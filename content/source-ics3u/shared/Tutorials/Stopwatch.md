@@ -1,5 +1,7 @@
 ---
 created: 2023-10-30T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 The purpose of this lesson is to learn a little more about laying out a user interface with SwiftUI by reproducing the Stopwatch app on iOS.
 

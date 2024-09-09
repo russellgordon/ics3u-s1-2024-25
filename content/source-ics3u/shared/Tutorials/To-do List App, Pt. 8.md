@@ -1,5 +1,7 @@
 ---
 created: 2024-05-27T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 In [[To-do List App, Pt. 7|part seven]] of this task, you learned how to make search work within the app, and how to ensure that one user does not see another user's data by properly configuring row-level security on the `todos` table of your database hosted at Supabase.
 

@@ -1,5 +1,7 @@
 ---
 created: 2024-01-09T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 The purpose of this lesson is to review concepts learned in the first module of this course by reproducing the user interface of the Home app on iOS.
 

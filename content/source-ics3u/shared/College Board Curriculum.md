@@ -1,5 +1,7 @@
 ---
 excludeFromExplorer: true
+enableToc: false
+excludeBacklinks: true
 ---
 # AP Computer Science Principles
 > [!NOTE]

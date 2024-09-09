@@ -1,6 +1,6 @@
 ---
-draft: false
-draftSectionTwo: false
+draft: true
+draftSectionTwo: true
 enableToc: false
 excludeBacklinks: true
 excludeFromExplorer: true

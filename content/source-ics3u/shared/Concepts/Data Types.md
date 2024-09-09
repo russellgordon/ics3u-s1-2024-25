@@ -1,6 +1,8 @@
 ---
 tags:
 created: 2023-10-20T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 At the level of hardware and electricity, a computer only understands *high voltage* and *low voltage*.
 

@@ -1,6 +1,8 @@
 ---
 tags:
 created: 2024-06-05T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 Entity-relationship (ER) diagrams were created by Peter Chen, a computer scientist, in the 1970's.
 

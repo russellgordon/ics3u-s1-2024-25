@@ -1,5 +1,7 @@
 ---
 created: 2024-05-30T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 In [[To-do List App, Pt. 8|part eight]] of this task, you improved the user interface of the app in these ways:
 

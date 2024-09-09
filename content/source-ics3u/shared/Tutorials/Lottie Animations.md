@@ -1,6 +1,8 @@
 ---
 tags:
 created: 2024-01-29T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 If you are interested in computer animation and graphics, you may be familiar with [Adobe After Effects](https://www.adobe.com/ca/products/aftereffects.html).
 

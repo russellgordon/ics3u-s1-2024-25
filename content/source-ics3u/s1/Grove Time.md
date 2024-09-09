@@ -1,11 +1,9 @@
 ---
 excludeFromExplorer: true
 ---
-Day|Time|Location
--|-|-
-Thursday|12:30 PM to 1:00 PM|Room 36
-Friday|12:30 PM to 2:00 PM|Room 36
 
-Grove Time is a drop-in, no appointment needed.
+There are no Grove Time offerings this week.
 
-If you have a question, **don't hesitate**, come on by!
+> [!NOTE]
+> 
+> The schedule for Mr. Gordon's Grove Time offerings for the week of September 16, 2024 will be posted soon.

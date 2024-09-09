@@ -1,5 +1,7 @@
 ---
 created: 2024-04-15T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 In [[To-do List App, Pt. 4|part four]] of this task, you improved the to-do list app so that you could use Xcode Previews again. You could test a single view in Xcode Previews, and data would not be persisted. You could run your app in the Simulator or on a physical device, and data *would* be persisted – saved to a database file – by the SwiftData framework.
 

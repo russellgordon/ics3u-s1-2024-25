@@ -1,6 +1,8 @@
 ---
 created: 2023-10-17T00:00:00.000-0400
 tags:
+draft: true
+draftSectionTwo: true
 ---
 In this activity, we asked a "turtle" to draw the letter `M` on the floor of Upper Hadden Hall.
 

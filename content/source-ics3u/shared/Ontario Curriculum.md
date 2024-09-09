@@ -1,5 +1,7 @@
 ---
 excludeFromExplorer: true
+enableToc: false
+excludeBacklinks: true
 ---
 # Introduction to Computer Science, Grade 11
 

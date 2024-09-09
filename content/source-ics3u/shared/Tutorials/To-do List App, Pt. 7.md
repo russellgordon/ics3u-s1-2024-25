@@ -1,5 +1,7 @@
 ---
 created: 2024-05-23T00:00:00.000-0400
+draft: true
+draftSectionTwo: true
 ---
 In [[To-do List App, Pt. 6|part six]] of this task, you learned how to implement all the functionality required to create, read, update, and delete data from a database hosted at Supabase. That knowledge will be directly applicable to the app you build for your culminating task.
 
