@@ -1,3 +1,48 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+// No indent for blockquotes from transcludes
+blockquote.transclude {
+
+  border-left: none;
+  padding-left: 0;
+
+}
+
+// Continue to indent lists that are part of transcludes
+.transclude ul, transclude ol {
+  padding-left: 40px;
+}
+
+// Hide "link to original post" for transcludes
+.transclude-src {
+	display: none;
+}
+
+// Hide footer
+footer {
+	display: none;
+}
+
+// No background colors for links
+a.internal {
+
+	background-color: unset;
+
+}
+
+// Hide external link icons
+svg.external-icon {
+	display: none;
+}
+
+// Fix header font sizes
+h1 {
+	font-size: 2em;
+}
+
+// More space for longer dates
+li.section-li>.section {
+	grid-template-columns: 16em 3fr 1fr;
+}

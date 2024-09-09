@@ -1,0 +1,30 @@
+#!/bin/zsh
+# ADAPTED FROM: https://rowannicholls.github.io/bash/intro/passing_arguments.html
+#
+# Set defaults
+#
+message="Syncing latest changes"
+#
+# Handle command line arguments passed
+#
+while [[ "$#" -gt 0 ]]
+do case $1 in
+    -m|--message) message="$2"
+    shift;;
+    *) echo "Unknown parameter passed: $1"
+    exit 1;;
+esac
+shift
+done
+#
+# Add all changed files
+#
+git add *
+#
+# Commit files
+#
+git commit -m $message
+#
+# Push files to remote
+#
+git push -u origin

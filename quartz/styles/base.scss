@@ -182,7 +182,6 @@ a {
     }
 
     & .sidebar.left {
-      z-index: 1;
       left: calc(calc(100vw - $pageWidth) / 2 - $sidePanelWidth);
       @media all and (max-width: $fullPageWidth) {
         gap: 0;
@@ -534,7 +533,7 @@ ol.overflow {
 
 .transclude {
   ul {
-    padding-left: 1rem;
+    padding-left: 0rem;
   }
 }
 

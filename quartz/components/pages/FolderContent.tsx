@@ -13,11 +13,16 @@ interface FolderContentOptions {
    * Whether to display number of folders
    */
   showFolderCount: boolean
+  /**
+   * Whether to display folders at all
+   */
+  showFolders: boolean
   sort?: SortFn
 }
 
 const defaultOptions: FolderContentOptions = {
-  showFolderCount: true,
+  showFolderCount: false,
+  showFolders: true,
 }
 
 export default ((opts?: Partial<FolderContentOptions>) => {
@@ -50,6 +55,7 @@ export default ((opts?: Partial<FolderContentOptions>) => {
     return (
       <div class={classes}>
         <article>{content}</article>
+        {folderSlug !== "Curriculum" && (
         <div class="page-listing">
           {options.showFolderCount && (
             <p>
@@ -58,10 +64,13 @@ export default ((opts?: Partial<FolderContentOptions>) => {
               })}
             </p>
           )}
-          <div>
-            <PageList {...listProps} />
-          </div>
+          {options.showFolders && (
+			<div>
+            	<PageList {...listProps} />
+			</div>
+          )}
         </div>
+        )}
       </div>
     )
   }

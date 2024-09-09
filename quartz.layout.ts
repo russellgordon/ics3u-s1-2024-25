@@ -27,10 +27,20 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer()),
+    Component.DesktopOnly(Component.Explorer({
+	    title: "Navigate this site",
+		folderClickBehavior: "link", 
+		filterFn: (node) => {
+			// exclude files with a frontmatter key named "excludeFromExplorer"
+			if (node.file?.frontmatter?.excludeFromExplorer || node.name === "Media" || node.name === "Curriculum") {
+				return false
+			} else {
+				return true
+			}
+		} 
+	})),
   ],
   right: [
-    Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],
@@ -44,7 +54,18 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer()),
+    Component.DesktopOnly(Component.Explorer({
+	    title: "Navigate this site",
+		folderClickBehavior: "link", 
+		filterFn: (node) => {
+			// exclude files with a frontmatter key named "excludeFromExplorer"
+			if (node.file?.frontmatter?.excludeFromExplorer || node.name === "Media" || node.name === "Curriculum") {
+				return false
+			} else {
+				return true
+			}
+		} 
+	})),
   ],
   right: [],
 }

@@ -12,8 +12,11 @@ const Backlinks: QuartzComponent = ({
 }: QuartzComponentProps) => {
   const slug = simplifySlug(fileData.slug!)
   const backlinkFiles = allFiles.filter((file) => file.links?.includes(slug))
+  const excludeBacklinks = fileData.frontmatter?.excludeBacklinks
   return (
-    <div class={classNames(displayClass, "backlinks")}>
+  	<div>
+  	{excludeBacklinks ? (<div></div>) : (
+  	<div class={classNames(displayClass, "backlinks")}>
       <h3>{i18n(cfg.locale).components.backlinks.title}</h3>
       <ul class="overflow">
         {backlinkFiles.length > 0 ? (
@@ -29,6 +32,9 @@ const Backlinks: QuartzComponent = ({
         )}
       </ul>
     </div>
+
+  	)}
+  	</div>
   )
 }
 
