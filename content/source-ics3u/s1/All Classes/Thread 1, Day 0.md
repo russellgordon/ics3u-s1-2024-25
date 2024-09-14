@@ -1,4 +1,5 @@
 ---
+transcludeTitleSize: h2
 tags:
 excludeBacklinks: true
 excludeFromExplorer: true

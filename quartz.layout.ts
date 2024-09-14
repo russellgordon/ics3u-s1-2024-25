@@ -32,7 +32,7 @@ export const defaultContentPageLayout: PageLayout = {
 		folderClickBehavior: "link", 
 		filterFn: (node) => {
 			// exclude files with a frontmatter key named "excludeFromExplorer"
-			if (node.file?.frontmatter?.excludeFromExplorer || node.name === "Media" || node.name === "Curriculum") {
+			if (node.file?.frontmatter?.excludeFromExplorer || node.name === "Media" || node.name === "Ontario-Curriculum") {
 				return false
 			} else {
 				return true
@@ -59,7 +59,7 @@ export const defaultListPageLayout: PageLayout = {
 		folderClickBehavior: "link", 
 		filterFn: (node) => {
 			// exclude files with a frontmatter key named "excludeFromExplorer"
-			if (node.file?.frontmatter?.excludeFromExplorer || node.name === "Media" || node.name === "Curriculum") {
+			if (node.file?.frontmatter?.excludeFromExplorer || node.name === "Media" || node.name === "Ontario-Curriculum") {
 				return false
 			} else {
 				return true

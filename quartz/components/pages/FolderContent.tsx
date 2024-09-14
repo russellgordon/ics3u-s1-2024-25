@@ -55,7 +55,7 @@ export default ((opts?: Partial<FolderContentOptions>) => {
     return (
       <div class={classes}>
         <article>{content}</article>
-        {folderSlug !== "Curriculum" && (
+        {folderSlug !== "Ontario-Curriculum" && (
         <div class="page-listing">
           {options.showFolderCount && (
             <p>
