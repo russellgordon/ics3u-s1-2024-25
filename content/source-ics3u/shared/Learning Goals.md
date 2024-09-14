@@ -15,7 +15,7 @@ Exemplars of suitable evidence for each learning goal will be shared as the cour
 ## 1
 
 I can identify and correct both logical errors and syntax errors in my code.
-<small>Ontario: [[Ontario Curriculum#A4.|A4]] / AP CSP: [[College Board Curriculum#4. Code Analysis|4]]</small>
+<small>Ontario: [[Ontario Curriculum#A4.|A4]] / AP CSP: [[College Board Curriculum#4|4]]</small>
 
 ## 2
 
