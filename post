@@ -17,6 +17,10 @@ esac
 shift
 done
 #
+# NOTE: Invoke 'synclink' when posting a section 2 website
+#
+# ./synclink
+#
 # Add all changed files
 #
 git add *

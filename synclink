@@ -1,0 +1,41 @@
+#!/bin/zsh
+#
+# Useful reference:
+# https://www.redhat.com/sysadmin/sync-rsync
+#
+# Syncs section 2 content folder so that it's a clone of section 1, minus the symlinks and Obsidian vaults
+#
+# Sync the content folder
+#
+echo "Starting to sync 'content' folder from section 1..."
+rsync -a /Users/russellgordon/Documents/Class\ Websites/2024-25/ICS3U/S1/quartz/content .
+echo "Sync complete."
+#
+# Remove vault folders
+# 
+echo "Removing redundant vault folders..."
+rm -rf content/vault*
+echo "Vault folders removed."
+#
+# Remove section specific symlinks
+#
+echo "Removing section 1 specific symlinks..."
+rm content/All\ Classes 
+rm content/Grove\ Time.md 
+rm content/index.md      
+rm content/Key\ Links.md 
+rm content/Private\ Notes.md 
+rm content/Scratch\ Page.md
+echo "Done."
+#
+# Add section 2 specific symlinks
+#
+echo "Adding section 2 specific symlinks..."
+cd content
+ln -s source-ics3u/s2/All\ Classes
+ln -s source-ics3u/s2/Grove\ Time.md
+ln -s source-ics3u/s2/index.md
+ln -s source-ics3u/s2/Key\ Links.md
+ln -s source-ics3u/s2/Private\ Notes.md
+ln -s source-ics3u/s2/Scratch\ Page.md
+echo "Done."

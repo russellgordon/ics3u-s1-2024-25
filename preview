@@ -17,6 +17,10 @@ esac
 shift
 done
 #
+# NOTE: Invoke 'synclink' when previewing a section 2 website
+#
+# ./synclink
+#
 # Preview the site
 #
 npx quartz build --serve --port=$port
