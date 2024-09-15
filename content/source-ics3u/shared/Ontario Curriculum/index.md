@@ -16,7 +16,7 @@ createdForSectionTwo: 2024-09-06T00:00:00.000-0400
 
 <h3 id="a1" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#a1"></a></h3>
 
-![[A1]]
+![[A1. Data Types and Expressions]]
 ![[A1.1]]
 ![[A1.2]]
 ![[A1.3]]
@@ -26,20 +26,20 @@ createdForSectionTwo: 2024-09-06T00:00:00.000-0400
 
 <h3 id="a2" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#a2"></a></h3>
 
-![[A2]]
+![[A2. Control Structures and Simple Algorithms]]
 ![[A2.1]]
 ![[A2.2]]
 ![[A2.3]]
 
 <h3 id="a3" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#a3"></a></h3>
 
-![[A3]]
+![[A3. Subprograms]]
 ![[A3.1]]
 ![[A3.2]]
 
 <h3 id="a4" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#a4"></a></h3>
 
-![[A4]]
+![[A4. Code Maintenance]]
 ![[A4.1]]
 ![[A4.2]]
 ![[A4.3]]
@@ -51,14 +51,14 @@ createdForSectionTwo: 2024-09-06T00:00:00.000-0400
 
 <h3 id="b1" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#b1"></a></h3>
 
-![[B1]]
+![[B1. Problem-solving Strategies]]
 ![[B1.1]]
 ![[B1.2]]
 ![[B1.3]]
 
 <h3 id="b2" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#b2"></a></h3>
 
-![[B2]]
+![[B2. Designing Software Solutions]]
 ![[B2.1]]
 ![[B2.2]]
 ![[B2.3]]
@@ -67,14 +67,14 @@ createdForSectionTwo: 2024-09-06T00:00:00.000-0400
 
 <h3 id="b3" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#b3"></a></h3>
 
-![[B3]]
+![[B3. Designing Algorithms]]
 ![[B3.1]]
 ![[B3.2]]
 ![[B3.3]]
 
 <h3 id="b4" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#b4"></a></h3>
 
-![[B4]]
+![[B4. The Software Development Life Cycle]]
 ![[B4.1]]
 ![[B4.2]]
 ![[B4.3]]
@@ -87,7 +87,7 @@ createdForSectionTwo: 2024-09-06T00:00:00.000-0400
 
 <h3 id="c1" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#c1"></a></h3>
 
-![[C1]]
+![[C1. Computer Components]]
 ![[C1.1]]
 ![[C1.2]]
 ![[C1.3]]
@@ -95,14 +95,14 @@ createdForSectionTwo: 2024-09-06T00:00:00.000-0400
 
 <h3 id="c2" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#c2"></a></h3>
 
-![[C2]]
+![[C2. File Maintenance]]
 ![[C2.1]]
 ![[C2.2]]
 ![[C2.3]]
 
 <h3 id="c3" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#c3"></a></h3>
 
-![[C3]]
+![[C3. Software Development]]
 ![[C3.1]]
 ![[C3.2]]
 ![[C3.3]]
@@ -114,7 +114,7 @@ createdForSectionTwo: 2024-09-06T00:00:00.000-0400
 
 <h3 id="d1" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#d1"></a></h3>
 
-![[D1]]
+![[D1. Environmental Stewardship and Sustainability]]
 ![[D1.1]]
 ![[D1.2]]
 ![[D1.3]]
@@ -122,14 +122,14 @@ createdForSectionTwo: 2024-09-06T00:00:00.000-0400
 
 <h3 id="d2" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#d2"></a></h3>
 
-![[D2]]
+![[D2. Exploring Computer Science]]
 ![[D2.1]]
 ![[D2.2]]
 ![[D2.3]]
 
 <h3 id="d3" style="margin-top: 0rem !important; margin-bottom: -3rem !important"><a href="#d3"></a></h3>
 
-![[D3]]
+![[D3. Postsecondary Opportunities]]
 ![[D3.1]]
 ![[D3.2]]
 ![[D3.3]]
