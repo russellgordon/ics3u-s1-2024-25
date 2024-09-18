@@ -24,4 +24,4 @@ We should not be dismayed when errors are encountered.
 
 *This is a normal part of writing software.*
 
-We can use [all sorts of techniques to become effective at debugging](https://wizardzines.com/zines/debugging-guide/) – the process of resolving errors.
+We can use [all sorts of techniques to become effective at debugging](https://rubberduckdebugging.com) – the process of resolving errors.
