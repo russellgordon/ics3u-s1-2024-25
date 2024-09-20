@@ -1,8 +1,9 @@
 ---
 tags:
 created: 2023-10-20T00:00:00.000-0400
+createdForSectionTwo: 2024-09-20T00:34:55.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
 ---
 At the level of hardware and electricity, a computer only understands *high voltage* and *low voltage*.
 
@@ -110,7 +111,7 @@ In Swift, on modern computers, an `Int` is [stored using *sixty-four* bits](http
 
 One bit is used to store the *sign* – that is, whether the number is positive or negative. 
 
-That leaves sixty-three bits to represent a range of values from  `-2,147,483,648` and `2,147,483,647`.
+That leaves sixty-three bits to represent a range of values from  `-9,223,372,036,854,775,808` and `9,223,372,036,854,775,807`.
 
 To be clear, an `Int` in Swift is stored this using the [[Binary Numbers|very same system of abstraction for binary numbers that we just explored]]. The only difference is that one bit is used to store the sign to mark a value as being positive or negative.
 
@@ -151,4 +152,4 @@ The `Double` data type stores numeric values that contain decimals. More on [how
 > 
 > A *constant* is a place to store a single value that is not allowed to change in the future in our code.
 > 
-> The three main data types we will use, at first, are: `Int`, `Double`, and `String`.
+> The three main data types we will use, at first, are: `String`, `Int`, and `Double`.

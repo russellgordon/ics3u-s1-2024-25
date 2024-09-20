@@ -2,7 +2,8 @@
 tags:
 created: 2023-10-20T00:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+createdForSectionTwo: 2024-09-20T00:34:55.000-0400
 ---
 Xcode is a large application that serves many purposes for software developers.
 
@@ -16,13 +17,13 @@ That is where an *Xcode playground* is useful – it is a place to try out idea
 
 To create a playground, make sure that Xcode is in the foreground on your computer by clicking it's icon in the Dock:
 
-![[Pasted image 20231021072302.png|100]]
+![[Pasted image 20231021072302.png|50]]
 
 From the menu bar at top left, choose **File > New > Playground...**:
 
 ![[Pasted image 20231021072525.png|400]]
 
-You will see the following window – here, choose the ==**macOS**== tab, then **Blank**, and then **Next**:
+You will see the following window – here, choose the ==macOS== tab, then **Blank**, and then **Next**:
 
 ![[Pasted image 20231021072716.png|600]]
 
