@@ -59,3 +59,11 @@ This is a space to make private notes and observations regarding students. This 
 	- Loves badminton.
 - Courage
 	- "My favourite series of book at the moment is The Culture by Iain Banks. I am starting to read Arrival written by Ted Chiang. The best film in my opinion is either Tenet or Interstellar by Christopher Nolan. I play tennis and watch tennis."
+- Ainsley
+	- Favourite movie: Original Mean Girls movie and original Maze Runner movie.
+	- Likes the Hunger Games book series, and watching gymnastics.
+	- Nothing else in particular to know.
+- Harshan
+	- Loves basketball
+	- Excited to build apps that help others
+	- 

@@ -3,7 +3,8 @@ draft: true
 draftSectionTwo: false
 enableToc: false
 excludeBacklinks: true
-created: 2023-10-19T00:00:00.000-0400
+created: 2024-09-19T00:00:00.000-0400
+createdForSectionTwo: 2024-09-19T00:00:00.000-0400
 tags:
 ---
 An Apple ID (now called an Apple Account) is required to accept your invitation to the [[Apple Developer Program]], which is offered through Lakefield College School, and has been sent to your LCS email address.
