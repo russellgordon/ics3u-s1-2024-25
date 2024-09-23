@@ -21,6 +21,10 @@ done
 #
 # ./synclink
 #
+# Update ICS3U curriculum page creation dates
+#
+./update-curriculum-tags
+#
 # Preview the site
 #
 npx quartz build --serve --port=$port

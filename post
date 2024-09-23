@@ -21,6 +21,10 @@ done
 #
 # ./synclink
 #
+# Update ICS3U curriculum page creation dates
+#
+./update-curriculum-tags
+#
 # Add all changed files
 #
 git add *

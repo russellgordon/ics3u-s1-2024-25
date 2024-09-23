@@ -1,7 +1,13 @@
 ---
 created: 2024-09-16T00:00:00.000-0400
 createdForSectionTwo: 2024-09-16T00:00:00.000-0400
-tags:
+tags: 
+  - A2.2
+  - A3.1
+  - A4.1
+  - A4.2
+  - A4.3
+  - A4.4
 draft: true
 draftSectionTwo: false
 ---

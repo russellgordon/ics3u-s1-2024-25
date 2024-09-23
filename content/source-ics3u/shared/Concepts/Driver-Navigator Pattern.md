@@ -4,6 +4,7 @@ draftSectionTwo: false
 created: 2024-09-20T00:00:00.000-0400
 createdForSectionTwo: 2024-09-20T00:00:00.000-0400
 tags: 
+  - B1.2
 ---
 
 [Pair programming](https://martinfowler.com/articles/on-pair-programming.html) is part of the broader umbrella of _Agile_ approaches to writing software. This post describes the *driver-navigator* pattern, which is one form of paired programming.
