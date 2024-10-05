@@ -27,7 +27,7 @@ An opportunity to demonstrate your understanding of how to use stored properties
 ## Success criteria
 
 - [ ] you created an [[Xcode Playgrounds|Xcode playground]] named **GeometricFigures**
-- [ ] for your assigned 2D or 3D figure, you:
+- [ ] for your [[figures-formulas-and-assignments.pdf|assigned 2D or 3D figure]] , you:
 	- [ ] authored a structure that stores key measurement(s)
 	- [ ] authored a structure that computes:
 		- [ ] the area and perimeter (for 2D figures), or...

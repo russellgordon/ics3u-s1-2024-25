@@ -24,7 +24,7 @@ I can use source control to organize and describe improvements made in my projec
 
 ## 3
 
-I understand data types (including simple types and collection types) and know when to use them as variables or constants in my programs.
+I understand operators and data types (including simple types and collection types) and know when to use a variable or constant in my programs.
 <small>Ontario: [[Ontario Curriculum#A1.|A1]] / AP CSP: [[College Board Curriculum#e3|3]]</small>
 
 ## 4

@@ -117,7 +117,7 @@ You can do these regular exercises (immediately below), or skip ahead and [[Oper
 
 ### 4: Calculating Total Cost
 
-1. Imagine you're shopping. Start with a variable called `totalCost` set to `0`.
+1. Imagine you're shopping. Start with a variable called `totalCost` set to `0.0`.
 2. Add the following item costs to `totalCost` using the `+=` operator:
     - $19.99
     - $25.50

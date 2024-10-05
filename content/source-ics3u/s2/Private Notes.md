@@ -5,6 +5,92 @@ tags:
 ---
 This is a space to make private notes and observations regarding students. This page will not be published to the web.
 
+# End of module 1 reviews
+
+## Ainsley
+
+80%
+
+## Isla
+
+97%
+
+## Elaine
+
+93%
+
+## Courage
+
+97%
+
+## Daniel
+
+95%
+
+## Kaan
+
+94%
+
+## Kevin
+
+88% 
+
+## Ethan
+
+96%
+
+## Collin
+
+90%
+
+## Thomas
+
+97%
+
+## Joseph
+
+96%
+
+## Michael
+
+80%
+
+## Kyle
+
+93%
+
+## Hannu
+
+94%
+
+## Marcus
+
+96%
+
+# Mid-module reviews
+
+Isla - ME
+Elaine - ME
+Marcus - ME
+Harshan - ME
+Ethan - ME
+Collin - ME
+Kaan - ME
+Kevin - ME
+Daniel - ME
+Thomas - ME
+Michael - ME
+Kyle - ME
+Courage - ME
+Hannu - ME
+Joseph - ME
+
+# Things to look at
+
+Why this happens:
+
+![[Screenshot 2024-09-25 at 7.12.45 AM.png]]
+
 # Student Interests and Notes
 
 - Kaan

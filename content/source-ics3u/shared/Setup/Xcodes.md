@@ -1,7 +1,7 @@
 ---
 draft: true
 draftSectionTwo: false
-enableToc: false
+enableToc: true
 excludeBacklinks: true
 created: 2024-09-19T00:00:00.000-0400
 createdForSectionTwo: 2024-09-19T00:00:00.000-0400
@@ -88,7 +88,7 @@ The list of versions of Xcode available will look something like this afterwards
 
 ## Sign in
 
-Last year you created an Apple ID tied to your LCS email address that you used to access the Apple Developer Program.
+You created an Apple ID tied to your LCS email address that you used to access the Apple Developer Program.
 
 Use that username and password to sign in to Xcodes, like this:
 

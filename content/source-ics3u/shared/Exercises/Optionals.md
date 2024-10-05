@@ -10,7 +10,7 @@ You already understand how to use typical data types such as `Int`, `Double`, `S
 
 You have already built – or will build soon – applications that accept user input in these ways:
 
-1. As an `Int` [[Interactive Apps|via the Stepper structure]]
+1. As an `Int` [[Introduction to Interactive Apps|via the Stepper structure]]
 2. As a  `Double` [[Separation of Concerns|via the Slider structure]].
 
 Steppers and sliders prevent the user from providing invalid input.

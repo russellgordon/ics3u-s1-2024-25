@@ -13,7 +13,7 @@ It will show you, on a practical level, how keeping view code and model code sep
 
 A *view* is anything the user sees within our apps or interacts with.
 
-For example, in the [[Interactive Apps]] activity you considered this view – a structure designed to show a single item within a list – displaying a title and a subtitle:
+For example, in the [[Introduction to Interactive Apps]] activity you considered this view – a structure designed to show a single item within a list – displaying a title and a subtitle:
 
 ![[Screenshot 2023-11-14 at 11.54.10 AM.png]]
 
@@ -182,14 +182,14 @@ First we will create a stored property to keep track of the radius for a circle 
 ![[Screenshot 2023-11-16 at 7.19.29 AM.png]]
 
 > [!NOTE]
-> As you learned in the [[Interactive Apps]], we mark the property with the `@State` property wrapper. This means that when the stored property changes, SwiftUI will update the user interface for us.
+> As you learned in the [[Introduction to Interactive Apps]], we mark the property with the `@State` property wrapper. This means that when the stored property changes, SwiftUI will update the user interface for us.
 
 Next we will add a `Text` view to show the contents of the `radius` property:
 
 ![[Screenshot 2023-11-16 at 7.21.16 AM.png]]
 
 > [!NOTE]
-> As you learned in [[Interactive Apps]], the syntax `\( )` represents *string interpolation* and in this case:
+> As you learned in [[Introduction to Interactive Apps]], the syntax `\( )` represents *string interpolation* and in this case:
 > 
 > `\(radius)`
 > 

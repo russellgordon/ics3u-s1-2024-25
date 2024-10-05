@@ -12,5 +12,3 @@ The SICs are available at the following times this week:
 Day|Time|SIC|Location
 -|-|-|-
 Monday|1:00 PM to 1:30 PM|Nikita|Room 6
-Friday|1:00 PM to 1:30 PM|Ben|Room 6
-

@@ -15,7 +15,7 @@ The textbook is [SwiftUI Views Mastery](https://www.bigmountainstudio.com/views)
 
 Mr. Gordon will distribute a sheet for signatures in today's class; this indicates your understanding that your family's account will be charged for the textbook purchase.
 
-The total cost will be just a little less than $50 (Canadian).
+The total cost will be $47.50 (Canadian).
 
 > [!TIP]
 > 
