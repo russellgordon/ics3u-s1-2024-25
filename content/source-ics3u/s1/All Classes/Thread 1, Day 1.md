@@ -19,7 +19,8 @@ created: 2024-10-07T00:00:00.000-0400
 9. Exercise: [[Name Plate]]
 	
 ## Things to do before our next class
-- [ ] Optionally, make a bit more progress on your [[Name Plate]].
+- [ ] Please [[Update macOS to 14.7|update your computer to macOS Sonoma 14.7]].
+	- If you are already on macOS Sequoia 15.0, that works too, but 14.7 is recommended.
 
 > [!IMPORTANT]
 > 
