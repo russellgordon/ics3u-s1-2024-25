@@ -12,9 +12,9 @@ createdForSectionTwo: 2024-09-19T00:34:55.000-0400
 1. Setup: [[Create an Apple ID]]
 2. Setup: [[Apple Developer Program]]
 3. Setup: [[Xcodes]]
+5. Concept: [[Diagonal Turtle Movements]]
 4. Exercise: [[Name Plate]]
 	- Complete your name plate today.
-5. Concept: [[Diagonal Turtle Movements]]
 
 > [!NOTE]
 > 

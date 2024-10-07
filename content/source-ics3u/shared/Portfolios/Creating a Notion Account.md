@@ -1,8 +1,8 @@
 ---
 tags:
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-09-06T00:00:00.000-0400
+created: 2024-10-07T00:00:00.000-0400
 createdForSectionTwo: 2024-09-07T00:00:00.000-0400
 ---
 # Introducing Notion
@@ -13,7 +13,14 @@ Notion is a combination of traditional note-taking software and something called
 
 ## How will we use Notion?
 
-For our purposes, Notion is a great platform to share your understanding of our course learning goals by compiling a portfolio.
+For our purposes, Notion is a great platform for two things:
+
+1. Sharing evidence of your developing mastery of [[Learning Goals|course learning goals]].
+2. Taking notes on the things you do not want to forget.
+
+> [!TIP]
+> 
+> Notion is searchable – so it makes a great online notebook!
 
 ## Create an account
 

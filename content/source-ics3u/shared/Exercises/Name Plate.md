@@ -1,5 +1,5 @@
 ---
-created: 2024-09-16T00:00:00.000-0400
+created: 2024-10-07T00:00:00.000-0400
 createdForSectionTwo: 2024-09-16T00:00:00.000-0400
 tags: 
   - A2.2
@@ -8,7 +8,7 @@ tags:
   - A4.2
   - A4.3
   - A4.4
-draft: true
+draft: false
 draftSectionTwo: false
 ---
 ## Objective
