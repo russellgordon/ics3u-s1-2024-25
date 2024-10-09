@@ -2,9 +2,9 @@
 tags:
   - A1.1
   - A1.3
-created: 2023-10-20T00:00:00.000-0400
+created: 2024-10-09T00:00:00.000-0400
 createdForSectionTwo: 2024-09-20T00:34:55.000-0400
-draft: true
+draft: false
 draftSectionTwo: false
 ---
 At the level of hardware and electricity, a computer only understands *high voltage* and *low voltage*.

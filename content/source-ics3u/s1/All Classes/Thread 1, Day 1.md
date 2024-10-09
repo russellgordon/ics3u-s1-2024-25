@@ -13,7 +13,7 @@ created: 2024-10-07T00:00:00.000-0400
 4. Tutorial: [[Creating Bookmarks]]
 1. Portfolio: [[Creating a Notion Account]]
 1. Portfolio: [[First Entry]]
-6. Exercise: Parsing Instructions
+6. Exercise: [[Parsing Instructions]]
 7. Setup: [[Installing Playgrounds]]
 8. Setup: [[Subscribe to Turtle Sketches]]
 9. Exercise: [[Name Plate]]
