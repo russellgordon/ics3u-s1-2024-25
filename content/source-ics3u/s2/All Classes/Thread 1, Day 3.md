@@ -25,5 +25,4 @@ createdForSectionTwo: 2024-09-20T00:34:55.000-0400
 	- Complete [[Structures#Exercise|the exercise]] to practice modelling the information shown on the hockey cards.
 
 ## Things to do before our next class
-- [ ] Write about what you learned today in a portfolio entry on [Notion](https://notion.so).
-	- Be sure to include a few screenshots of your progress.
+- [ ] Complete the exercises given in class today.
