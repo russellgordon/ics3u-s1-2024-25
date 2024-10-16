@@ -5,6 +5,8 @@ tags:
 ---
 This page is a place to place text or other bits of information in, temporarily.
 
+4. Exercise: [[Modelling a Book Listing]]
+
 ## SIC Drop-In Sessions
 
 Here is this week's schedule:
