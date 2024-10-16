@@ -1,9 +1,9 @@
 ---
 tags:
   - A1.4
-created: 2023-10-20T00:00:00.000-0400
+created: 2024-10-16T00:00:00.000-0400
 createdForSectionTwo: 2024-09-23T00:34:55.000-0400
-draft: true
+draft: false
 draftSectionTwo: false
 ---
 
@@ -47,7 +47,7 @@ print("Remainder: \(result)")  // Output: Remainder: 1.5
 
 In this example, `14.0` divided by `2.5` leaves a remainder of `1.5`.
 
-## Assignment Operator
+## Assignment Operators
 
 - `=` (Assignment): Assigns a value to a variable.  
     Example: `let a = 5` assigns the value `5` to the constant `a`.

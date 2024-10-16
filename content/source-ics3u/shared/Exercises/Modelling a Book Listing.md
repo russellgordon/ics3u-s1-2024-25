@@ -1,9 +1,9 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
 enableToc: true
 excludeBacklinks: true
-created: 2024-09-18T00:00:00.000-0400
+created: 2024-10-16T00:00:00.000-0400
 createdForSectionTwo: 2024-09-25T00:00:00.000-0400
 tags:
   - A1.1
@@ -23,13 +23,13 @@ This process of designing a data structure [[Defining and Using Structures|was l
 
 ## Exercise
 
-Work with a partner using the [[Driver-Navigator Pattern|driver-navigator pattern]].
+Optionally, work with a partner using the [[Driver-Navigator Pattern|driver-navigator pattern]].
 
 Author a data structure named `BookListing`.
 
 Follow established [[Code Style Conventions|code style conventions]].
 
-Your data structure should have a property to keep track of all information shown within the blue box:
+Your data structure should have a property to *store* or *compute* all of the information shown within the blue box:
 
 ![[Book Example.png|700]]
 
