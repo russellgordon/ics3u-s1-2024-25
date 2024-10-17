@@ -9,6 +9,9 @@ created: 2024-10-16T00:00:00.000-0400
 ## Agenda
 1. Exercise: Computed Properties
 	- Using the measurements we collected yesterday, we will learn about the difference between stored properties and computed properties within a structure.
+	> [!TIP]
+	> 
+	> Here a short video where the concepts we examined – [[Computed Properties|how to create and use computed properties]] – are explained again.
 1. Setup: [[Translations]]
 1. Portfolio: [[Tagging Entries]]
 3. Concept: [[Operators]]
