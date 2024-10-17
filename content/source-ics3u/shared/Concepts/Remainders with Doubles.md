@@ -25,7 +25,7 @@ enableToc: false
 
 This page describes how the `remainder(dividingBy:)` instance method of the `Double` data type in Swift rounds off values:
 
-https://developer.apple.com/documentation/swift/double/remainder(dividingby:) 
+[https://developer.apple.com/documentation/swift/double/remainder(dividingby:)](https://developer.apple.com/documentation/swift/double/remainder(dividingby:))
 
 It implements remainder operation as defined by the [IEEE 754 specification](https://ieeexplore.ieee.org/document/4610935).
 
