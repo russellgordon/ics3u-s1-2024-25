@@ -18,7 +18,7 @@ Is writing an app the only way to help others?
 
 ## Instructions
 
-Please have a notebook out while you watch [Programming with Purpose](https://www.youtube.com/embed/M-7DQJbMapI).
+Please have a notebook out while you watch [Programming with Purpose](https://www.youtube.com/embed/M-7DQJbMapI), as told by Ish Shabazz.
 
 <a href="https://www.youtube.com/embed/M-7DQJbMapI"><img width="500" src="/Media/Screenshot 2023-10-18 at 9.08.36 PM.png"/></a>
 
