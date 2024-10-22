@@ -1,8 +1,8 @@
 ---
 tags:
-created: 2023-10-20T00:00:00.000-0400
+created: 2024-10-22T00:00:00.000-0400
 createdForSectionTwo: 2024-09-26T00:34:55.000-0400
-draft: true
+draft: false
 draftSectionTwo: false
 ---
 
@@ -50,7 +50,7 @@ protocol Describable {
 
 Now open your **GeometricFigures** playground.
 
-Add the protocol code provided above the top of your playground file. Make your structure that describes a 2D or 3D use, or promise to follow the rules of, the `Describable` protocol. 
+Add the protocol code provided above the top of your playground file. Make your structure that describes a 2D or 3D figure use, or promise to follow the rules of, the `Describable` protocol. 
 
 Like Mr. Gordon did, invoke the `description` property on at least one instance of your structure, so you can verify that the new property is working.
 
