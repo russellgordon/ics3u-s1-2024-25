@@ -1,12 +1,12 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-10-01T00:00:00.000-0400
+created: 2024-10-29T00:00:00.000-0400
 createdForSectionTwo: 2024-10-03T00:00:00.000-0400
 tags:
 ---
 
-The end of the module is tomorrow.
+Our next class is the final class of the module.
 
 Your final task is to complete your self-assessment and propose a numeric grade, based on the evidence you have placed in your portfolio over the last three weeks.
 
