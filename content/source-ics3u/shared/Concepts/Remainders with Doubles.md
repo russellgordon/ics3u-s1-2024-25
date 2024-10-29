@@ -20,6 +20,8 @@ enableToc: false
 > It is very technical, and not necessarily the easiest to understand.
 > 
 > So, let's try turning to a large language model – ChatGPT in this case – and see if we can generate some clearer examples.
+> 
+> The interaction with ChatGPT is included below, but here [is the original series of prompts and responses](https://chatgpt.com/share/6720cdc5-0cb0-800b-94b6-33a2ca996ebf)).
 
 ## Mr. Gordon's query
 

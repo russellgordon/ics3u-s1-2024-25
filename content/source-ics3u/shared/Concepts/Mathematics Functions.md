@@ -8,7 +8,7 @@ draftSectionTwo: true
 
 > [!NOTE]
 > 
-> Mr. Gordon generated this concept summary and the related examples using ChatGPT.
+> Mr. Gordon generated this concept summary and the related examples using ChatGPT (here are the [prompts given and responses received](https://chatgpt.com/share/6720cce3-8f14-800b-9fd0-4dc7a81efdfa)).
 > 
 > He then reviewed and edited the results for clarity and accuracy.
 > 
