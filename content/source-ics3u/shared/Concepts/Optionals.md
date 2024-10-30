@@ -1,7 +1,7 @@
 ---
 tags:
 created: 2024-10-29T00:00:00.000-0400
-createdForSectionTwo: 2024-09-23T00:34:55.000-0400
+createdForSectionTwo: 2024-11-04T00:34:55.000-0400
 draft: false
 draftSectionTwo: true
 ---
@@ -12,7 +12,7 @@ You already understand how to use typical data types such as `Int`, `Double`, `S
 You have already built – or will build soon – applications that accept user input in these ways:
 
 1. As an `Int` via the Stepper structure
-2. As a  `Double` Separation of Concerns|via the Slider structure
+2. As a  `Double` via the Slider structure
 
 Steppers and sliders prevent the user from providing invalid input.
 
