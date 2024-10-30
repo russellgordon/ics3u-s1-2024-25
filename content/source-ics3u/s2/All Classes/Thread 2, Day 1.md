@@ -2,11 +2,11 @@
 transcludeTitleSize: h2
 tags:
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
 excludeBacklinks: true
 excludeFromExplorer: true
 enableToc: false
-createdForSectionTwo: 2024-10-04T00:34:55.000-0400
+createdForSectionTwo: 2024-11-04T07:34:55.000-0400
 ---
 ## Agenda
 1. Task: [[ADJ – Brainstorm, Part 1]]
