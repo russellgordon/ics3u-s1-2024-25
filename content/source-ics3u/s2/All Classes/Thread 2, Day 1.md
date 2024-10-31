@@ -9,6 +9,15 @@ enableToc: false
 createdForSectionTwo: 2024-11-04T07:34:55.000-0400
 ---
 ## Agenda
+
+> [!TIP]
+> 
+> As I'm unable to be in class today, please [watch this video](https://vimeo.com/1024903591/20e7196a60?share=copy) for an introduction to our new thread of study and to today's tasks.
+> 
+> See you soon,
+> 
+> *Mr. Gordon*
+
 1. Task: [[ADJ – Brainstorm, Part 1]]
 	- Begin the process of considering what app you want to write this year by identifying apps you like to use, and why...
 2. Concept: [[Optionals]]
