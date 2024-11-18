@@ -85,7 +85,7 @@ A second opportunity to demonstrate your understanding of key concepts from the 
    
    ![[Screenshot 2023-01-12 at 10.06.32 AM.png|400]]
    
-5. Now work to complete each item described above in the [[Trading Cards#Success criteria and exemplar|success criteria]].
+5. Now work to complete each item described above in the [[Trading Cards, Part 1#Success criteria and exemplar|success criteria]].
    
    ==Please remember to commit and push your work regularly.==
 

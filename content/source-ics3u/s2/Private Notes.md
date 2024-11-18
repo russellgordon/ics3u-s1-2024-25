@@ -9,63 +9,67 @@ This is a space to make private notes and observations regarding students. This 
 
 ## Ainsley
 
-80%
+80% ✔️ 
 
 ## Isla
 
-97%
+97% ✔️ 
 
 ## Elaine
 
-93%
+93% ✔️ 
 
 ## Courage
 
-97%
+97% ✔️ 
 
 ## Daniel
 
-95%
+95% ✔️ 
 
 ## Kaan
 
-94%
+94% ✔️ 
 
 ## Kevin
 
-88% 
+88% -> 86%
 
 ## Ethan
 
-96%
+96% ✔️ 
 
 ## Collin
 
-90%
+90% -> 87% ✔️ 
 
 ## Thomas
 
-97%
+97% ✔️ 
 
 ## Joseph
 
-96%
+96% ✔️ 
 
 ## Michael
 
-80%
+80% -> 73% ✔️ 
 
 ## Kyle
 
-93%
+93% ✔️ 
 
 ## Hannu
 
-94%
+94% ✔️ 
 
 ## Marcus
 
-96%
+96% -> 93% ✔️ 
+
+## Harshan
+
+92% ✔️ 
 
 # Mid-module reviews
 

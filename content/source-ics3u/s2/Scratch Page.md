@@ -1,8 +1,14 @@
----
+`---
 draft: true
 draftSectionTwo: true
 tags:
 ---
+
+3. Recap: [Develop in Swift Tutorials](https://developer.apple.com/tutorials/develop-in-swift-tutorials)
+	- A self-paced opportunity to consolidate concepts learned in the first module of this course, and learn a few new ways to navigate the features of Xcode.
+	- Chapters 1, 2, and 3 are good choices to complete at this time.
+
+
 This page is a place to place text or other bits of information in, temporarily.
 
 # To do soon
