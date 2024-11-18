@@ -1,6 +1,6 @@
 ---
-draft: false
-draftSectionTwo: false
+draft: true
+draftSectionTwo: true
 tags: 
 created: 2024-11-18T01:23:31.000-0400
 createdForSectionTwo: 2024-11-18T03:00:00.000-0400
