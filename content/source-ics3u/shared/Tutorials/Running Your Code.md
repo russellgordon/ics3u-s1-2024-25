@@ -1,26 +1,32 @@
 ---
-created: 2023-11-06T00:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-10-09T07:00:00.000-0400
+createdForSectionTwo: 2024-11-25T07:34:55.000-0400
+tags:
 ---
-In the Stopwatch tutorial series you learned implicity how to use the **Preview** or **Canvas** area to see your code.
-
-In this mini-tutorial you will explicitly learn the difference between:
+In this tutorial you will explicitly learn the difference between:
 
 - seeing a **Preview** of your code for part of your app
-- seeing *all* of your code run on a simulated device
+- seeing *all* of your code run on a simulated device (or a physical device)
 
 Both ways of running your code have advantages, depending on what you are trying to test.
 
 ## Obtain the example project
 
-This will be easier to understand if you have some code to try out while following this mini-tutorial.
+This tutorial will be easier to understand if you have some code to try out while following along with this mini-tutorial.
 
-The **PhonePrototype** project is an "empty" version of the **Phone** app interface for iOS. Only the tab view at the bottom of the app's interface has been implemented:
+The **PhonePrototype** project is an "empty" version of the [[Screenshot 2024-11-24 at 9.27.51 AM.png|Phone app interface for iOS]]. What is meant by "empty"? Only the tab view at the bottom of the app's interface has been implemented:
 
 ![[Screenshot 2023-11-05 at 7.48.22 AM.png]]
 
-Please download [the **PhonePrototype** project shown here](https://github.com/lcs-rgordon/PhonePrototype/archive/493b647beec57540b446f5aa73295a19f0a805a5.zip) so you can try it out.
+Please now download [the **PhonePrototype** project](https://github.com/lcs-rgordon/PhonePrototype/archive/493b647beec57540b446f5aa73295a19f0a805a5.zip) so you can try it out while reading this tutorial.
+
+> [!NOTE]
+> 
+> This tutorial aligns with [[Learning Goals#7|learning goal 7]] – use that learning goal when summarizing what you've learned in your portfolio post for today's class.
+> 
+> You are encouraged to take note of the keyboard shortcuts introduced in this tutorial: using them will make navigating Xcode easier and faster for you in the future.
 
 ### Expand the compressed file
 
@@ -60,6 +66,10 @@ After opening the project you will see something like this:
 
 ![[Screenshot 2023-11-05 at 7.56.54 AM.png]]
 
+> [!NOTE]
+> 
+> This tutorial was written a year ago, so the run destination shows as **iPhone 15 Pro**, whereas the run destination on your computer will likely show as **iPhone 16 Pro**. This is completely OK – it will not affect your ability to follow this tutorial.
+
 Select the blue **PhonePrototype** project file:
 
 ![[Screenshot 2023-11-05 at 7.57.25 AM.png]]
@@ -68,9 +78,9 @@ Then select the **Signing & Capabilities** tab:
 
 ![[Screenshot 2023-11-05 at 7.58.36 AM.png]]
 
-Finally, from the drop-down for **Team**, select your personal team:
+Finally, from the drop-down for **Team**, select **Lakefield College School**:
 
-![[Screenshot 2023-11-05 at 7.59.21 AM (2).png]]
+![[Screenshot 2024-11-24 at 9.33.09 AM.png]]
 
 Now, you should be able to preview and run the project in the Simulator. We will learn how to do this now...
 
@@ -80,15 +90,15 @@ Press **Command-1** to be sure you have the **Project Navigator** open, then exp
 
 ![[Screenshot 2023-11-05 at 8.02.38 AM.png]]
 
-If you do not see the **Preview** section at right, sometimes called the **Canvas**, press **Option-Command-Return** on your keyboard, or use the mouse pointer as shown.
+If you do not see the **Preview** section at right (sometimes called the **Canvas**) then you can press **Option-Command-Return** on your keyboard, or use the mouse pointer as shown.
 
 The **Preview** or **Canvas** area will appear and disappear:
 
-![[Toggling the Preview Area 1.gif]]
+![[Toggling the Preview Area 1.mp4]]
 
 ## Starting the Preview
 
-The primary purpose of the **Preview** window is to show just the contents of the *single view*, or file, you are currently working on.
+The purpose of the **Preview** window is to show just the contents of the *single view*, or file, you are currently working on. This makes it easy to rapidly iterate on (improve) the interface or logic you are authoring within a single view.
 
 To start the Preview, click the ↻ icon, or use the **Option-Command-P** keyboard shortcut:
 
@@ -168,7 +178,7 @@ Here is an illustration of the flow:
 
 If we click through the different views of the app, we can see each file in turn appear in the Previews area:
 
-![[Previewing Multiple Files.gif]]
+![[Previewing Multiple Files.mp4]]
 
 This is fine if we really do just want to see each view on it's own.
 
@@ -178,7 +188,7 @@ In that case, we can run the app in the full Simulator.
 
 ### Running an app in the Simulator
 
-To run an app in the Simulator, first check that you have an appropriate run destination selected. In this case, the app will run within the iPhone 15 Pro simulator:
+To run an app in the Simulator, first check that you have an appropriate run destination selected. In this case, the app will run within the iPhone 15 Pro simulator, but you can also use the iPhone 16 Pro simulator, or really any other simulated device that is available:
 
 ![[Screenshot 2023-11-05 at 11.44.16 AM.png]]
 
@@ -196,9 +206,11 @@ After a moment, you will see the app appear in the Simulator:
 > 
 > However, after the Simulator is loaded for the first time, if you keep it running, the next time you run your code, the new version of your app will appear in the Simulator much more quickly.
 > 
-> It is also possible to run apps directly on your actual phone, and this process is much faster. A tutorial explaining how to do that will be provided soon.
+> To be clear, to keep the Simulator running, do **not** click the red button in the toolbar when you are finished testing the current version of the code in your app. Just return to Xcode, make whatever code changes you think are necessary, then re-run the app in the simulator using **Command-R**.
+> 
+> It is also possible to [[Deploy to a Device|run your code on your own phone]], if you wish. Sometimes that is absolutely necessary (such as when testing an app that uses the camera, which does not exist in the simulator).
 
-Note that the app is only showing `FavouritesView` though, and not the full tab view.
+Note that the **PhonePrototype** app, running in the Simulator, is only showing `FavouritesView`, and not the full tab view.
 
 Why is that? Let's investigate...
 
@@ -246,7 +258,7 @@ For this particular app, what we want to do is create an instance of `LandingVie
 
 So if we want to see this same content when the app opens in the full simulator, this is the change should make at the app entry point:
 
-![[Changing What Structure Shows When App Runs.gif]]
+![[Changing What Structure Shows When App Runs.mp4]]
 
 Conceptually, this is what we now have:
 
@@ -280,6 +292,6 @@ When you want to test the functionality of just one view within your app, use th
 
 ![[Screenshot 2023-11-05 at 11.15.47 AM.png]]
 
-When you want to test how the app works as a whole, run it within the full Simulator (or test it on an actual physical device). When an app is run in the Simulator or on a device, the structure created by the app entry point file is what we will see:
+When you want to test how the app works as a whole, run it within the full Simulator (or test it on an [[Deploy to a Device|actual physical device]]). When an app is run in the Simulator or on a device, the structure created by the app entry point file is what we will see:
 
 ![[Screenshot 2023-11-05 at 12.20.05 PM (2).png]]

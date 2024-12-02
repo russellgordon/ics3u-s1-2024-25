@@ -5,6 +5,67 @@ tags:
 ---
 This is a space to make private notes and observations regarding students. This page will not be published to the web.
 
+City model
+
+Adjust city view
+
+Create instances of cities...
+
+Iterate over all the cities...
+
+Exercise: Fruits and their health benefits
+
+This has been done below, on line 66:
+
+![[Screenshot 2023-01-21 at 8.44.03 AM.png]]
+
+By placing instances of a structure into an array (also known as a list, lowercase "l"), a very nice edit can be made to the `PlayerListView` page:
+
+![[Screenshot 2023-01-21 at 8.47.39 AM.png]]
+
+Now, the `List` structure on line 13 is accepting the array (or list) named `allPlayers`.
+
+The `List` structure in SwiftUI iterates over the `allPlayers` array, which contains:
+
+|Index|Element|
+|-|-|
+|0|kellyGruber|
+|1|joeCarter|
+|2|patBorders|
+|3|tonyFernandez|
+|4|georgeBell|
+
+With each iteration the next player in the array is temporarily inserted into `currentPlayer` and then used to create a `NavigationLink`.
+
+In turn, that instance of `currentPlayer` (which changes as the loop iterates) is passed along to the `DetailView` to allow each card to be shown.
+
+This is very much like what happened earlier in the example from the command line app:
+
+![[Screenshot 2023-01-21 at 8.56.13 AM.png]]
+
+Here, the loop on line 14 iterates over the array, and each band member's name is printed to the screen on line 15.
+
+There is *one* final change that must be made, however.
+
+To use an instance of a structure with `List` in SwiftUI, that instance must be uniquely identifiable.
+
+When a structure is used with a `List`, but each instance cannot be uniquely identified, this error will appear:
+
+![[Screenshot 2023-01-21 at 8.59.47 AM.png]]
+
+To fix this, we declare that our `TradingCard` structure will conform to the `Identifiable` protocol by making the change shown on line 10 – note that the *old* code is shown in dark grey, and the *new* code is shown in dark blue:
+
+![[Screenshot 2023-01-21 at 9.14.38 AM.png]]
+
+Finally, on line 12, we actually make instances of the `TradingCard` structure uniquely identifiable by adding a stored property named `id` and assigning it a default value of `UUID()`, using the  assignment operator, `=`.
+
+`UUID` is short for "universally unique identifier".
+
+With those minor changes to `TradingCard`, the `List` structure back on the list view is now happy and shows each player in the `allPlayers` array:
+
+![[Screenshot 2023-01-21 at 9.17.05 AM.png]]
+
+
 # End of module 1 reviews
 
 ## Ainsley
@@ -71,7 +132,7 @@ This is a space to make private notes and observations regarding students. This 
 
 92% ✔️ 
 
-# Mid-module reviews
+# Mid-module reviews- Mod 1
 
 Isla - ME
 Elaine - ME
@@ -88,6 +149,26 @@ Kyle - ME
 Courage - ME
 Hannu - ME
 Joseph - ME
+
+# Mid-module reviews- Mod 2
+
+Isla - EE
+Ainsley - ME
+Elaine - ME
+Marcus - BE
+Harshan - ME
+Ethan - EE
+Collin -  BE (Lexi - Peer Helper - 7:00 - 8:45 )
+Kaan - ME
+Kevin - ME
+Daniel - EE
+Thomas - EE
+Michael - BE
+Kyle - ME
+Courage - EE
+Hannu - ME
+Joseph - ME
+
 
 # Things to look at
 

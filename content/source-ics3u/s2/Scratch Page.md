@@ -1,8 +1,56 @@
-`---
+---
 draft: true
 draftSectionTwo: true
 tags:
 ---
+
+Idea for start of mod 3:
+
+![[Pasted image 20241201164035.png]]
+
+Quick assignment to reproduce street signs?
+
+Maybe after learning how to do curves in shapes?
+
+[![Standard Traffic Signs MUTCD Compliant - Traffic Safety Corp.](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.xwalk.com%2Fapp%2Fuploads%2F2019%2F12%2F21185354%2Fwarning-signs-v2.png&f=1&nofb=1&ipt=1ce371b522a9887d68a7b1ac4c5000560d8b68caa22cc5deaadb546b16b21ecd&ipo=images)](https://cdn.xwalk.com/app/uploads/2019/12/21185354/warning-signs-v2.png)
+
+Progression for final week of classes:
+
+First class
+- Navigation + Tab view review + app entry point discussion vs. previews
+	- exercise: add navigation to your favourite things app + a tab with an about the developer page
+
+Second
+- Custom shapes
+	- explain basic idea
+	- build a new shape
+- Trading cards, part two
+	- MAKE A PLAN (for custom shape + card layout changes)
+	- add a shape to your card
+	- add several cards (apply abstraction, add navigation)
+
+Third
+- Portfolio review
+- Guessing game lesson 
+	- take arbitrary input
+	- handle logic in separate structure
+	- handle bad input (optionals)
+
+Start of module three:
+
+- [[List and Detail Views]]
+	- recap?
+
+
+
+Progression:
+
+- Shapes
+- Subviews with bindings
+- Revised hockey card task
+- arrays
+- 
+
 
 3. Recap: [Develop in Swift Tutorials](https://developer.apple.com/tutorials/develop-in-swift-tutorials)
 	- A self-paced opportunity to consolidate concepts learned in the first module of this course, and learn a few new ways to navigate the features of Xcode.

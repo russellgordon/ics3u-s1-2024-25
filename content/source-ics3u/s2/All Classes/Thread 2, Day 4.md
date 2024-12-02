@@ -6,7 +6,7 @@ draftSectionTwo: false
 excludeBacklinks: true
 excludeFromExplorer: true
 enableToc: false
-createdForSectionTwo: 2024-11-08T00:34:55.000-0400
+createdForSectionTwo: 2024-11-08T03:34:55.000-0400
 ---
 ## Agenda
 1. Setup: [[SwiftUI Views Mastery]] Textbook

@@ -1,9 +1,9 @@
 ---
 draft: false
-draftSectionTwo: true
+draftSectionTwo: false
 tags: 
-created: 2024-10-31T00:00:00.000-0400
-createdForSectionTwo: 2024-09-27T00:00:00.000-0400
+created: 2024-10-31T07:00:00.000-0400
+createdForSectionTwo: 2024-11-25T07:00:00.000-0400
 ---
 To run applications you write in Xcode on your iPhone or iPad, a few *one-time-only* setup steps are required.
 

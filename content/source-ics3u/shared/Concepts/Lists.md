@@ -1,8 +1,9 @@
 ---
-tags:
-created: 2024-01-25T00:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-10-09T07:00:00.000-0400
+createdForSectionTwo: 2024-11-20T07:34:55.000-0400
+tags:
 ---
 
 ## Recap
@@ -10,11 +11,11 @@ draftSectionTwo: true
 Early on in this course we learned about  *variables* and *constants*, each of which can hold a single value of a [[Data Types|given data type]]:
 
 ```swift
-var score = 0			// variable, data type is Int
-let acceleration = 9.8	// constant, data type is Double 
+var score = 0           // variable, data type is Int
+let acceleration = 9.8  // constant, data type is Double 
 ```
 
-[[Thread 1#Structures|Structures]] allow us to describe more interesting data by grouping related individual variables and constants:
+Structures allow us to describe more interesting data by grouping related individual variables and constants:
 
 ```swift
 struct TradingCard {
@@ -47,36 +48,11 @@ let joeCarter = TradingCard(imageName: "JoeCarter",
                             famousPlay: "In 1993, in the World Series, with the Blue Jays leading three games to two, Carter came to bat with one out in the bottom of the ninth inning with the Blue Jays trailing 6–5 and Rickey Henderson and Paul Molitor on base. On a 2–2 count, Carter hit a three-run walk-off home run off Phillies pitcher Mitch Williams.")
 ```
 
-This in turn allowed us to *apply abstraction* in the **Trading Cards** task.
-
-We presented five different trading cards using just one structure that describes the data – `TradingCard`:
-
-![[Screenshot 2023-01-21 at 6.26.34 AM.png]]
-
-And one structure to describe the user interface – `DetailView`:
-
-![[Screenshot 2024-01-25 at 7.27.01 AM.png]]
-
-> [!NOTE]
+> [!TIP]
 > 
-> Some students will have used helper views to shorten or divide up the code within `DetailView`.
-
-The ability to navigate to the five different cards is provided by the `PlayerListView` structure:
-
-![[Screenshot 2023-01-21 at 6.33.50 AM.png]]
-
-However, you may have been wondering – aren't we supposed to avoid repeating ourselves?
-
-Recall:
-
-> **D.R.Y.**
-> Don't Repeat Yourself!
-
-Look at the code in the final screenshot above, of `PlayerListView`.
-
-It sure looks like we are repeating ourselves – five navigation links – otherwise identical, except for what player card they lead to.
-
-The solution to this repetition is another way to store values – that is something called an *array* or *list*.
+> These examples are from Mr. Gordon's [[Trading Cards, Part 1|Trading Cards]] exemplar.
+> 
+> More on that task in a couple of classes. 
 
 ## What is an array?
 
@@ -115,15 +91,7 @@ All AP materials from the College Board – including questions on the Computer 
 
 These are the same thing.
  
-Finally, note that an array or list is not quite the same thing as the `List` structure in the SwiftUI framework.
-
-An array, or list, in programming language terms lets us store many values but access them via one name.
-
-A `List` structure in SwiftUI lets use *present* many values in a user interface, like we did with the `PlayerListView` structure:
-
-![[Screenshot 2023-01-21 at 6.33.50 AM.png]]
-
-In this course, you will hear and use both words:
+In this course, you will hear and use both words to refer to the same concept:
 
 - array
 - list
@@ -161,7 +129,7 @@ Overall the `blackPinkBand` list is described this way:
 
 We can access individual elements of a list by their index.
 
-For example, in a [[Command-Line Projects|command-line app]], we could print the third band member's name using this code:
+For example, in a command-line app – an app with a text-based user interface – we could print the third band member's name using this code:
 
 ```swift
 print(blackPinkBand[2])
@@ -207,15 +175,17 @@ print(blackPinkBand[4])
 
 > [!EXERCISE]
 > 
-> 1. Create a new [[Command-Line Projects|command-line macOS app]] named `TopTenList` and create a list that has ten elements.
->    
+> 1. Create a new [[Command-Line Projects|command-line macOS app]] named `TopTenList` and then make a list that has ten elements.
+>    <br/><br/>
 >    For example, you might create a list of ten cities that you would like to visit someday, or your ten favourite ice cream flavours.
->    
+>    <br/><br/>
 >    Then print the first, fifth, and final element of each list, similar to what was shown above.
->    
+>    <br/><br/>
 >    Finally, try printing the eleventh element of your list. 
->    
+>    <br/><br/>
 >    Of course, that does not exist, and your app will crash. It's good to become familiar with common reasons why your app might crash. Going past the end of a list is a very common programming error.
+>    <br/><br/>
+>    Share screenshots of your results in your portfolio post for today.
 
 ## Iterating over lists
 
@@ -245,9 +215,9 @@ We could use a loop like that to iterate over the elements in the `blackPinkBand
 
 ![[Screenshot 2023-01-21 at 8.08.05 AM.png]]
 
-Here is that same code, with the results shown using an animation:
+Here is a video of that code being run, so you can see what happens step by step:
 
-![[Stepping Through an Array.gif]]
+![[Stepping Through an Array.mp4]]
 
 However, this is not the best way to use a loop with a list in Swift.
 
@@ -263,9 +233,9 @@ It's very easy to make a mistake and go past the end of the array, by asking for
 
 ![[Screenshot 2023-01-21 at 8.09.53 AM.png]]
 
-Here is that same code, with the results shown as an animation:
+Here is a video of that code being run, so you can see what happens step by step:
 
-![[Index Out of Range.gif]]
+![[Index Out of Range.mp4]]
 
 > [!TIP]
 > "Index out of range" is one of the *most common* categories of programmer errors.
@@ -285,100 +255,123 @@ With each iteration of the loop, the value of `bandMember` is changed to tempora
 
 Even better: if we are deliberate in how we name a list, the Xcode editor's autocomplete is very helpful – this feature exists because iterating over a list is a *very common task* when developing an app:
 
-![[Iterating Over a List.gif]]
+![[Iterating Over a List.mp4]]
 
 ### Exercise 2
 
 > [!EXERCISE]
 > 
 > 2. Extend your `TopTenList` command-line app.
->    
+>    <br/><br/>
 >    Referring to the examples in the section above, iterate over the values of your list and print them to the screen using two different approaches in code.
+>    <br/><br/>
+>    Share screenshots of your results in your portfolio post for today.
 
-## Iterating over lists with SwiftUI
+## Scrollable Lists in SwiftUI
 
-As you know, SwiftUI has a `List` structure.
+SwiftUI has a `List` structure, which provides a scrollable list of elements.
 
-We used it in our Trading Cards app:
+> [!TIP]
+> 
+> The name `List` is not an accident.
+> 
+> The `List` structure exists to make it easy to – wait for it – iterate over the elements of a *list* – also known as an array.
+> 
+> More on how to use a `List` structure with a *list* – an array – in our very next class.
 
-![[Screenshot 2023-01-21 at 6.33.50 AM.png]]
+One example of where a `List` is useful would be in the **World Clock** interface we built earlier in this module:
 
-However, it's *name* – `List` – is not an accident.
+![[Pasted image 20241119174315.png]]
 
-The `List` structure is not an array, but it works *with* arrays.
+In the example above, a `VStack` is used to show each city that we created a clock for. A `Spacer` view is used to push the cities up to the top of the interface.
 
-As it turns out: we can take individual instances of a structure, and put them into an array.
+Instead of that approach, we can:
 
-This has been done below, on line 66:
+1. Replace the `VStack` with `List`
+2. Remove the `Spacer`
+3. Use the view modifier `.listStyle(.plain)`
 
-![[Screenshot 2023-01-21 at 8.44.03 AM.png]]
+This achieves the desired visual look and feel:
 
-By placing instances of a structure into an array (also known as a list, lowercase "l"), a very nice edit can be made to the `PlayerListView` page:
+![[Pasted image 20241119174740.png]]
 
-![[Screenshot 2023-01-21 at 8.47.39 AM.png]]
+As a bonus, the interface is now scrollable:
 
-Now, the `List` structure on line 13 is accepting the array (or list) named `allPlayers`.
+![[ScrollingList.mp4]]
 
-The `List` structure in SwiftUI iterates over the `allPlayers` array, which contains:
+However, let's look again at the code:
 
-|Index|Element|
-|-|-|
-|0|kellyGruber|
-|1|joeCarter|
-|2|patBorders|
-|3|tonyFernandez|
-|4|georgeBell|
+![[Pasted image 20241119180437.png]]
 
-With each iteration the next player in the array is temporarily inserted into `currentPlayer` and then used to create a `NavigationLink`.
+Isn't this a bit... *repetitive*?
 
-In turn, that instance of `currentPlayer` (which changes as the loop iterates) is passed along to the `DetailView` to allow each card to be shown.
+Recall the number one rule of software development:
 
-This is very much like what happened earlier in the example from the command line app:
+**D.R.Y.** or **D**on't **R**epeat **Y**ourself
 
-![[Screenshot 2023-01-21 at 8.56.13 AM.png]]
+How can we fix this?
 
-Here, the loop on line 14 iterates over the array, and each band member's name is printed to the screen on line 15.
+We can apply just a little bit more *abstraction*.
 
-There is *one* final change that must be made, however.
+Notice the *call sites* where an instance of `CityView` is created:
 
-To use an instance of a structure with `List` in SwiftUI, that instance must be uniquely identifiable.
+![[Pasted image 20241119190931.png]]
 
-When a structure is used with a `List`, but each instance cannot be uniquely identified, this error will appear:
+Each time an instance of `CityView` is made, four questions are asked:
 
-![[Screenshot 2023-01-21 at 8.59.47 AM.png]]
+1. What is the time zone offset?
+2. What city?
+3. What time?
+4. AM or PM?
 
-To fix this, we declare that our `TradingCard` structure will conform to the `Identifiable` protocol by making the change shown on line 10 – note that the *old* code is shown in dark grey, and the *new* code is shown in dark blue:
+... and all four questions must be answered.
 
-![[Screenshot 2023-01-21 at 9.14.38 AM.png]]
+The call sites are *messy*.
 
-Finally, on line 12, we actually make instances of the `TradingCard` structure uniquely identifiable by adding a stored property named `id` and assigning it a default value of `UUID()`, using the  assignment operator, `=`.
+What if they could be simplified?
 
-`UUID` is short for "universally unique identifier".
+What if we created a structure that models a city? Like this:
 
-With those minor changes to `TradingCard`, the `List` structure back on the list view is now happy and shows each player in the `allPlayers` array:
+![[Screenshot 2024-11-19 at 7.16.52 PM.png]]
 
-![[Screenshot 2023-01-21 at 9.17.05 AM.png]]
+Then we could create *instances* of that structure, to hold the relevant data for each city:
+
+![[Pasted image 20241119191923.png]]
+
+> [!NOTE]
+> 
+> This is exactly the same as work we did earlier in this course, as shown here:
+> 
+> ![[Pasted image 20241119193134.png]]
+
+So what is the advantage of this? We can then change our `CityView` structure from this – where four stored properties are defined:
+
+![[Pasted image 20241119193236.png]]
+
+To this instead, where we just define a single stored property – which city should be shown:
+
+![[Pasted image 20241119192446.png]]
+
+In turn, this allows us to clean up the call sites where instances of `CityView` are created – now just one question must be answered – which city should be viewed?
+
+In each case, we provide a city to show information for:
+
+![[Pasted image 20241119192719.png]]
+
+In this way, we *separate concerns* – we keep the data (model) in our app separated from the user interface (views).
+
+And – as you will see in our next class – when we combine this idea with storing instances of a structure in an array – we can make our code even less repetitive.
+
+For now – try the exercise below.
 
 ### Exercise 3
 
 > [!EXERCISE]
 > 
-> 3. Return to your own **Trading Cards** app.
->    
->    Make your structure conform to the `Identifiable` protocol as explained above.
->    
->    Add the instances of your structure to an array, like was shown with `allPlayers` above.
->    
->    Finally, in your app's list view, change the code so that the `List` structure uses your new array.
->    
->    In this way, you can change the list view from having this many lines of code:
->    
->    ![[Screenshot 2023-01-21 at 9.28.02 AM.png]]
->    
->    ... to this many:
->    
->    ![[Screenshot 2023-01-21 at 9.22.55 AM.png]]
->    
->    By doing this, you will have *managed complexity* in your app by using an array with a `List` structure to elminate some very repetitive code.
+> Using the concepts we've learned about today and earlier in this module, author a simple app that uses a scrollable `List` to describe the virtues of the four seasons:
+> <br/><br/>
+> ![[Pasted image 20241119195312.png]]
+> <br/><br/>
+> Alternately, make a similar app that compares information among several instances of something that shares a common theme. You might write an app that includes an icon, the name, and a brief description of each of Taylor Swift's four most popular albums. Or, an app that displays the four best teams (in your opinion) in a given sports league.
    
    
