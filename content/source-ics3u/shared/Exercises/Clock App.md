@@ -439,9 +439,11 @@ Now is a good time to [[Pushing Commits|commit and push]] your work, using this 
 
 > Applied abstraction to show many cities in the World Clock user interface using a helper view.
 
+## Exercises
+
 > [!IMPORTANT]
 > 
-> One member of your driver-navigator team will not have the code you have carefully worked on together.
+> One member of your driver-navigator team will not have the code you have carefully worked on together during the lesson.
 > 
 > The partner who *does* have the code needs to use the **View on GitHub** command on their *local* copy of the repository to get the address of their *remote* repository – the same way we all did a couple of days ago:
 > 
@@ -449,9 +451,7 @@ Now is a good time to [[Pushing Commits|commit and push]] your work, using this 
 > 
 > Then the partner who *does not* have the code right now needs to visit the address of their partner's remote repository, and [[Forking a Repository|fork and clone]] that repository to their own computer.
 > 
-> Each partner within the pair should continue on and complete the exercises below independently.
-
-## Exercises
+> Each partner within the pair should then continue on and complete the exercises below independently. 👍🏼
 
 ### 1. Alarms
 

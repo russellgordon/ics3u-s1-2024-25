@@ -16,7 +16,8 @@ created: 2024-12-06T07:00:00.000-0400
 3. Exercise: [[Clock App]]
 	- Learn how to use SwiftUI Views Mastery as a reference book.
 	- Practice creating professional layouts.
-	- Use the [[Driver-Navigator Pattern]] to complete this exercise.
+	- Use the [[Driver-Navigator Pattern]] to complete the lesson.
+	- Work independently to [[Clock App#Exercises|complete the exercises]].
 	  
 ## Things to do before our next class
 
