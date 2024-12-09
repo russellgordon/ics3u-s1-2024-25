@@ -9,5 +9,5 @@ They are friendly, very knowledgeable, and staff drop-in sessions as well – si
 
 Day|Time|SIC|Location
 -|-|-|-
-Tuesday|1:00 PM to 1:30 PM|Nikita|Room 6
-Friday|1:00 PM to 1:30 PM|Ben|Room 6
+Tuesday|1:00 PM to 1:30 PM|Ben|Room 6
+Friday|1:00 PM to 1:30 PM|Nikita|Room 6
