@@ -1,7 +1,7 @@
 ---
 draft: true
 draftSectionTwo: false
-created: 2024-10-09T07:00:00.000-0400
+created: 2024-12-13T07:00:00.000-0400
 createdForSectionTwo: 2024-11-26T07:34:55.000-0400
 tags:
 ---
@@ -16,7 +16,7 @@ Recall that shapes are *push-out*, or "greedy", views.
 
 They take up as much space as they can.
 
-As well, the specific amount of space that a shape will have available to draw itself within will vary.
+As well, the specific amount of space that a shape has available to draw itself within will vary.
 
 For example, here, from [[Block Layouts, Part 2]], we used the `.aspectRatio` view modifier to make the second rectangle be twice as wide as it is tall:
 

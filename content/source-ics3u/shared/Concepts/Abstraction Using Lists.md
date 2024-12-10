@@ -1,7 +1,7 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-10-09T07:00:00.000-0400
+created: 2024-12-11T07:00:00.000-0400
 createdForSectionTwo: 2024-11-22T07:34:55.000-0400
 tags:
 ---
@@ -289,6 +289,8 @@ The app works like this when completed:
 Create a project named **FavouriteThings** that lists up to six of the things or people you are most grateful for in your life:
 
 ![[RocketSim_Screenshot_iPhone_16_Pro_6.3_2024-11-21_22.11.28.png|350]]
+
+Be sure to create a remote and then [[Pushing Commits|commit and push]] your work often while working on this exercise.
 
 > [!TIP]
 > 
