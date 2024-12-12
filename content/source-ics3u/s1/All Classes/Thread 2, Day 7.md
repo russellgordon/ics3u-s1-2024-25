@@ -14,7 +14,7 @@ created: 2024-12-12T07:00:00.000-0400
 	- Review how a `TabView` is often used in an application.
 3. Concept: [[Navigating to a Detail View]]
 	- Learn how to allow a user to navigate within your app.
-	- Be sure to complete the [[Navigation to a Detail View#Exercises]].
+	- Be sure to complete the [[Navigating to a Detail View#Exercises|exercises]].
 
 	  
 ## Things to do before our next class
