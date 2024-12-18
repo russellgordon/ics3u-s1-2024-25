@@ -5,6 +5,24 @@ tags:
 ---
 This is a space to make private notes and observations regarding students. This page will not be published to the web.
 
+## End of mod 2 portfolio review chats
+
+### Susie
+
+95 if all work completed
+
+### Nicholas
+
+97 to 98
+
+### Julien
+
+97
+
+### Kevin
+
+
+
 # Mid-mod portfolio reviews
 
 ## Neil
