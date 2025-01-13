@@ -3,8 +3,8 @@ draft: false
 draftSectionTwo: false
 enableToc: false
 excludeBacklinks: true
-created: 2024-10-15T00:00:00.000-0400
-createdForSectionTwo: 2024-09-21T00:00:00.000-0400
+created: 2024-10-15T07:00:00.000-0400
+createdForSectionTwo: 2024-09-21T07:00:00.000-0400
 tags:
 ---
 To help Mr. Gordon ensure that every student is positioned for success this year, please create a new blank portfolio entry [on Notion](https://notion.so). Name the new entry **About my Mac**.

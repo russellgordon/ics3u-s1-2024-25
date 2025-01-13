@@ -3,8 +3,8 @@ draft: false
 draftSectionTwo: false
 enableToc: false
 excludeBacklinks: true
-created: 2024-10-07T00:00:00.000-0400
-createdForSectionTwo: 2024-09-23T00:00:00.000-0400
+created: 2024-10-07T07:00:00.000-0400
+createdForSectionTwo: 2024-09-23T07:00:00.000-0400
 tags:
 ---
 As mentioned in our [course outline](https://drive.google.com/file/d/1qBRTN-AjrFhCuNItfIOblKPqq7hqgkkC/view?usp=share_link), there is one required textbook for this course:

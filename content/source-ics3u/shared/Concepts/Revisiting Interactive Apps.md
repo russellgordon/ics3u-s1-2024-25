@@ -1,12 +1,11 @@
 ---
 tags:
-created: 2023-11-14T00:00:00.000-0400
+created: 2024-10-28T07:00:00.000-0400
+createdForSectionTwo: 2025-01-13T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
 ---
-# Introduction to Interactive Apps
-
-In this lesson you will learn how to build a simple interactive application using SwiftUI.
+In this lesson you will learn how to build another interactive application using SwiftUI.
 
 A small extension to what you already know about structures is all that you need to make an interactive app.
 
@@ -80,7 +79,7 @@ Each of the structures shown above have *two* stored properties and *one* comput
 
 As a convention, in a structure, we will always list *stored properties* first and then *computed properties*.
 
-Going forward, it is a good idea to *mark* which properties are stored properties and which properties are computed properties, using short comments.
+As a gentle reminder, it is a good idea to *mark* which properties are stored properties and which properties are computed properties, using short comments.
 
 Like this:
 
@@ -145,6 +144,20 @@ struct ListItem: View {
     
 }
 ```
+
+Using comments to mark the location of stored properties and computed properties creates helps to organize the code within our structure, and makes it possible to use the *jump bar* in Xcode to move between sections of a longer file:
+
+![[Pasted image 20250112140155.png]]
+
+And:
+
+![[Screenshot 2025-01-12 at 2.01.03 PM.png]]
+
+> [!NOTE]
+> 
+> These screenshots are from a larger application – the **Check In** app currently being authored by Grade 12 Computer Science students to make the breakfast check-in process in the dining hall less reliant on paper for tracking information.
+> 
+> In a smaller app, it's true that it may not be strictly necessary to use the jump bar to navigate around a shorter file, but, it's a good idea to get into the habit of adding these comments now – you too will soon be authoring more significant applications with larger amounts of code.
 
 ### Stored vs. computed properties
 
@@ -303,9 +316,11 @@ However, we also need to use a *property wrapper* called `@State`, like this:
 
 What does `@State` do?
 
-**It tells SwiftUI that when a property's value does change, the user interface should  be updated automatically.** That's really important.
+**It tells SwiftUI that when a property's value does change, the user interface should  be updated automatically.**
 
-`@State` before a property in a structure ensures SwiftUI will update the user interface  when that property's value changes.
+That's really important, so let's say this again for the record:
+
+> `@State` before a property in a structure ensures SwiftUI will update the user interface  when that property's value changes.
 
 So, please add the property wrapper to your code now:
 
@@ -364,19 +379,20 @@ Now, let's break down in detail what is happening there:
 ![[Screenshot 2023-11-14 at 1.23.44 PM.png]]
 
 > [!DISCUSSION]
-> 1. In the `Stepper`, for the `value` parameter, we pass an argument of `$base`.
->    
->    The `$` is special syntax that means this is a *binding*.
->    
->    What is a binding? It means the stepper is bound, or directly connected to, the `base` stored property, in this example.
->    
->    So, as the stepper's controls are tapped by the user, the value of the `base` stored property is changed.
->    
->    And, since we marked that stored property with `@State`, the user interface will automatically be updated.
-> 2. For the `label` parameter, we pass a code block that starts with a `{` and ends with a `}`. This type of code block is also called a *closure*.
->    
->    Inside the closure that is passed as the argument for the `label` parameter, we provide a `Text` view.
->    
+> 1. In the `Stepper`, for the `value` parameter, we pass an argument of `$base`.<br/>
+>    <br/>
+>    The `$` is special syntax that means this is a *binding*.<br/>
+>    <br/>
+>    What is a binding? It means the stepper is bound, or directly connected to, the `base` stored property, in this example.<br/>
+>    <br/>
+>    So, as the stepper's controls are tapped by the user, the value of the `base` stored property is changed.<br/>
+>    <br/>
+>    And, since we marked that stored property with `@State`, the user interface will automatically be updated.<br/>
+>    <br/>
+> 2. For the `label` parameter, we pass a code block that starts with a `{` and ends with a `}`. This type of code block is also called a *closure*.<br/>
+>    <br/>
+>    Inside the closure that is passed as the argument for the `label` parameter, we provide a `Text` view.<br/>
+>    <br/>
 >    The `Text` view inside the closure provides the visual output that we see beside the stepper control. In this case, it is simply text that says "Base".
 
 If you try the app now, as the stepper is tapped, the text view that shows the base is updated automatically – that happens because of the `@State` property wrapper:
@@ -482,6 +498,7 @@ $$
 \begin{align}
 &=-2^2  \\
 &=-1\times2^2 \\
+&=-1\times2\times2 \\
 &=-1\times4 \\
 &=-4 \\
 \end{align}
@@ -507,3 +524,30 @@ If you wish to demonstrate even greater understanding of the concepts at hand, a
 ![[Screenshot 2023-11-06 at 7.22.16 PM.png|300]]
 
 ![[Screenshot 2023-11-06 at 7.22.35 PM.png|300]]
+
+## Reflection questions
+
+When you write a portfolio entry for this lesson, please try responding to the questions below.
+
+> [!NOTE]
+> 
+> Since thinking about what you learned today, and making the effort to articulate your ideas in writing is the point of responding to these questions, please do not use a large language model such as ChatGPT to come up with responses.
+> 
+> By thinking about your responses to these questions on your own, you will better prepare yourself for upcoming conversation-based evaluations in this module of the course. As a group, we will soon speak at greater length together about what these conversation-based evaluations are. Note that every student in the class will complete a conversation-based evaluation at least once before the end of this module.
+
+1. What is the difference between a stored property and a computed property in a structure? Provide an example of each from the tutorial.
+   
+2. Why is it important to use comments like `// MARK: Stored properties` and `// MARK: Computed properties` in your code?
+   
+3. In the `StepperExample` app, why is the `base` property marked with `@State`? What would happen if it were not?
+   
+4. What is the purpose of a *binding* in SwiftUI? What is the special syntax used to denote a binding?
+   
+5. What is string interpolation, and why is it necessary to use it when displaying the `squared` computed property in a `Text`view?
+   
+6. How could you modify the `StepperExample` app to allow the user to calculate cubes instead of squares?
+   
+7. If you wanted to display the result of the squared computation in a larger, bold font and a different color, how would you modify the `Text` view in the `StepperExample` app? 
+
+
+

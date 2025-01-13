@@ -1,14 +1,16 @@
 ---
 tags:
-created: 2023-10-30T00:00:00.000-0400
+created: 2024-10-28T07:00:00.000-0400
+createdForSectionTwo: 2025-01-13T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
 ---
 Xcode is a large application that serves several purposes for software developers.
 
 Many different types of projects can be created for different Apple platforms.
 
 This short tutorial will show you how to create a project that runs on iOS.
+
 ## Create the project
 
 To create a playground, make sure that Xcode is in the foreground on your computer by clicking it's icon in the Dock:
@@ -17,11 +19,11 @@ To create a playground, make sure that Xcode is in the foreground on your comput
 
 From the menu bar at top left, choose **File > New > Project...**:
 
-![[Screenshot 2023-10-23 at 6.11.30 AM.png|400]]
+![[Screenshot 2025-01-12 at 1.33.39 PM.png|450]]
 
-You will see the following window – here, choose the ==**iOS**== tab, then **App**, and then **Next**:
+You will see the following window – here, choose the **iOS** tab, then **App**, and then **Next**:
 
-![[Screenshot 2023-10-30 at 10.32.28 AM.png]]
+![[Pasted image 20250112133559.png]]
 
 On the following screen, give your project:
 
@@ -32,22 +34,33 @@ On the following screen, give your project:
 	- NOTE: If your name is Stephanie Laroux, use `ca.stephanielaroux`
 4. interface should be **SwiftUI**
 5. language should be **Swift**
-6. storage should be **None**
-7. no checkmark beside **Include Tests**
+6. testing system should be **None**
+7. storage should be **None**
 
-![[Screenshot 2023-10-27 at 7.29.05 AM.png]]
+![[Pasted image 20250112133738.png]]
+
+Then press the **Next** button.
 
 On the following screen, choose where to save your project – be sure that source control is enabled:
 
-![[Screenshot 2023-10-30 at 10.34.25 AM.png]]
+![[Pasted image 20250112133829.png]]
 
-## Begin coding
+## Create a remote
 
 You will see the following when your project first opens:
 
-![[Screenshot 2023-10-30 at 10.37.42 AM.png]]
+![[Pasted image 20250112133948.png]]
 
-> [!NOTE]
-> It may take some time for the preview to load at first.
-> 
-> After the phone simulator loads, the preview window will update quickly.
+Press **Command-2** to switch to the source control navigator, then tap the **Repositories** tab, then right-click on the local repository to create a remote:
+
+![[Screenshot 2025-01-12 at 1.40.43 PM.png]]
+
+Accept the default values by pressing the **Create** button:
+
+![[Screenshot 2025-01-12 at 1.41.40 PM.png]]
+
+Now press **Command-1** to return to the project navigator:
+
+![[Pasted image 20250112134328.png]]
+
+You are ready to begin coding!

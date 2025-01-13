@@ -1,8 +1,8 @@
 ---
 draft: false
 draftSectionTwo: true
-created: 2024-12-03T00:00:00.000-0400
-createdForSectionTwo: 2024-10-01T00:00:00.000-0400
+created: 2024-12-03T07:00:00.000-0400
+createdForSectionTwo: 2024-10-01T07:00:00.000-0400
 tags:
 ---
  This is a self-paced opportunity to consolidate concepts learned in the first module of this course, learn a few new ways to navigate the features of Xcode, and get a taste of *applying abstraction* by creating custom views – the primary concept we will be learning about in this thread of the course.

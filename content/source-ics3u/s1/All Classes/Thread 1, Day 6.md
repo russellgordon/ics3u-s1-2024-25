@@ -4,7 +4,7 @@ tags:
 excludeBacklinks: true
 excludeFromExplorer: true
 enableToc: false
-created: 2024-10-17T00:00:00.000-0400
+created: 2024-10-17T07:00:00.000-0400
 ---
 ## Agenda
 1. Follow-up: [[Remainders with Doubles]]

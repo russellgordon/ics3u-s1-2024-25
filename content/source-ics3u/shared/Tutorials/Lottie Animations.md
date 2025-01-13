@@ -1,8 +1,9 @@
 ---
-tags:
-created: 2024-01-29T00:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+tags: 
+created: 2024-11-12T01:23:31.000-0400
+createdForSectionTwo: 2025-01-09T03:00:00.000-0400
 ---
 If you are interested in computer animation and graphics, you may be familiar with [Adobe After Effects](https://www.adobe.com/ca/products/aftereffects.html).
 
@@ -52,16 +53,16 @@ Once the project is open, create a remote:
 
 Now, complete the following steps:
 
-1. Delete `ContentView`
-2. Create two groups:
+1. Use the **Refactor > Rename** feature to change the name of the `ContentView` structure to `AnimationsListView`.
+2. Right-click on the top-most blue folder and choose **Convert to Group.** The folders will change in colour to be grey. It will now to possible to re-arrange folders and files as you wish.
+4. Create two groups:
 	- `Model`
 	- `Views`
-3. Inside the `Views` group, create a new **SwiftUI View** named `AnimationsListView`.
-4. Make the app entry point file create an instance of `AnimationsListView`.
+5. Move `AnimationsListView` into the `Views` group.
 
 When you are all done, your project should look like this:
 
-![[Screenshot 2023-01-27 at 1.16.50 PM.png]]
+![[Pasted image 20250109135818.png]]
 
 At this point, commit and push your work to your remote, with the message:
 
@@ -91,9 +92,17 @@ In the window that appears, type `lottie-ios` in the top-right corner:
 
 Then choose the **Add Package** button.
 
-After a moment, another window will appear. Choose **Add Package** a second time:
+After a moment, another window will appear:
 
 ![[Screenshot 2023-01-27 at 1.21.33 PM.png]]
+
+Next, it is important to choose **None** for the **Lottie-Dynamic** package product:
+
+![[Pasted image 20250109145152.png]]
+
+Finally, choose **Add Package** again:
+
+![[Pasted image 20250109145254.png]]
 
 If things worked correctly, you should see `Lottie` listed under **Package Dependencies**:
 
@@ -103,7 +112,7 @@ If things worked correctly, you should see `Lottie` listed under **Package Depen
 > 
 > The exact version number of the package might vary from what you see in the screenshot above.
 > 
-> For example, the current version of the Lottie package is 4.4.0.
+> For example, the current version of the Lottie package is 4.5.1.
 
 At this point, commit and push your work to your remote, with the message:
 
@@ -137,21 +146,13 @@ You have already [browsed available animations](https://lottiefiles.com/featured
 
 Each Lottie animation can be saved as a JSON file, which is just a text file that has a particular format that is used to describe the animation.
 
-Find an animation you like:
+Find an animation you like, then click the **Download** button at top-right:
 
-![[Screenshot 2024-01-28 at 6.01.48 PM.png]]
+![[Pasted image 20250109142800.png]]
 
-Then click the **Download** button at top-right:
+On the page that appears, choose to download in the **Lottie JSON** format:
 
-![[Screenshot 2024-01-28 at 6.02.08 PM.png]]
-
-Click **Save to workspace to download**:
-
-![[Screenshot 2024-01-28 at 6.02.32 PM.png]]
-
-Once added to your workspace, download the animation in the **Lottie JSON** format:
-
-![[Screenshot 2024-01-28 at 6.04.06 PM.png]]
+![[Pasted image 20250109142844.png]]
 
 Now, make a new group named `Animations` in your Xcode project, then drag and drop the JSON file from your **Downloads** folder into the `Animations` group in Xcode:
 

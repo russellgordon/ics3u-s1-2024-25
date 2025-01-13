@@ -7,6 +7,7 @@ Computer Studies Program SICs are students enrolled in Grade 12 Computer Science
 
 They are friendly, very knowledgeable, and staff drop-in sessions as well – similar to Grove Time.
 
-> [!NOTE]
-> 
-> For the first week back from December Break, there will be no SIC drop-in sessions offered.
+Day|Time|SIC|Location
+-|-|-|-
+Tuesday, January 14|12:30 PM to 1:00 PM|Nikita|Room 6
+Thursday, January 16|12:30 PM to 1:00 PM|Ben|Room 6

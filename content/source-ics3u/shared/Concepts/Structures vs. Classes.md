@@ -1,12 +1,25 @@
 ---
-tags:
-created: 2024-04-06T00:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+tags: 
+created: 2024-11-12T01:23:31.000-0400
+createdForSectionTwo: 2025-01-09T03:00:00.000-0400
 ---
+
 This lesson is really about *value types* and how they differ from *reference types*.
 
-To explore this concept, please create a [[Xcode Playgrounds|new Xcode playground]] named `StructuresAndClasses`.
+To explore this concept, please create a new Xcode *playground*:
+
+![[Screenshot 2025-01-09 at 1.27.19 PM.png|400]]
+
+For the macOS platform:
+
+![[Screenshot 2025-01-09 at 1.27.56 PM.png|450]]
+
+Named `StructuresAndClasses`:
+
+![[Screenshot 2025-01-09 at 1.28.25 PM.png|500]]
+
 ## Value types
 
 What is a value type?
@@ -44,7 +57,6 @@ var home = school
 ```
 
 Based on the results you have seen when running the playground – what can you conclude about what happened when the `home` variable was created?
-
 ## Reference types
 
 Now, on line 3, change the `struct` keyword so that it says `class` instead:
@@ -67,7 +79,7 @@ An initializer is used when an instance of a class is created, or initialized. T
 
 Fortunately, we do not need to write the initializer for a class manually – Xcode will do it for us. Make edits to your code as follows:
 
-![[Adding an Initializer.gif|650]]
+![[Adding an Initializer.mp4|650]]
 
 ### How initializers work
 
@@ -101,7 +113,7 @@ Again, how are those results different as compared to when `Location` is defined
 
 Try changing `Location` from a structure to a class and back again, and really take a close look at the results:
 
-![[Struct to Class and Back Again.gif|650]]
+![[Struct to Class and Back Again.mp4|650]]
 
 ## Summary
 
@@ -119,7 +131,3 @@ Add the following to your notes, completing each sentence.
 4. In the code example above, when `Location` is defined as a class, `home` is simply a &#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f; to `school` and occupies the &#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f; region of memory in the computer.<br/>
     So, when `home` changes, `school`  &#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;&#x5f;.
    <br/>
-
-
-
-

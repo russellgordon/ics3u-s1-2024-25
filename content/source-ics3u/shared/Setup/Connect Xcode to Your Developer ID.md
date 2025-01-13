@@ -3,8 +3,8 @@ draft: false
 draftSectionTwo: false
 enableToc: false
 excludeBacklinks: true
-created: 2024-10-28T00:00:00.000-0400
-createdForSectionTwo: 2024-09-30T00:00:00.000-0400
+created: 2024-10-28T07:00:00.000-0400
+createdForSectionTwo: 2024-09-30T07:00:00.000-0400
 tags:
 ---
 In order to (eventually) run your apps on a physical device, you need to log in to the [[Create an Apple ID|Apple ID]] you created to accept your [[Apple Developer Program]] membership.
