@@ -1,10 +1,11 @@
 ---
-tags:
-created: 2024-01-30T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-10-09T07:00:00.000-0400
+createdForSectionTwo: 2025-01-16T07:34:55.000-0400
+tags:
 ---
-So far we have made lists that hold a set number of values, like in the Trading Cards app:
+Most often this year, we have used lists that hold a set number of values, like in the Trading Cards app:
 
 ![[Screenshot 2023-01-23 at 8.21.50 PM.png]]
 
@@ -18,7 +19,7 @@ In the screenshot above, on line 67, a list (also called an array) named `allPla
 |3|tonyFernandez|
 |4|georgeBell|
 
-However, a great deal of the utility of using a list comes from its flexibility: the number of elements can be *increased* (or decreased) while our program runs.
+However, as you saw earlier this week with the [[Dynamic Lists|Find the Roots]] application, a great deal of the utility is found in using a *dynamic* list: a list (or array) where the number of elements is *increased* (or decreased) while our program runs.
 
 ## Understanding the data structure
 
@@ -87,7 +88,7 @@ Finally, click the disclosure triangle beside `numbers` and you will see the thr
 
 If you wish, you can step through the code. Press the **Step Over** button a few times, and you will see the loop print the numbers in the array to the console:
 
-![[Stepping Through Code.gif]]
+![[Stepping Through Code.mp4]]
 
 ### Mutating the array
 
@@ -137,7 +138,7 @@ This demonstrates that you *can* mutate, or change, the number of elements in an
 
 Try this out by running the code and stepping through it – notice how the size of the array changes as the additional lines of code are run:
 
-![[More Stepping Through Code.gif]]
+![[More Stepping Through Code.mp4]]
 
 However, we, as the programmer, are still deciding to add two more elements, and *we* are writing the code to make that happen.
 
@@ -153,7 +154,7 @@ We can do that.
 
 First, let's clear the breakpoint on line 21, like this:
 
-![[Clearing a Breakpoint.gif]]
+![[Clearing a Breakpoint.mp4]]
 
 Then add the code below to the bottom of the existing code in your app:
 
@@ -207,7 +208,7 @@ Choosing a value less than 10 is recommended unless you *really* enjoy typing nu
 
 Notice that when the program stops at the second breakpoint, the size of the array has grown by however many elements you chose to add:
 
-![[Adding Elements to an Array.gif]]
+![[Adding Elements to an Array.mp4]]
 
 So, that is a recap of how arrays are structured.
 
@@ -279,6 +280,36 @@ Before continuing, commit and push your work with this message:
 ```
 Added starter code for Guessing Game interface.
 ```
+
+### Functions
+
+You will notice that the `GameView` structure contains several sections of code:
+
+- stored properties
+- computed properties
+- functions
+
+![[Pasted image 20250116092011.png]]
+
+*Functions* are new to you.
+
+A function is a way to *encapsulate* (contain) a section of logic.
+
+We can *invoke* (call) a function from elsewhere within our program:
+
+![[Pasted image 20250116092048.png]]
+
+When the **Submit Guess** button is pressed, the `checkGuess` function is invoked. This just means that our app will then "jump down" and run the logic within the `checkGuess` function:
+
+![[Pasted image 20250116092336.png]]
+
+In this program, a function is helpful because it allows us to keep the user interface  *separated* from the game logic.
+
+It is generally a good idea to avoid intermingling different types of code. As a best practice:
+
+- keep the computed property named `body` focused on showing the user interface
+- when there is a need to run logic to check user input, place that in a function
+- invoke (call) the function from within the `body` property
 
 ### Array is mutated at run time
 
@@ -381,3 +412,18 @@ Finished Guessing Game logic by guiding the user toward a correct answer.
 How can you win the Guessing Game in the fewest number of guesses?
 
 Describe your strategy for doing so in your portfolio post for today in Notion.
+
+## Reflection questions
+
+When you write a portfolio entry for this lesson, please try responding to the questions below.
+
+> [!NOTE]
+> 
+> Since thinking about what you learned today, and making the effort to articulate your ideas in writing is the point of responding to these questions, please do not use a large language model such as ChatGPT to come up with responses.
+> 
+> By thinking about your responses to these questions on your own, you will better prepare yourself for upcoming conversation-based evaluations in this module of the course. As a group, we will soon speak at greater length together about what these conversation-based evaluations are. Note that every student in the class will complete a conversation-based evaluation at least once before the end of this module.
+
+1. In your own words, explain the difference between a static array and a dynamic array. 
+2. How can breakpoints help you understand the structure and contents of an array during runtime? Describe the steps you followed to inspect the `numbers` array using breakpoints.
+3. What happens when you enter a non-numeric value as input for the number of additional elements to add to the array? Why does this occur? How do you prevent the program from crashing in this scenario?
+4. Compare the dynamic arrays you worked with in this tutorial to a real-world app you use (e.g., a shopping cart in an online store). How might the concepts of array mutation and user interaction apply in that context?

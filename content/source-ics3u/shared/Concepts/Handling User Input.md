@@ -1,8 +1,9 @@
 ---
-tags:
-created: 2024-01-31T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-10-09T07:00:00.000-0400
+createdForSectionTwo: 2025-01-18T07:34:55.000-0400
+tags:
 ---
 There is an obvious downside to the current interface of the [[Lists and Selection#Exercise|Guessing Game]] app created in our most recent class:
 
@@ -239,7 +240,7 @@ The user is shown a clear error message – and then the program quits gracefull
 
 Here is an animation showing the flow of the program when bad input is provided:
 
-![[Guard Statement Example.gif]]
+![[Guard Statement Example.mp4]]
 
 On the other hand, if the conversion of `givenInput` into an integer value succeeds, our program continues on.
 
@@ -265,7 +266,7 @@ It works as expected, telling us that the simulated input, `50`, is more than th
 
 Here is an animation of how the program flows through a `guard` statement when reasonable input is provided, and the conversion to an `Int` works:
 
-![[Guard Statement Example – Conversion Works 2.gif]]
+![[Guard Statement Example – Conversion Works 2.mp4]]
 
 ## Summary so far
 
@@ -283,7 +284,7 @@ Then, when bad input is provided, we can gracefully stop the conversion, and sho
 
 > [!IMPORTANT]
 > 
-> The core purpose of the `guard` statement is provide a graceful early exit from a section of logic that has received bad input.
+> The core purpose of the `guard` statement is to provide a graceful early exit from a section of logic that has received bad input.
 > 
 > When a `guard` statement is in a command-line program we can use the `exit` command to stop program execution.
 > 
@@ -437,9 +438,9 @@ Then please commit and push your work with this message:
 Created the project and finished initial project organization.
 ```
 
-Now, [copy and paste this code](https://gist.githubusercontent.com/lcs-rgordon/31a6e332e7fe8a9b91307cd278cefa86/raw/71fb3ecf8b79ca48c4cd8de2b845070eb07f0441/AdditionView.swift) into `AdditionView`, like this:
+Now, [copy and paste this code](https://gist.githubusercontent.com/lcs-rgordon/27e25118c8930f11294fa97682010eda/raw/2e4e4b8d341e04ebdd9c96d30ae6732c5d096531/AdditionView.swift) into `AdditionView`, like this:
 
-![[Screenshot 2024-01-30 at 9.34.20 PM.png]]
+![[Pasted image 20250116090043.png]]
 
 Press the **Option-Command-P** keyboard shortcut a few times to see what happens.
 
@@ -461,3 +462,18 @@ When all is said and done, your app might work something like this:
 
 ![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-01-31_07.08.05.gif|301]]
 
+## Reflection questions
+
+When you write a portfolio entry for this lesson, please try responding to the questions below.
+
+> [!NOTE]
+> 
+> Since thinking about what you learned today, and making the effort to articulate your ideas in writing is the point of responding to these questions, please do not use a large language model such as ChatGPT to come up with responses.
+> 
+> By thinking about your responses to these questions on your own, you will better prepare yourself for upcoming conversation-based evaluations in this module of the course. As a group, we will soon speak at greater length together about what these conversation-based evaluations are. Note that every student in the class will complete a conversation-based evaluation at least once before the end of this module.
+
+1. Why can’t a `String` be directly compared to an `Int` in Swift? What steps must you take to compare values of different types?
+2. How does a `guard` statement help prevent program crashes? What is the purpose of the `else` block in a `guard` statement?
+3. What are the benefits of using a `TextField` for user input compared to a `Stepper`? How do you bind a `TextField` to a stored property in SwiftUI?
+4. In the context of user input, why is it important to provide clear feedback when invalid input is entered?
+5. How would you modify the Guessing Game app to provide additional feedback, such as when the user enters a number outside the valid range?
