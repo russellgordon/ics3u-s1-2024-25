@@ -1,13 +1,16 @@
 ---
 draft: false
-draftSectionTwo: true
+draftSectionTwo: false
 created: 2024-12-03T07:00:00.000-0400
-createdForSectionTwo: 2024-10-01T07:00:00.000-0400
+createdForSectionTwo: 2025-01-21T07:00:00.000-0400
 tags:
 ---
- This is a self-paced opportunity to consolidate concepts learned in the first module of this course, learn a few new ways to navigate the features of Xcode, and get a taste of *applying abstraction* by creating custom views – the primary concept we will be learning about in this thread of the course.
+ These tutorials are self-paced opportunities to consolidate concepts we have been learning this year.
  
-The following chapters of **SwiftUI Foundations** are good choices to complete at this point in time:
+The following chapters of **SwiftUI Foundations** are good choices to complete at this point in time. 
+
+If you don't know where to start, it is recommended that you complete these in order, or, ask Mr. Gordon for advice:
+
 - [Chapter 1 - Explore Xcode](https://developer.apple.com/tutorials/develop-in-swift#explore-xcode)
 	- [tutorial](https://developer.apple.com/tutorials/develop-in-swift/hello-swiftui) / [exercises](https://developer.apple.com/tutorials/develop-in-swift/explore-xcode-conclusion)
 
@@ -16,3 +19,10 @@ The following chapters of **SwiftUI Foundations** are good choices to complete a
 
 - [Chapter 3 - Layout and Style](https://developer.apple.com/tutorials/develop-in-swift#layout-and-style)
 	- [tutorial](https://developer.apple.com/tutorials/develop-in-swift/design-an-interface) / [exercises](https://developer.apple.com/tutorials/develop-in-swift/layout-and-style-conclusion)
+
+- [Chapter 4 - Buttons and State](https://developer.apple.com/tutorials/develop-in-swift#buttons-and-state)
+	- [tutorial](https://developer.apple.com/tutorials/develop-in-swift/update-the-ui-with-state) / [exercises](https://developer.apple.com/tutorials/develop-in-swift/buttons-and-state-conclusion)
+
+> [!TIP]
+> 
+> Remember to try the exercises for each chapter to maximize your learning.

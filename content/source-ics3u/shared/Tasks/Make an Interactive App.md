@@ -3,7 +3,7 @@ draft: true
 draftSectionTwo: false
 excludeBacklinks: false
 created: 2024-10-17T07:00:00.000-0400
-createdForSectionTwo: 2024-11-11T07:00:00.000-0400
+createdForSectionTwo: 2025-01-20T07:00:00.000-0400
 tags:
 ---
 ## Objective
@@ -151,6 +151,7 @@ Each person in class will author an app to complete one of the following program
 ### 6. **Random Name Picker**
 
 **Input:** The user provides five names that are added to a list.
+
 **Output:** Displays one randomly selected name from the list. As a bonus, your program is not fixed to accept only five names, but accepts any number of names, then randomly selects a name from that list.
 
 ---

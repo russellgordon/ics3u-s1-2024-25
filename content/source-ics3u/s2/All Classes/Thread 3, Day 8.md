@@ -10,7 +10,7 @@ createdForSectionTwo: 2025-01-20T03:34:55.000-0400
 ---
 ## Agenda
 1. Task: [[Make an Interactive App]]
-	- Demonstrate that you understand key concepts we have learned about in this module.
+	- Demonstrate that you understand key concepts we have learned about so far in this module and earlier in this school year.
 
 ## Things to do before our next class
 
