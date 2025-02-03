@@ -1,6 +1,6 @@
 ---
-draft: true
-draftSectionTwo: false
+draft: false
+draftSectionTwo: true
 enableToc: true
 excludeBacklinks: true
 created: 2025-02-03T07:00:00.000-0400
@@ -16,8 +16,8 @@ The objective of this exercise is to activate your prior knowledge of these topi
 - [[Structures|structures]]
 - [[Operators|operators]] and computed properties (as from the [[Geometric Figures]] task)
 - user interface design / layouts [[Block Layouts|using]] [[Block Layouts, Part 2|stacks]]
-- [[Lists|lists]] and [[Abstraction Using Lists|abstraction]]
-- [[Navigation to a Detail View|navigation]]
+- [[Arrays|arrays (a.k.a. lists)]] and [[Abstraction Using Lists|abstraction]]
+- [[Navigating to a Detail View|navigation]]
 
 ## Context
 
