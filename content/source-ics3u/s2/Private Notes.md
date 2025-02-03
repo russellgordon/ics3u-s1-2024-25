@@ -65,6 +65,36 @@ With those minor changes to `TradingCard`, the `List` structure back on the list
 
 ![[Screenshot 2023-01-21 at 9.17.05 AM.png]]
 
+# Module 3 - Mid-mod / End-of-mod Portfolio Review
+
+Collin – BE
+Ethan – ME
+Kaan – ME
+Kevin – ME
+(get more practice string to other data types)
+Ainsley – ME
+(operators exercises)
+Thomas – ME
+Hannu – EE
+Kyle – ME
+(enumeration)
+Marcus – ME 
+input, checking the input, want to understand arrays / history a bit better
+Courage – EE
+Joseph – EE
+Harshan – ME
+Elaine - ME
+Daniel - EE
+Michael - BE (needs to add evidence to portfolio)
+
+# Module 3 – Database exercises
+
+*Who made best efforts to complete these exercises on a 0-2 scale?*
+
+## Kaan
+
+0
+
 
 # End of module 1 reviews
 

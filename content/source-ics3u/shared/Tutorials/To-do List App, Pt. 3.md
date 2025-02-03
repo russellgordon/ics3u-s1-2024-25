@@ -1,7 +1,9 @@
 ---
-created: 2024-04-09T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-12-05T07:00:00.000-0400
+createdForSectionTwo: 2025-01-28T07:00:00.000-0400
+tags:
 ---
 In [[To-do List App, Pt. 2|part two]] of this task, you improved the to-do list app so that it became interactive.
 
@@ -814,4 +816,4 @@ How could you add a single line of code to ensure that the text field, when addi
 
 > [!TIP]
 > 
-> When you have finished this part of the tutorial, in your next class, you can continue on to [[To-do List App, Pt. 4|part 4]].
+> When you have finished this part of the tutorial, when you next have some time on your hands, continue on to [[To-do List App, Pt. 4|part 4]].

@@ -1,7 +1,9 @@
 ---
-created: 2024-04-10T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-12-05T07:00:00.000-0400
+createdForSectionTwo: 2025-01-30T07:00:00.000-0400
+tags:
 ---
 In [[To-do List App, Pt. 3|part three]] of this task, you improved the to-do list app so that it persisted data even when the app was quit.
 
@@ -202,4 +204,6 @@ You have now made use of in-memory containers with SwiftData so that you can use
 
 The approaches shown here can be applied to any view that you wish to preview data within when using SwiftData.
 
-In the next and final part of this tutorial series, you will learn how to persist data within a cloud-hosted database, so that if necessary, multiple users of your apps can see data created by one another. However – that is a task for another day.
+In the remaining parts of this tutorial series (to be provided at the start of our next module), you will learn how to persist data within a cloud-hosted database, so that if necessary, multiple users of your apps can see data created by one another. 
+
+However – that is a task for another day.

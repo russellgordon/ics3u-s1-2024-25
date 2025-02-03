@@ -1,10 +1,20 @@
 ---
-excludeFromExplorer: true
-created: 2024-03-05T07:00:00.000-0400
-tags:
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-12-05T07:00:00.000-0400
+createdForSectionTwo: 2025-01-28T07:00:00.000-0400
+tags:
 ---
+> [!TIP]
+> 
+> From class on Tuesday, January 28, 2025, here is our discussion of the solutions to these exercises:
+> 
+> <div style="padding:56.25% 0 0 0;position:relative;">
+> <iframe src="https://player.vimeo.com/video/1051529577?h=e9ec4989f2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
+> </iframe>
+> </div>
+> <script src="https://player.vimeo.com/api/player.js"></script>
+
 ## 1
 
 

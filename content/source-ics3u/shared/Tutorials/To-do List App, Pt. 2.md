@@ -1,13 +1,13 @@
 ---
-created: 2024-04-08T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-12-05T07:00:00.000-0400
+createdForSectionTwo: 2025-01-28T07:00:00.000-0400
+tags:
 ---
 In [[To-do List App|part one]] of this task, you worked to activate prior knowledge by building a static interface for the To-do List app.
 
 ## Creating the static interface
-
-There was a lot to remember for creating a static interface, and a long March Break probably did not help!
 
 If there was any part of creating the static interface that you could not remember how to do, use the following video to get ready for part 2 of this tutorial.
 
@@ -244,4 +244,4 @@ In the next part of this tutorial, you will learn how fix these issues, making m
 
 > [!TIP]
 > 
-> When you have finished this part of the tutorial, in your next class, you can continue on to [[To-do List App, Pt. 3|part 3]].
+> When you have finished this part of the tutorial, when you next have some time on your hands, continue on to [[To-do List App, Pt. 3|part 3]].

@@ -1,8 +1,9 @@
 ---
-tags:
-created: 2024-03-05T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-12-05T07:00:00.000-0400
+createdForSectionTwo: 2025-01-23T07:00:00.000-0400
+tags:
 ---
 There are many ways to store, or *persist*, data within an app.
 
@@ -34,7 +35,7 @@ For example, the `Sales` department has a department ID of `7` and exists on row
 > 
 > A department with an ID of `7` does not have to be the seventh row in the table.
 
-<small>[[#Databases|Back to top ⬆]]</small>
+
 
 ## Relationships
 
@@ -48,7 +49,7 @@ We will explore the concept of relationships between tables in a future class.
 
 For now, the structure of this example database is provided for background.
 
-<small>[[#Databases|Back to top ⬆]]</small>
+
 
 ## Database Management Systems
 
@@ -82,7 +83,7 @@ To query a database means to obtain information from it.
 
 In this class, we will work with the [SQLite](https://www.sqlite.org/about.html) DBMS. It is open-source, fast, free to use, and importantly, works great as a way to store data for iOS apps made with Swift and SwiftUI.
 
-<small>[[#Databases|Back to top ⬆]]</small>
+
 
 ## Structured Query Language
 
@@ -92,16 +93,15 @@ We will practice using SQL together to query the `employees` example database de
 
 First, we must install some software and obtain the example database.
 
-<small>[[#Databases|Back to top ⬆]]</small>
+
 
 ## Required Software
 
-First, download **DB Browser for SQLite**.
+First, download **[DB Browser for SQLite](https://download.sqlitebrowser.org/DB.Browser.for.SQLite-v3.13.1.dmg)**.
 
-Be sure to download the appropriate version for your computer:
-
-- [DB Browser for Macs with Apple Silicon (M1, M2, et cetera)](https://download.sqlitebrowser.org/DB.Browser.for.SQLite-arm64-3.12.2.dmg)
-- [DB Browser for Macs with Intel processors](https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.12.2.dmg)
+> [!NOTE]
+> 
+> The current version of DB Browser for SQLite is 3.13.1. Screenshots in this tutorial will show an older version number.
 
 After downloading the disk image file – the .dmg file – double-click it, and then drag the DB Broswer for SQLite application to your Applications folder:
 
@@ -115,7 +115,7 @@ And finally delete the disk image file from your **Downloads** folder:
 
 ![[Screenshot 2023-03-28 at 6.39.30 AM.png|450]]
 
-<small>[[#Databases|Back to top ⬆]]</small>
+
 
 ## Example Database
 
@@ -133,7 +133,7 @@ You can then drag the `employees.sqlite` file to your **Computer Studies** folde
 
 ![[Screenshot 2023-03-28 at 6.54.42 AM.png|375]]
 
-<small>[[#Databases|Back to top ⬆]]</small>
+
 
 ## Opening DB Browser
 
@@ -160,9 +160,9 @@ Select the **Execute SQL** tab, and you should see something like this:
 ![[Screenshot 2023-03-28 at 7.03.49 AM.png]]
 
 > [!TIP]
-> At this point, you can optionally make some recommended configuration changes to DB Browser to [[Current Courses/Grade 11 Introduction to Computer Science/Tutorials/Configuring DB Browser|change the fonts and colours it uses to display results]].
+> At this point, you can optionally make some recommended configuration changes to DB Browser to [[Configuring DB Browser|change the fonts and colours it uses to display results]].
 
-<small>[[#Databases|Back to top ⬆]]</small>
+
 
 ## Practicing with SQL
 
@@ -193,15 +193,19 @@ You should see this result:
 
 ![[Screenshot 2023-03-29 at 6.26.33 AM.png]]
 
-<small>[[#Databases|Back to top ⬆]]</small>
 
-## Exercise
+
+## Exercises
 
 In fact, there are many ways that queries can be constructed.
 
 The best way to learn is by *doing*, and taking notes as you go.
 
-Working with a partner, and [referring to this summary sheet](https://learnsql.com/blog/sql-basics-cheat-sheet/sql-basics-cheat-sheet-letter.pdf), try to write queries to answer these questions:
+Work with a partner, and [[sql-basics-cheat-sheet-letter.pdf|refer to this summary sheet]]:
+
+![[sql-basics-cheat-sheet-letter.pdf]]
+
+Now, try to write queries to answer these questions:
 
 1.  Find a list of all the departments in the company.     
 2.  Write a query to get the details for the first 25 employees in the employee table ordered by first name, descending. 
@@ -220,12 +224,30 @@ Working with a partner, and [referring to this summary sheet](https://learnsql.c
 9.  How many employees work for the company?
 10.  Find a list of employee IDs where the salary paid is greater than $60000.  
 11.  _How many_ employee IDs have been tied to a salary that is greater than $60000?  
-12.  Find a list of employee IDs where the salary paid is in the range $60000 to $70000.  
-13.  _How many_ employee IDs have been tied to a salary in the range $60000 to $70000?  
-14.  Find a list of employee IDs whose salary is *not* in the range $60000 to $70000.  
+12.  Find a list of employee IDs where the salary paid is in the range \$60000 to \$70000.  
+13.  _How many_ employee IDs have been tied to a salary in the range \$60000 to \$70000?  
+14.  Find a list of employee IDs whose salary is *not* in the range \$60000 to \$70000.  
 15.  Find only the maximum and minimum salary paid to employee number 10012.  
 16.  Find the maximum and minimum salary paid to all employees.  
 17.  Write a query to display the first name and last name of all employees who have both "b" and "c" in their first name.  Order the results by first name, then by last name.
 18.  Find a list of all the job titles held by employee number 499998. List the job titles in alphabetical order.
 
-<small>[[#Databases|Back to top ⬆]]</small>
+> [!TIP]
+> 
+> DB Browser is a macOS desktop application. Your work to answer these questions will exist in a *document* which you must create and save changes to manually (as opposed to environments like Google Docs where your work is automatically saved).
+> 
+> You are strongly recommended to take five minutes and watch this video that demonstrates how to work with multiple queries in DB Browser – this also shows how to save your work:
+> 
+> <div style="padding:56.25% 0 0 0;position:relative;">
+>	<iframe src="https://player.vimeo.com/video/1049673749?h=d674d239c8&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
+> 	</iframe>
+>	</div>
+>	<script src="https://player.vimeo.com/api/player.js"></script>
+
+For reference, here is the diagram showing the database schema once again:
+
+![[Pasted image 20230328060245.png]]
+
+> [!NOTE]
+> 
+> Since we have now [[Thread 3, Day 13|discussed these solutions in class together]] , if you are reading this after Tuesday, January 28, 2025, you can [[Databases (Solutions)|refer to the solutions here]] to check your work.
