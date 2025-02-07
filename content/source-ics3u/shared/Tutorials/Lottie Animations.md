@@ -1,8 +1,8 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
 tags: 
-created: 2024-11-12T01:23:31.000-0400
+created: 2025-02-07T01:23:31.000-0400
 createdForSectionTwo: 2025-01-09T03:00:00.000-0400
 ---
 If you are interested in computer animation and graphics, you may be familiar with [Adobe After Effects](https://www.adobe.com/ca/products/aftereffects.html).

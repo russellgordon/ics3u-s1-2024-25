@@ -5,7 +5,7 @@ tags:
 excludeBacklinks: true
 excludeFromExplorer: true
 enableToc: false
-created: 2025-03-05T07:00:00.000-0400
+created: 2025-02-05T07:00:00.000-0400
 ---
 ## Agenda
 1. Exercise: [[Grocery Store Flyer]]

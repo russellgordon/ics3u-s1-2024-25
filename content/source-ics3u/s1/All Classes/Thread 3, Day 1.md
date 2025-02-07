@@ -5,7 +5,7 @@ tags:
 excludeBacklinks: true
 excludeFromExplorer: true
 enableToc: false
-created: 2025-03-02T07:00:00.000-0400
+created: 2025-02-03T07:00:00.000-0400
 ---
 ## Agenda
 1. Video: [New Beginnings](https://player.vimeo.com/video/173099570?h=40bc579bcd&color=ffffff)
