@@ -1,18 +1,21 @@
 ---
 tags:
-created: 2024-10-29T07:00:00.000-0400
+created: 2025-02-10T07:00:00.000-0400
 createdForSectionTwo: 2024-11-04T07:34:55.000-0400
-draft: true
+draft: false
 draftSectionTwo: false
 ---
 ## Introduction
 
 You already understand how to use typical data types such as `Int`, `Double`, `String`, and `Bool`.
 
-You have already built – or will build soon – applications that accept user input in these ways:
+On the [[Interactive Apps]] task, you made an app that accepts input as a `Double` using the Slider structure:
 
-1. As an `Int` via the Stepper structure
-2. As a  `Double` via the Slider structure
+![[Pasted image 20250210070259.png|300]]
+
+ Where whole number input is desired, it is also possible to build apps that accept input using a Stepper structure:
+
+![[RocketSim_Recording_iPhone_15_Pro_2023-11-14_13.31.53 1.gif|300]]
 
 Steppers and sliders prevent the user from providing invalid input.
 
@@ -31,7 +34,7 @@ This is when the notion of an *optional* data type becomes useful.
 
 ## Getting started
 
-Please [download a ZIP file of this project](https://russellgordon.ca/lcs/2023-24/Optionals.zip):
+Please [download a ZIP file of this project](https://www.russellgordon.ca/lcs/2024-25/Optionals.zip):
 
 ![[Screenshot 2024-01-09 at 8.11.04 PM.png|500]]
 
@@ -55,16 +58,20 @@ You will see the following dialog – choose **Trust and Open**:
 
 ![[Screenshot 2024-01-09 at 8.13.36 PM.png|250]]
 
-
 You will see the opening page of the playground. Read the introduction carefully. When you ready, tap the blue link at the bottom of the page to advance:
 
-![[Screenshot 2024-01-09 at 8.03.15 PM.png]]
+![[Pasted image 20250210072610.png]]
 
-Try each page of the playground by following instructions given, while taking notes in your black paper notebook.
+Try each page of the playground by following instructions given, taking notes to respond to the prompts directly in your portfolio entry for Notion for today. It's probably going to be easiest to arrange the application windows side by side. For example:
 
-Take your time – *read for understanding* – write down your responses to the questions posed in your black book.
+![[Screenshot 2025-02-10 at 7.22.43 AM.png]]
 
-When you are done – *summarize* in writing what you have learned in your [Notion post](https://notion.so) for today – as well as any questions you have.
+> [!TIP]
+> 
+> Take your time – *read for understanding*.
+> 
+> When you are finished each page of the playground *summarize* in writing what you have learned.
 
 > [!IMPORTANT]
-> Be sure to include several screenshots showing your progress as you completed the playground.
+> 
+> In your portfolio post, include screenshots of your progress through the playground.

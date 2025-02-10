@@ -2,12 +2,11 @@
 excludeFromExplorer: true
 ---
 
-Mr. Gordon is available at these times this week:
+This week, Mr. Gordon's availability is:
 
 Day|Time|Location
 -|-|-
-Tuesday, February 4|12:30 PM to 1:00 PM|Room 6
-Friday, February 7|12:30 PM to 1:00 PM|Room 6
+Monday, February 10|1:30 PM to 2:00 PM|Room 6
 
 Grove Time is a drop-in, no appointment needed.
 
