@@ -8,6 +8,9 @@ enableToc: false
 created: 2025-02-10T07:00:00.000-0400
 ---
 ## Agenda
+1. Discussion: [[Grocery Store Flyer]]
+	- Here is the video from our discussion about wrapping up this exercise.
+	- Optionally, apply the techniques shared here to your own 
 1. Concept: [[Optionals]]
 	- Understand what it means for a variable to be an *optional*, which is a fundamental concept for authoring more interesting apps using Swift and SwiftUI.
 
