@@ -543,7 +543,7 @@ When you write a portfolio entry for this lesson, please try responding to the q
    
 4. What is the purpose of a *binding* in SwiftUI? What is the special syntax used to denote a binding?
    
-5. What is string interpolation, and why is it necessary to use it when displaying the `squared` computed property in a `Text`view?
+5. What is string interpolation, and why is it necessary to use it when displaying the `squared` computed property in a `Text` view?
    
 6. How could you modify the `StepperExample` app to allow the user to calculate cubes instead of squares?
    
