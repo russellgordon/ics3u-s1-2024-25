@@ -835,6 +835,10 @@ Refined the view so it presents the power in a way that better matches symbolic 
 
 Try extending the app in the following ways.
 
+> [!TIP]
+> 
+> Before trying the exercises, you may find it helpful to [[Separation of Concerns#Addendum|review this addendum]] regarding how to selectively run different blocks of code.
+
 ### Handle zero exponents
 
 When a zero exponent is provided, the app currently returns an error message.
@@ -878,3 +882,53 @@ Make changes first to the model, then to the view model, and finally to the view
 > When the user provides a negative exponent, express the result as a fraction.
 > 
 > For example, $\left(5\right)^{-2}=\frac{1}{25}$
+
+## Addendum
+
+### Selection statements
+
+To complete [[Separation of Concerns#Selection statements|the exercises]], you will need to make some use of selection statemetns.
+
+That means comparing values to one another, and *selectively* – based on certain *conditions* – choosing to run a given block of code.
+
+There are multiple types of programming language structures that allow for selection to occur.
+
+In this discussion, we will look at `if` statements.
+
+The general syntax is:
+
+![[Pasted image 20221216083514.png|225]]
+
+In that example, only when the `condition` evaluates to `true` does the block of code inside the `{ }` brackets get selected to be run. Otherwise, the block of code is skipped.
+
+Here is another example:
+
+![[Pasted image 20221216083829.png|175]]
+
+In that example, when the `condition` is `true` the first block of code runs. Otherwise, `else`,  the second block of code runs.
+
+And finally, here is a third example – note that as necessary, you can add additional `else if` branches:
+
+![[Pasted image 20221216083829 copy 1.png|245]]
+
+In this example, there would be different conditions in the first and second branches.
+
+So... what is a condition?
+
+A condition is often a comparison of two values. Here are all the ways two numeric values can be compared:
+
+![[Pasted image 20221216090240 1.png|400]]
+
+For example, the following code has a condition, `a > b`:
+
+```swift
+let a = 20
+let b = 10
+if a > b {
+	print("a is greater")
+} else {
+	print("b is greater")
+}
+```
+
+Since `a` has a value of `20` in that example, the first branch of the `if` statement is run, and second branch is ignored. `a is greater` will be printed on the screen.
