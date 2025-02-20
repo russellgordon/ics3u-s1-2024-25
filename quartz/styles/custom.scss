@@ -46,3 +46,11 @@ h1 {
 li.section-li>.section {
 	grid-template-columns: 16em 3fr 1fr;
 }
+
+// Hide equation numbers
+.eqn-num { display: none !important; }
+
+// No scrollbars on Katex equations
+.katex-display {
+	overflow: clip;
+}

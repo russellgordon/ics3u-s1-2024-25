@@ -214,7 +214,7 @@ Let's say we want to make a simple app that shows the square of a given number.
 
 It will work like this:
 
-![[RocketSim_Recording_iPhone_15_Pro_2023-11-14_12.06.11 1.gif|300]]
+![[RocketSim_Recording_iPhone_15_Pro_2023-11-14_12.06.11.gif|300]]
 
 To create this app, all we need is a structure.
 

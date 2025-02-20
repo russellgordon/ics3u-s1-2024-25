@@ -1,8 +1,8 @@
 ---
 tags:
-created: 2024-10-28T07:00:00.000-0400
+created: 2025-02-12T07:00:00.000-0400
 createdForSectionTwo: 2025-01-13T07:00:00.000-0400
-draft: true
+draft: false
 draftSectionTwo: false
 ---
 Xcode is a large application that serves several purposes for software developers.
