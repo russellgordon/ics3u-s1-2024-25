@@ -853,6 +853,17 @@ Make changes first to the model, then to the view model, to support the evaluati
 > 
 > Try modifying the model, and then the view model, first within the playground you set up earlier. Once you have the code there working correctly, move it into your project.
 
+> [!NOTE]
+>  
+>  The point is always to learn. If you are super-stuck on this exercise, please watch this video to understand how to modify the model and view model to allow for zero exponents:
+>  
+>  <div style="padding:56.25% 0 0 0;position:relative;">
+> <iframe src="https://player.vimeo.com/video/1058982686?h=d2730fcb45&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
+> </iframe>
+> </div>
+> <script src="https://player.vimeo.com/api/player.js"></script>
+
+
 ### Handle a negative base
 
 When a negative base is provided, the app currently returns an error message.
@@ -871,17 +882,37 @@ It is not correct to show this:
  
 ... since the base in the power $-5^2$ is $5$ and not $-5$.
 
+> [!NOTE] 
+> 
+> The point is always to learn. If you are super-stuck on this exercise, please watch this video to understand how to modify view model and view to allow for evaluation of powers with a negative base:
+>  
+>  <div style="padding:56.25% 0 0 0;position:relative;">
+> <iframe src="https://player.vimeo.com/video/1058987874?h=a823b525a8&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
+> </iframe>
+> </div>
+
 ### Handle negative exponents
 
 When a negative exponent is provided, the app currently returns an error message.
 
 Make changes first to the model, then to the view model, and finally to the view, to support the evaluation of powers with negative exponents.
 
-> [!NOTE]
+> [!TIP]
 > 
 > When the user provides a negative exponent, express the result as a fraction.
 > 
 > For example, $\left(5\right)^{-2}=\frac{1}{25}$
+
+> [!NOTE]
+> 
+> The point is always to learn. If you are super-stuck on this exercise, please watch this video to understand how to modify the model, view model, and view to allow for zero exponents:
+> 
+> The point is always to learn. If you are super-stuck on this exercise, please watch this video to understand how to modify view model and view to allow for evaluation of powers with a negative base:
+>  
+>  <div style="padding:56.25% 0 0 0;position:relative;">
+> <iframe src="https://player.vimeo.com/video/1058992027?h=7c298f67b2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
+> </iframe>
+> </div>
 
 ## Addendum
 
