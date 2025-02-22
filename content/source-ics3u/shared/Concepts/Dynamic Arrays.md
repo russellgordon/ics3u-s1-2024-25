@@ -1,11 +1,11 @@
 ---
-draft: true
-draftSectionTwo: false
-created: 2024-10-09T07:00:00.000-0400
+draft: false
+draftSectionTwo: true
+created: 2025-02-22T07:00:00.000-0400
 createdForSectionTwo: 2025-01-16T07:34:55.000-0400
 tags:
 ---
-Most often this year, we have used arrays that hold a set number of elements, like in the Hobby Cards app:
+Most often this year, we have used [[Arrays|arrays]] that hold a set number of elements, like in the Hobby Cards app:
 
 ![[Pasted image 20250220121040.png]]
 
@@ -20,23 +20,15 @@ For example, in the screenshot above, on lines 98 to 107, an array (also called 
 |4|sarahNurse|
 |5|paytenLevis|
 
-The use of an array allowed Mr. Gordon to [[Abstraction Using Lists|apply abstraction]] and create his Hobby Cards app, where users can swipe through a list of players in the [PWHL](https://www.thepwhl.com/en/):
+The use of an array allowed Mr. Gordon to [[Abstraction Using Lists|apply abstraction]] and create his exemplar for the Hobby Cards task, where users can swipe through a list of players in the [PWHL](https://www.thepwhl.com/en/):
 
-   <div style="padding:56.25% 0 0 0;position:relative;">
-	<iframe src="https://player.vimeo.com/video/1033841165?h=4dbfcb0c4c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
-	</iframe>
-	</div>
-<script src="https://player.vimeo.com/api/player.js"></script>
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1033841165?h=4dbfcb0c4c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Exemplar – Improved Trading Cards"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 This was a fun app to make, however, a great deal of the utility of using an array comes from its flexibility: the number of elements can be *increased* (or decreased) while our program runs.
 
 For example, consider the following improvement to our app that allows for powers to be evaluated – it might be nice for users to see a list of previous calculations:
 
-   <div style="padding:56.25% 0 0 0;position:relative;">
-	<iframe src="https://player.vimeo.com/video/1058679175?h=d568a5a6b2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
-	</iframe>
-	</div>
-<script src="https://player.vimeo.com/api/player.js"></script>
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1058679175?h=d568a5a6b2&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Saving Evaluated Powers to an Array"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 A similar app that performs more complex calculations and provides a way to save prior results might be even more useful.
 
@@ -382,11 +374,200 @@ Now try typing in a power, and then saving the evaluated result. You should see 
 	</div>
 <script src="https://player.vimeo.com/api/player.js"></script>
 
+So – now you can see that the `resultHistory` array is being mutated each time we press the **Save** button in the user interface – a new element is being added to the array.
+
 This is a good time to [[Pushing Commits|commit and push]] your work with the following message:
 
 ```
 Added a button to the view to invoke the function from the view model that saves an evaluated power to our history of previously evaluated powers.
 ```
+
+#### Show the history
+
+Our view model contains the array that the history of previously calculated results is saved in.
+
+The button we added invokes the function on the view model that adds a result to the array.
+
+Now that we are successfully mutating the array at run time, of course, the next step is to let the user *see* that history of previously calculated results.
+
+To do this, we can add the following code to our view, to create a scrollable list showing the history. Copy this code to your clipboard:
+
+```swift
+// Show a title for the history
+HStack {
+	Text("History")
+		.bold()
+	Spacer()
+}
+.padding(.vertical)
+
+// Iterate over the history of results
+List(viewModel.resultHistory) { priorResult in
+	PowerItemView(power: priorResult)
+}
+.listStyle(.plain)
+```
+
+Then locate the `Spacer` at the bottom of the `body` property in `PowerView`:
+
+![[Pasted image 20250222084133.png]]
+
+Replace the `Spacer` with the code from above, like this:
+
+![[Pasted image 20250222084250.png]]
+
+You will immediately see a compiler error, because there is currently no structure in your project named `PowerItemView`.
+
+You already have plenty of experience creating helper views – the purpose of this tutorial to explain how to mutate and display an array at run-time in an app – so, please just copy this helper view code into your clipboard:
+
+```swift
+import SwiftUI
+
+struct PowerItemView: View {
+    
+    // MARK: Stored properties
+    let power: Power
+    
+    // MARK: Computed properties
+    var body: some View {
+        
+        HStack {
+            // Show the provided base, exponent, and result
+            // in an arrangement that looks the same as how
+            // we write a power on paper in math class
+            HStack(alignment: .center) {
+                HStack(alignment: .top) {
+                    
+                    Text("\(power.base.formatted())")
+                        .font(.largeTitle)
+                    
+                    Text("\(power.exponent)")
+                        .font(.title2)
+                }
+                HStack {
+
+                    Text("=")
+                        .font(.largeTitle)
+
+                    Text("\(power.result.formatted())")
+                        .font(.largeTitle)
+                }
+            }
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            
+            Spacer()
+        }
+        
+    }
+}
+
+#Preview {
+    PowerItemView(power: Power(base: 3, exponent: 2))
+        .padding()
+}
+```
+
+Then make a new **SwiftUI View** file named `PowerItemView` within the **Views** group:
+
+![[Pasted image 20250222084610.png]]
+
+... and then paste the code from your clipboard into the new view, replacing the default code that was provided by Xcode:
+
+![[Pasted image 20250222084711.png]]
+
+Now return to `PowerView` and the code that creates the scrollable list:
+
+![[Pasted image 20250222084754.png]]
+
+You should see that the error complaining about `PowerItemView` is gone, but, a new error has taken it's place – there is a problem with the scrollable list.
+
+Click the red bubble to see more details:
+
+![[Pasted image 20250222084845.png]]
+
+The problem is that our `Power` structure, in the model layer of our app, does not conform to the `Identifiable` protocol. Recall from earlier this year – any information shown in a scrollable list in a SwiftUI app must have a unique identifier.
+
+This is an easy problem to fix. Switch to the `Power` structure in your project:
+
+![[Pasted image 20250222084947.png]]
+
+Adjust the definition of the structure so that we promise to conform the structure to the `Identifiable` protocol:
+
+![[Pasted image 20250222085036.png]]
+
+Then, we must in fact make the `Power` structure conform to the protocol – by giving it a stored property that holds a unique identifier:
+
+![[Pasted image 20250222085137.png]]
+
+Now that the compiler errors have been resolved, we can review what we have done.
+
+First, return to `PowerItemView`, and if necessary, press **Option-Command-P** to restart Xcode Previews:
+
+![[Pasted image 20250222085457.png]]
+
+You should see a preview of the helper view's user interface.
+
+Scroll to the bottom of this file, where the preview is created:
+
+![[Pasted image 20250222085531.png]]
+
+`PowerItemView` has one parameter, or question, that must be answered for it to do it's job – what power should it display? We are telling it to display an instance of the `Power` structure with a base of 3 and an exponent of 2.
+
+Try changing the arguments, or answers, to something else instead:
+
+![[Pasted image 20250222085658.png]]
+
+You can even create a preview of a scrollable list of several instances of the `PowerItemView` helper view:
+
+![[Pasted image 20250222085833.png]]
+
+Now, return to `PowerView` and you should see something like this:
+
+![[Pasted image 20250222085906.png]]
+
+Try evaluating several powers, and saving the results:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1059275750?h=29e2d9534a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Saving Calculated Results to an Array"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+You should see that the scrollable list presents the contents of the `resultHistory` array from the view model.
+
+This is a great time to [[Pushing Commits|commit and push]] your work, with the following message:
+
+```
+Made it possible to see the array of previously calculated results in a scrollable list.
+```
+
+#### User interface refinements
+
+This last part of the tutorial is optional.
+
+You may have noticed that the interface "jumps" a bit when valid input is provided. This is because of the addition of the button.
+
+The height of the views that show the evaluated power *and* the height of the button is more than the height of the `ContentUnavailableView`.
+
+If this kind of thing bothers you (and it should) then you can fix it by placing the views that display the evaluated power and button into a `VStack`, then setting the height of that `VStack` to be the same as the height of the `ContentUnavailableView` instance.
+
+Here is a short video showing how to do this – a video has been used since the edits are a bit tricky to describe in writing:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1059278016?h=a39e442303&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Refining the User Interface"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+Finally, if you want to show a navigation title, you can make the following edits as well:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1059278647?h=984e5a143c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding a Navigation Title"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+Don't forget to [[Pushing Commits|commit and push]] your work – this message is reasonable:
+
+```
+Added some interface refinements so that UI does not jump when a calculated result is saved to the list.
+```
+
+## Exercise
+
+To practice working with dynamic arrays (mutating, or changing an array at runtime), try adjusting at least one of your previously authored arithmetic apps (addition, subtraction, multiplication, or division), so that you can:
+
+- [ ] save calculations to a history
+- [ ] view the saved calculations in a scrollable list
 
 ## Reflection questions
 

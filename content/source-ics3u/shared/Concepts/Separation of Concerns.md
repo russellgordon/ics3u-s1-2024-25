@@ -857,11 +857,7 @@ Make changes first to the model, then to the view model, to support the evaluati
 >  
 >  The point is always to learn. If you are super-stuck on this exercise, please watch this video to understand how to modify the model and view model to allow for zero exponents:
 >  
->  <div style="padding:56.25% 0 0 0;position:relative;">
-> <iframe src="https://player.vimeo.com/video/1058982686?h=d2730fcb45&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
-> </iframe>
-> </div>
-> <script src="https://player.vimeo.com/api/player.js"></script>
+>  <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1058982686?h=d2730fcb45&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Handling Zero Exponents"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 
 ### Handle a negative base
@@ -909,10 +905,7 @@ Make changes first to the model, then to the view model, and finally to the view
 > 
 > The point is always to learn. If you are super-stuck on this exercise, please watch this video to understand how to modify view model and view to allow for evaluation of powers with a negative base:
 >  
->  <div style="padding:56.25% 0 0 0;position:relative;">
-> <iframe src="https://player.vimeo.com/video/1058992027?h=7c298f67b2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Opening the Teamspace">
-> </iframe>
-> </div>
+>  <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1058992027?h=7c298f67b2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Handling Negative Exponents"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ## Addendum
 
