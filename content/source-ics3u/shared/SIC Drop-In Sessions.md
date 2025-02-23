@@ -9,5 +9,5 @@ They are friendly, very knowledgeable, and staff drop-in sessions as well – si
 
 Day|Time|SIC|Location
 -|-|-|-
-Thursday, February 20|12:30 PM to 1:00 PM|Nikita|Room 6
-Friday, February 21|12:30 PM to 1:00 PM|Ben|Room 6
+Tuesday, February 25|12:30 PM to 1:00 PM|Ben|Room 6
+Friday, February 28|12:30 PM to 1:00 PM|Nikita|Room 6
