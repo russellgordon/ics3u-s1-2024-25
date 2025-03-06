@@ -548,7 +548,7 @@ However, at this point, you might be getting a little frustrated with Mr. Gordon
 
 Well, yes, he did – and that's true – we must only have a single source of truth – one instance of the view model – to be shared among views when *running on a device* or *in the Simulator*.
 
-We must also have a *single source of truth* when using the **Previews** window – and – we do! Remember, the **Previews** window let's us examine each view, one at a time, *completely independent of any other views in our app*.
+We must also have a *single source of truth* when using the **Previews** window – and – we do! Remember, the **Previews** window lets us examine each view, one at a time, *completely independent of any other views in our app*.
 
 When we *preview* `LandingView`, it has just one instance of the view model:
 
