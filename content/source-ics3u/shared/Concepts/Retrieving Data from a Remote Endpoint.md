@@ -636,6 +636,12 @@ When all is said and done, you should have an app that works like the example gi
 
 <div style="padding:50% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1061866415?h=b4186237df&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Button Shows to Load New Joke"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
+Finally, it's a good idea to [[Pushing Commits|commit these changes]] with the following message right now:
+
+```
+Added a button so that we can load a new joke if desired.
+```
+
 ## Exercise
 
 Examine the structure of the JSON object returned by [this endpoint](https://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=en):
@@ -653,3 +659,9 @@ You may refer to the **Jokes** app you just built, or any part of this lesson.
 > [!TIP]
 > 
 > Get started by designing a structure that models the format of the JSON received from the endpoint.
+
+> [!NOTE]
+> 
+> If you'd like to learn how to create a more advanced user interface for this app and learn how to persist (save) jokes for future reference – as shown in the video below – then have [[Swipe Gestures and Persisting Data|a look at this follow-up lesson]].
+> 
+> <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1062985316?h=b113472f23&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Completed Joke Finder"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
