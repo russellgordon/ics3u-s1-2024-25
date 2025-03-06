@@ -242,7 +242,7 @@ We've learned about tab views before, but not looked at how we can keep track of
 
 > [!DISCUSSION]
 > 
-> 1. We add a stored property to keep track of which tab has been selected by the user. This ensure that when `LandingView` is reloaded, it will "stay" on whatever tab the user last selected. Otherwise, each time `LandingView` is loaded, it would default to the first tab.
+> 1. We add a stored property to keep track of which tab has been selected by the user. This ensures that when `LandingView` is reloaded, it will "stay" on whatever tab the user last selected. Otherwise, each time `LandingView` is loaded, it would default to the first tab.
 > 2. The `tag` view modifiers assign a unique identifier to each tab.
 > 3. The `TabView` has a binding to the `currentTab` stored property, so that when a new tab is selected, the stored property is updated.
 
