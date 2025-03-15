@@ -283,9 +283,9 @@ This is what happens, in general:
 ```mermaid
 flowchart TB
 
-id1["<b>Photo Picker</b>\nUser selects a photo"]
-id2["<b>selectionResult</b>\nHolds a reference to selected photo"]
-id3["<b>newItemImage</b>\nHolds an instance of TodoItemImage"]
+id1["<b>Photo Picker</b><br/>User selects a photo"]
+id2["<b>selectionResult</b><br/>Holds a reference to selected photo"]
+id3["<b>newItemImage</b><br/>Holds an instance of TodoItemImage"]
 
 id1 -- sends selection to --> id2
 id2 -- data sent to --> id3

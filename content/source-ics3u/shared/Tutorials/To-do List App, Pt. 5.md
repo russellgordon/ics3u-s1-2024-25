@@ -137,8 +137,8 @@ Visually, and in general, that looks like this:
 ```mermaid
 flowchart LR
 
-id1["<b>Model</b>\nDescribes data"] --> id2["<b>View Model</b>\nManages the state of data"]
-id2 --> id3["<b>View(s)</b>\nPresent data"]
+id1["<b>Model</b><br/>Describes data"] --> id2["<b>View Model</b><br/>Manages the state of data"]
+id2 --> id3["<b>View(s)</b><br/>Present data"]
 id3 --> id2
 
 ```

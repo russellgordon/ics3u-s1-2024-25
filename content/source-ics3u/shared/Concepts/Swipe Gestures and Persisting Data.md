@@ -338,12 +338,12 @@ flowchart LR
 subgraph aep["&nbsp;"]
 	direction TB
 	id1["<b>JokeView</b>"]
-	id2[("<b>JokeViewModel</b>\n<em>Observable class</em>")]
+	id2[("<b>JokeViewModel</b><br/><em>Observable class</em>")]
 end
 subgraph ae["&nbsp;"]
 	direction TB
 	id3["<b>FavouriteJokesView</b>"]
-	id4[("<b>JokeViewModel</b>\n<em>Observable class</em>")]
+	id4[("<b>JokeViewModel</b><br/><em>Observable class</em>")]
 end
 id1-.creates instance of.->id2
 id3-.creates instance of.->id4
@@ -395,7 +395,7 @@ flowchart LR
 subgraph aep["&nbsp;"]
 	direction TB
 	id1["<b>App Entry Point</b>"]
-	id2[("<b>JokeViewModel</b>\n<em>Observable class</em>")]
+	id2[("<b>JokeViewModel</b><br/><em>Observable class</em>")]
 end
 subgraph ae["<b>App's Environment</b>"]
 	direction LR
@@ -405,7 +405,7 @@ end
 id1-.creates instance of.->id2
 aep-- inserted into -->ae
 id3~~~id4
-id3~~~|All subviews\ncan access\nthe view model\nvia @Environment\nproperty wrapper|id3
+id3~~~|All subviews<br/>can access<br/>the view model<br/>via @Environment<br/>property wrapper|id3
 ```
 
 Let's get started on this.
@@ -502,7 +502,7 @@ flowchart LR
 subgraph aep["&nbsp;"]
 	direction TB
 	id1["<b>App Entry Point</b>"]
-	id2[("<b>JokeViewModel</b>\n<em>Observable class</em>")]
+	id2[("<b>JokeViewModel</b><br/><em>Observable class</em>")]
 end
 subgraph ae["<b>App's Environment</b>"]
 	direction LR
@@ -512,7 +512,7 @@ end
 id1-.creates instance of.->id2
 aep-- inserted into -->ae
 id3~~~id4
-id3~~~|All subviews\ncan access\nthe view model\nvia @Environment\nproperty wrapper|id3
+id3~~~|All subviews<br/>can access<br/>the view model<br/>via @Environment<br/>property wrapper|id3
 ```
 
 However, there is the small matter of our app crashing. Why is this happening?

@@ -169,10 +169,10 @@ First we create a `TabView`, then we identify the structures that a user can nav
 ```mermaid
 flowchart TD
 
-id1["App Entry Point\n(TabView)"] --> id3["World Clock\n(.tabItem)"]
-id1 --> id4["Alarm\n(.tabItem)"]
-id1 --> id5["Stopwatch\n(.tabItem)"]
-id1 --> id6["Timer\n(.tabItem)"]
+id1["App Entry Point<br/>(TabView)"] --> id3["World Clock<br/>(.tabItem)"]
+id1 --> id4["Alarm<br/>(.tabItem)"]
+id1 --> id5["Stopwatch<br/>(.tabItem)"]
+id1 --> id6["Timer<br/>(.tabItem)"]
 ```
 
 This is generally how a `TabView` is used when authoring a finished app – you would place the `TabView` in the app entry point file:
@@ -222,10 +222,10 @@ So, now, please make these edits to the `ContentView_Previews` structure – rem
 ```mermaid
 flowchart TD
 
-id1["Preview\n(TabView)"] --> id3["World Clock\n(.tabItem)"]
-id1 --> id4["Alarm\n(.tabItem)"]
-id1 --> id5["Stopwatch\n(.tabItem)"]
-id1 --> id6["Timer\n(.tabItem)"]
+id1["Preview<br/>(TabView)"] --> id3["World Clock<br/>(.tabItem)"]
+id1 --> id4["Alarm<br/>(.tabItem)"]
+id1 --> id5["Stopwatch<br/>(.tabItem)"]
+id1 --> id6["Timer<br/>(.tabItem)"]
 ```
 
 Now, despite some issues to fix with colors, we've made significant progress, so please commit and push your work with this message:

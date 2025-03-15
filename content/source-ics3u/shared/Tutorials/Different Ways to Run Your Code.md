@@ -231,13 +231,13 @@ Conceptually, this is what we now have:
 ```mermaid
 flowchart TD
 
-id1["App Entry Point\n"] --> id2["LandingView"]
+id1["App Entry Point<br/>"] --> id2["LandingView"]
 id2 --> id3["TabView"]
-id3 --> id4["FavouritesView\n(.tabItem)"]
-id3 --> id5["RecentsView\n(.tabItem)"]
-id3 --> id6["ContactsView\n(.tabItem)"]
-id3 --> id7["KeypadView\n(.tabItem)"]
-id3 --> id8["VoicemailView\n(.tabItem)"]
+id3 --> id4["FavouritesView<br/>(.tabItem)"]
+id3 --> id5["RecentsView<br/>(.tabItem)"]
+id3 --> id6["ContactsView<br/>(.tabItem)"]
+id3 --> id7["KeypadView<br/>(.tabItem)"]
+id3 --> id8["VoicemailView<br/>(.tabItem)"]
 ```
 
 The app entry point creates an instance of `LandingView`.

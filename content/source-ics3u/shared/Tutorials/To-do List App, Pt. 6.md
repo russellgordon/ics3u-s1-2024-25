@@ -177,15 +177,15 @@ Here is the current overall architecture of our to-do list app:
 ```mermaid
 flowchart LR
 
-id1["<b>Model</b>\nDescribes data"] --> vm
+id1["<b>Model</b><br/>Describes data"] --> vm
 subgraph vm["<b>View Model</b>"]
 	direction TB
-	id2["Manages the\nstate of data"]
+	id2["Manages the<br/>state of data"]
 	id2-.->id4
 end
-vm --> id3["<b>View(s)</b>\nPresent data"]
+vm --> id3["<b>View(s)</b><br/>Present data"]
 id3 --> vm
-id4["Data is kept\n<em>only in memory</em>"]
+id4["Data is kept<br/><em>only in memory</em>"]
 ```
 
 We will be modifying the architecture so that it works as follows:
@@ -193,18 +193,18 @@ We will be modifying the architecture so that it works as follows:
 ```mermaid
 flowchart LR
 
-id1["<b>Model</b>\nDescribes data"] --> vm
+id1["<b>Model</b><br/>Describes data"] --> vm
 subgraph vm["<b>View Model</b>"]
 	direction TB
-	id2["Manages the\nstate of data"]
+	id2["Manages the<br/>state of data"]
 	id2-.->id4
 	id4-.->id5
 	id5-.->id4
 end
-vm --> id3["<b>View(s)</b>\nPresent data"]
+vm --> id3["<b>View(s)</b><br/>Present data"]
 id3 --> vm
-id4["Data is kept\n<em>in memory</em>\nwhile app is running"]
-id5["Data is persisted\n<em>in the cloud</em>"]
+id4["Data is kept<br/><em>in memory</em><br/>while app is running"]
+id5["Data is persisted<br/><em>in the cloud</em>"]
 ```
 
 ## Load data from the cloud
@@ -605,18 +605,18 @@ Before we continue, let's review the overall architecture of the app:
 ```mermaid
 flowchart LR
 
-id1["<b>Model</b>\nDescribes data"] --> vm
+id1["<b>Model</b><br/>Describes data"] --> vm
 subgraph vm["<b>View Model</b>"]
 	direction TB
-	id2["Manages the\nstate of data"]
+	id2["Manages the<br/>state of data"]
 	id2-.->id4
 	id4-.->id5
 	id5-.->id4
 end
-vm --> id3["<b>View(s)</b>\nPresent data"]
+vm --> id3["<b>View(s)</b><br/>Present data"]
 id3 --> vm
-id4["Data is kept\n<em>in memory</em>\nwhile app is running"]
-id5["Data is persisted\n<em>in the cloud</em>"]
+id4["Data is kept<br/><em>in memory</em><br/>while app is running"]
+id5["Data is persisted<br/><em>in the cloud</em>"]
 ```
 
 Note how the view model must manage to-do items held in memory *and* keep the database up-to-date.
@@ -772,9 +772,9 @@ In this app in particular, directly passing a reference looks like this:
 ```mermaid
 flowchart LR
 
-id1[("<b>TodoListViewModel</b>\n<em>Observable class</em>")]
-id2["<b>LandingView</b>\n<em>Parent View</em>\nCreates view model instance\n(source of truth)"]
-id3["<b>ItemView</b>\n<em>Subview</em>\nReceives reference to view model\nfrom parent view"]
+id1[("<b>TodoListViewModel</b><br/><em>Observable class</em>")]
+id2["<b>LandingView</b><br/><em>Parent View</em><br/>Creates view model instance<br/>(source of truth)"]
+id3["<b>ItemView</b><br/><em>Subview</em><br/>Receives reference to view model<br/>from parent view"]
 id1-.->id2
 id2-.->id3
 ```
@@ -830,7 +830,7 @@ flowchart LR
 subgraph aep["&nbsp;"]
 	direction TB
 	id1["<b>LandingView</b>"]
-	id2[("<b>TodoListViewModel</b>\n<em>Observable class</em>")]
+	id2[("<b>TodoListViewModel</b><br/><em>Observable class</em>")]
 end
 subgraph ae["<b>App's Environment</b>"]
 	direction LR
@@ -845,7 +845,7 @@ aep-- inserted into -->ae
 id3~~~id4
 id4~~~id5
 id6~~~id7
-id3~~~|All subviews\ncan access\nthe view model|id3
+id3~~~|All subviews<br/>can access<br/>the view model|id3
 ```
 
 > [!NOTE]

@@ -253,8 +253,8 @@ From our look at [[Separation of Concerns]] you know the high-level purpose of e
 ```mermaid
 flowchart LR
 
-id1["<b>Model</b>\nDescribes data"] --> id2["<b>View Model</b>\nManages the state of data\nContains business logic"]
-id2 --> id3["<b>View(s)</b>\nPresents data"]
+id1["<b>Model</b><br/>Describes data"] --> id2["<b>View Model</b><br/>Manages the state of data<br/>Contains business logic"]
+id2 --> id3["<b>View(s)</b><br/>Presents data"]
 id3 --> id2
 
 ```

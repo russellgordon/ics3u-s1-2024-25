@@ -116,8 +116,8 @@ Remember that in general, this is how the MVVM (model, view, view model) design 
 ```mermaid
 flowchart LR
 
-id1["<b>Model</b>\nDescribes data"] --> id2["<b>View Model</b>\nManages the state of data"]
-id2 --> id3["<b>View(s)</b>\nPresent data"]
+id1["<b>Model</b><br/>Describes data"] --> id2["<b>View Model</b><br/>Manages the state of data"]
+id2 --> id3["<b>View(s)</b><br/>Present data"]
 id3 --> id2
 
 ```
@@ -316,10 +316,10 @@ Here is the approach our app will now take:
 flowchart TB
 
 id1([App Entry Point])
-id2["<b>AppEntryView</b>\nMonitors authentication state"]
+id2["<b>AppEntryView</b><br/>Monitors authentication state"]
 id3((Is the user authenticated?))
-id4["<b>LandingView</b>\nPresents list of to-do items"]
-id5["<b>AuthView</b>\nPerforms anonymous sign-in\nwhich changes authentication state"]
+id4["<b>LandingView</b><br/>Presents list of to-do items"]
+id5["<b>AuthView</b><br/>Performs anonymous sign-in<br/>which changes authentication state"]
 id1-- shows -->id2
 id2-- asks -->id3
 id3-- yes -->id4
