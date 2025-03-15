@@ -238,7 +238,7 @@ Rather than having the `students` array be a list of instances of the basic `Str
 
 ![[Pasted image 20250315131629.png]]
 
-...the `students` array should contain instances of newly defined `Student` structure insetad:
+...the `students` array should contain instances of newly defined `Student` structure instead:
 
 ![[Pasted image 20250315130949.png]]
 
