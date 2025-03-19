@@ -31,6 +31,12 @@ You can [download a copy of this project here](https://github.com/lcs-rgordon/Te
 
 Your job, together with your partner, is to write the missing view model.
 
+> [!TIP]
+> 
+> If you missed this class or would simply like to compare your work on this exercise to a possible solution, here is a video of Mr. Gordon completing this exercise:
+> 
+> <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1066640282?h=bd6d091b53&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Temperature Converter Solution"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 ### Time Converter
 
 Here is how the app should work when it is complete:
@@ -40,3 +46,9 @@ Here is how the app should work when it is complete:
 You can [download a copy of this project here](https://github.com/lcs-rgordon/TimeConverter/archive/904536e8f6909d25a926690af398810a41d6d480.zip) – note, however, that the main view is missing.
 
 Your job, together with your partner, is to write the missing view.
+
+> [!TIP]
+> 
+> If you missed this class or would simply like to compare your work on this exercise to a possible solution, here is a video of Mr. Gordon completing this exercise:
+> 
+> <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1066718017?h=bb1ac1b7ba&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Time Converter Solution"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
