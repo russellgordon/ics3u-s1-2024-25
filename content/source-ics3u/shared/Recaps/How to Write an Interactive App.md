@@ -24,7 +24,7 @@ However, if you were away from class due to illness, exchange, sports, or numero
 
 If that is the case, it is Mr. Gordon's hope that the following video-tutorial-based recap of how to write an interactive app will help.
 
-The following videos show, step-by-step, how to complete the [[Write an Interactive App]] task for the [[Write an Interactive App#1. **Tip Calculator**|Tip Calculator]] app.
+The following videos show, step-by-step, how to complete the [[Write an Interactive App]] task for the [[Write an Interactive App#List of potential apps|Tip Calculator]] app.
 
 > [!NOTE]
 > 
@@ -58,7 +58,7 @@ In this video, see how to author and test a view model in a playground:
 
 The view accepts user input from the user, and shows output provided by the view model. 
 
-Here is how to author the view for the Tip Calculator [[Write an Interactive App#1. **Tip Calculator**|Tip Calculator]] app:
+Here is how to author the view for the Tip Calculator [[Write an Interactive App#List of potential apps|Tip Calculator]] app:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1067056070?h=e09ace9f5c&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Tip Calculator - Authoring the View"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
