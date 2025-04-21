@@ -1,8 +1,8 @@
 ---
 draft: false
-draftSectionTwo: true
+draftSectionTwo: false
 created: 2025-03-03T07:00:00.000-0400
-createdForSectionTwo: 2025-01-23T07:00:00.000-0400
+createdForSectionTwo: 2025-03-31T07:00:00.000-0400
 tags:
 ---
 
@@ -16,7 +16,7 @@ The purpose of this lesson is to build upon what was demonstrated in the [[Retri
 - [ ] use a share link to send a joke to a friend
 - [ ] delete an item from a list
 
-When completed, you will have an app that looks like this:
+Between today's lesson and the lesson available in our next class, you will have an app that looks like this:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1062985316?h=b113472f23&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Completed Joke Finder"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
@@ -1166,3 +1166,4 @@ Saved jokes are now persisted to a JSON file kept on device.
 > [!NOTE]
 > 
 > Coming soon. As this lesson was getting a tad long, Mr. Gordon decided that adding swipe left and swipe right gestures deserves its own lesson!
+

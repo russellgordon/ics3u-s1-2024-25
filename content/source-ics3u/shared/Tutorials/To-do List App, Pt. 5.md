@@ -1,7 +1,9 @@
 ---
-created: 2024-04-15T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-12-05T07:00:00.000-0400
+createdForSectionTwo: 2025-04-02T07:00:00.000-0400
+tags:
 ---
 In [[To-do List App, Pt. 4|part four]] of this task, you improved the to-do list app so that you could use Xcode Previews again. You could test a single view in Xcode Previews, and data would not be persisted. You could run your app in the Simulator or on a physical device, and data *would* be persisted – saved to a database file – by the SwiftData framework.
 
@@ -355,43 +357,27 @@ You will then see this:
 
 Select the green **Authorize supabase** button.
 
+### Create an organization
+
 After a moment, you will be logged in to Supabase, and presented with this screen:
 
-![[Screenshot 2024-04-14 at 8.26.15 PM.png]]
-
-> [!TIP]
-> 
-> Do not worry if you briefly see a message at top right that says `Failed to create your profile.` That will go away after a moment, and does *not* impact your ability to use the service, in any case.
-
-### Create a new project
-
-Begin by clicking either one of the green **New Project** buttons:
-
-![[Screenshot 2024-04-14 at 8.27.24 PM.png]]
-
-The first time you create a project, you will be prompted to create an organization:
-
-![[Screenshot 2024-04-14 at 8.29.32 PM.png]]
+![[Pasted image 20250402075442.png]]
 
 Type `Lakefield College School` for the **Name** field and then select `Educational` for the **Type of organization** dropdown, then click **Create organization**:
 
-![[Screenshot 2024-04-14 at 8.30.35 PM.png]]
+![[Pasted image 20250402075551.png]]
 
-After a moment, you will be brought to this screen to create a new project:
+### Create a project
 
-![[Screenshot 2024-04-14 at 8.32.44 PM.png]]
+Next you will be prompted to create a new project. 
 
-Make the following selections – and – **very important** – be sure to copy and save the database password in a safe place on your own computer – you **must** be able to find this password later on:
+Make the following selections and entries – and – **very important** – be sure to copy and save the database password in a safe place on your own computer – you **must** be able to find this password later on – then press the **Create new project** button:
 
-![[Screenshot 2024-04-14 at 8.33.34 PM.png]]
+![[Pasted image 20250402075928.png]]
 
-You will then see something like this screen – it may take a few minutes to set up your project:
+After a moment, you will see something like this screen – it may take a few minutes to set up your project:
 
-![[Screenshot 2024-04-14 at 8.37.14 PM.png]]
-
-After a little while, the screen will change to the following:
-
-![[Screenshot 2024-04-14 at 8.38.35 PM.png]]
+![[Pasted image 20250402080140.png]]
 
 You are ready to create a table in your cloud-hosted database!
 
@@ -570,15 +556,15 @@ Open the **Project Settings** page:
 
 ![[Screenshot 2024-04-15 at 8.04.21 AM.png]]
 
-Then select the **API** option (this stands for *application programming interface*):
+Then select the **Data API** option (API stands for *application programming interface*):
 
-![[Screenshot 2024-04-15 at 8.05.03 AM.png]]
+![[Pasted image 20250402081051.png]]
 
 On the resulting page, there are two pieces of information that you need.
 
 Copy the **URL** and the **anon public** key to a safe place on your computer, such as a text file stored in your **Computer Studies** folder. You will need this information later on.
 
-![[Screenshot 2024-04-15 at 8.07.31 AM.png]]
+![[Pasted image 20250402082235.png]]
 
 ### Fetching table data
 
@@ -586,23 +572,23 @@ We will use `curl` to fetch all the data in the `todos` table.
 
 Select the **API Docs** page:
 
-![[Screenshot 2024-04-15 at 8.09.49 AM.png]]
+![[Pasted image 20250402081231.png]]
 
 Then select the link for the `todos` table:
 
-![[Screenshot 2024-04-15 at 8.10.17 AM.png]]
+![[Pasted image 20250402081306.png]]
 
 Now select the **Bash** option at top right:
 
-![[Screenshot 2024-04-15 at 8.11.34 AM.png]]
+![[Pasted image 20250402081351.png]]
 
 Next, there is an option, also at top-right, to show the API key – click the **hide** button:
 
-![[Screenshot 2024-04-15 at 8.12.35 AM.png]]
+![[Pasted image 20250402081421.png]]
 
 Then, select **(anon) public**:
 
-![[Screenshot 2024-04-15 at 8.12.55 AM.png]]
+![[Pasted image 20250402081448.png]]
 
 Now the documentation page for Supabase automatically generates the `curl` commands that you can use to query your database from the command line.
 
@@ -610,23 +596,23 @@ Note that this is *not* how we will obtain the data for our app – but this is 
 
 Scroll down to the **Read All Rows** option, then copy the command:
 
-![[Screenshot 2024-04-15 at 8.16.11 AM.png]]
+![[Pasted image 20250402081540.png]]
 
 This command uses `curl` to request a web page from the Supabase web server. It sets several *headers* to identify which project to pull data from. The `apikey` is a secret (for your project only) and that lets Supabase know that it is you (and not someone else) requesting data from your database.
 
 So, now, paste that command into your **Terminal** window:
 
-![[Screenshot 2024-04-15 at 8.16.46 AM.png|500]]
+![[Pasted image 20250402081645.png|500]]
 
 ... then press the **Return** key:
 
-![[Screenshot 2024-04-15 at 8.17.09 AM.png|500]]
+![[Pasted image 20250402081702.png|500]]
 
 You should see output that provides the contents of the `todos` table.
 
 This is how Supabase sends us data (and in turn, how we send data to Supabase).
 
-It is all done by making requests over the World Wide Web.
+It is all done by making requests over the World Wide Web – with information formatted [[Retrieving Data from a Remote Endpoint#JavaScript Object Notation|in JSON format]].
 
-In part 6 of this tutorial (tomorrow's class) you will learn a little about the format of the data being sent from Supabase, and how to use the actual Supabase library to much more easily obtain data and use it within your to-do list app.
+In part 6 of this tutorial (our next class) you will learn a little more about the format of the data being sent from Supabase, and how to use the actual Supabase library to much more easily obtain data and use it within your to-do list app.
 

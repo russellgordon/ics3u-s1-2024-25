@@ -1,7 +1,9 @@
 ---
-created: 2024-05-22T07:00:00.000-0400
 draft: true
-draftSectionTwo: true
+draftSectionTwo: false
+created: 2024-12-05T07:00:00.000-0400
+createdForSectionTwo: 2025-04-03T07:00:00.000-0400
+tags:
 ---
 In [[To-do List App, Pt. 5|part five]] of this task, you learned about the MVVM design pattern and how it promotes separation of concerns within an app. You set up a Supabase account and created a database to store the to-do list items. Finally, you saw how Supabase sends data from the database over the World Wide Web.
 
@@ -9,7 +11,7 @@ In this continuation of that tutorial, you will learn how to consume data from a
 
 ## Unpause your database
 
-If you completed part 5 of this tutorial series in the prior module here at LCS, it's quite likely that your database, hosted by Supabase, has been paused to conserve server-side resources. This occurs automatically for free-tier projects at Supabase when a database has been inactive for 7 days. 
+If you completed part 5 of this tutorial series a while ago here at LCS, it's quite likely that your database, hosted by Supabase, has been paused to conserve server-side resources. This occurs automatically for free-tier projects at Supabase when a database has been inactive for 7 days. 
 
 To get started, first be sure you are [signed in at GitHub](https://github.com/login).
 
@@ -27,7 +29,7 @@ After a moment, you will see your dashboard at Supabase:
 
 ![[Screenshot 2024-05-18 at 2.27.48 PM.png]]
 
-Notice that your project is likely listed as paused. If you click on your project to open it, you will see this message:
+Notice that your project is likely listed as paused. If it is not, please [[To-do List App, Pt. 6#Understanding JSON|proceed to the next section]] of this tutorial. If your database is paused, when you click on your project to open it, you will see this message:
 
 ![[Screenshot 2024-05-18 at 2.28.52 PM.png]]
 
@@ -138,9 +140,13 @@ Then select **Add Package** and you will see this screen briefly:
 
 ![[Screenshot 2024-05-19 at 8.02.17 AM.png]]
 
-On the screen that appears, expand the window if needed, then for each package product shown, change the option for the **Add to Target** column to read **TodoList** (this is the app or target name of your project):
+On the screen that appears, expand the size of the window if needed, then for each package product shown, change the option for the **Add to Target** column to read **TodoList** (this is the app or target name of your project):
 
 ![[Screenshot 2024-05-19 at 8.04.10 AM.png]]
+
+> [!IMPORTANT]
+> 
+> There are *six* packages to be added to your project. Be sure that you make selections, as shown in the screenshot above, so that all of the packages are added to your project.
 
 Finally, press the **Add Package** button:
 
@@ -149,6 +155,10 @@ Finally, press the **Add Package** button:
 If all goes well you will see the frameworks that have been added in the lower left corner of the Xcode window: 
 
 ![[Screenshot 2024-05-19 at 8.10.14 AM.png]]
+
+> [!NOTE]
+> 
+> This tutorial was written a few months ago. You may see that version numbers for the frameworks are slightly higher than those shown in this screenshot.
 
 This is a small but key step. Please go ahead and commit and push your work with this message:
 
@@ -168,7 +178,7 @@ Please [visit the documentation that can be found here](https://supabase.com/doc
 
 ## App architecture
 
-A tremendous benefit of separating concerns within an app is that when you make changes to how data is persisted the view layer never needs to know about it.
+A tremendous benefit of [[Separation of Concerns|separating concerns]] within an app is that when you make changes to how data is persisted (saved) the view layer never needs to know about it.
 
 As a result, when we begin using Supabase to persist data for this app, no source code in the view layer needs to be modified. We will only be modifying the model and view model layers.
 
@@ -271,7 +281,7 @@ It will look like this:
 
 ![[Screenshot 2024-05-19 at 12.40.23 PM.png]]
 
-Then select the API link:
+Then select the **Data API** link:
 
 ![[Screenshot 2024-05-19 at 12.40.57 PM.png]]
 
