@@ -1,9 +1,9 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
 enableToc: true
 excludeBacklinks: true
-created: 2024-12-06T07:00:00.000-0400
+created: 2025-04-23T07:00:00.000-0400
 createdForSectionTwo: 2025-04-11T07:00:00.000-0400
 tags:
 ---
@@ -20,7 +20,7 @@ The *beneficial effect* of the app is to ensure that a dog does not go without f
 
 ![[Pasted image 20250410202321.png]]
 
-... as well as to ensure that a dog does not get fed twice by mistake:
+... as well as to ensure that a dog does not get fed twice by mistake – at least not too often!
 
 ![[Pasted image 20250410202442 1.png]]
 
@@ -32,7 +32,7 @@ Then prioritize these features by importance, with the most important feature li
 
 Finally, use Keynote with your partner to make a rough interface for what this app would look like.
 
-Tomorrow, part-way through our period, we will share interfaces that groups came up with.
+In our next class, part-way through our period, we will share interfaces that groups came up with.
 
 The purpose of this activity is to practice translating features into a usable interface, and to get familiar with how to use Keynote to create a mockup of an application.
 

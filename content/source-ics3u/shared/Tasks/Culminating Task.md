@@ -62,4 +62,75 @@ Here are some suggestions about how to get rolling!
 > Reviewing the order of the steps Mr. Gordon took to author his exemplar app might help you decide what order to implement ideas in your own app, however, the necessary steps might vary depending on what you need to do for your app.
 > 
 > As you work, don't hesitate to ask questions! You can help out your friends, but remember, if you use code someone else wrote, or code that was co-created with a large language model, be sure to [cite](https://github.com/lcs-rgordon/ReadWell2025/blob/875fe04a65b1d249b6327c00e68c45ab4228d4ee/ReadWell2025/README.md?plain=1#L24-L35) [that](https://github.com/lcs-rgordon/ReadWell2025/blob/c247cb5d830e30cf1f9aacaed5d9827a96c709c3/ReadWell2025/Views/StarRatingView.swift#L10-L14) you did so. Images, sounds, or animations you use [should also be cited](https://github.com/lcs-rgordon/ReadWell2025/blob/875fe04a65b1d249b6327c00e68c45ab4228d4ee/ReadWell2025/README.md?plain=1#L5-L22) – the [Creative Commons search portal](https://search.creativecommons.org) is a great resource to find content that you can share, use, and remix into an app.
-   
+
+## Recaps and resources
+
+### User interfaces
+
+Whether as a recap or a resource for new techniques you might find useful, Paul Hudson has authored a nice summary of how to build layouts, or user interfaces, using SwiftUI:
+
+- [The Complete Guide to Layout in SwiftUI](https://www.hackingwithswift.com/articles/217/complete-guide-to-layout-in-swiftui)
+
+As well, remember that you have a visual guide to using nearly every unique feature of the SwiftUI framework – SwiftUI Views Mastery – this should already be on your computer:
+
+![[SwiftUI Views Mastery.png]]
+
+For example, many students are building apps that work with dates – this will be a useful control:
+
+![[Pasted image 20250422175028.png]]
+
+To customize a user interface further, we can [[Shapes Protocol|define and use custom shapes]].
+
+It is also possible to create [[Creating Custom Color Sets in Xcode|custom colour sets in Xcode]] to use within an app.
+
+When used sparingly, [[Lottie Animations|third-party pre-built animations]] can be a useful addition to an app.
+
+### Describing data
+
+We use variables or constants and [[Data Types#Variables, Constants, Data Types|three basic data types]] to build [[Structures|custom structures]] that [[Defining and Using Structures|model something]] from our world.
+
+Stored properties hold data that must be provided when [[Structures#Creating an instance|an instance of a structure]] is created.
+
+[[Computed Properties|Computed properties]] within a structure provide new information created by using the data held within stored properties, often using [[Operators|operators]] and potentially [[Mathematics Functions|mathematics functions]] to perform some kind of calculation.
+
+We use structures within the [[Separation of Concerns#Model|model layer]] in an app.
+
+### Lists of data
+
+It is a common task in an app to organize many instances of the same type of data.
+
+Many instances of the same type of data will be held within a [[Lists|list]] (also called an array).
+
+We often [[Abstraction Using Lists|create scrollable lists]] within an app, from which a user can [[Navigation to a Detail View|navigate to a detail view]].
+
+When using instances of a data type in a scrolling list, be sure that the data type is [[Identifiable Instances of a Structure|made identifiable to avoid potential problems]].
+
+### Obtaining data
+
+Apps are nothing more than "input-process-output machines".
+
+One way that our apps can collect data is by providing user interface elements such as sliders or steppers that are in turn [[Revisiting Interactive Apps#Bindings to a control|bound to a stored property]] within a structure.
+
+We apply the MVVM (model-view-view model) design pattern to make it easier to write [[Separation of Concerns#Accept free-form input|more sophisticated apps that accept free-form input]] from a user.
+
+Apps do not just obtain data from a user directly.
+
+It's very common for apps to [[Retrieving Data from a Remote Endpoint|obtain data from a third-party service]], or web endpoint.
+
+### Persisting data
+
+Once we have an app that does something useful for a user, it is natural that we'd want to *persist* that data – keep it around for future reference. If the user closes our app at some point, when they open it again, they expect their data to still be there.
+
+One way to persist data is to save it in a [[Swipe Gestures and Persisting Data#Persisting jokes|JSON-encoded text file]] located on the user's device.
+
+Another way to is use a [[Databases|database]].
+
+When information that we want to persist for a user never needs to be seen or shared by anyone else, we could use the [[To-do List App, Pt. 3#Persist data with SwiftData|SwiftData]] framework.
+
+When information *will* need to be shared or seen by others, we will need to keep that information in a [[To-do List App, Pt. 5#Supabase|cloud-hosted database]].
+
+> [!TIP]
+> 
+> Mr. Gordon will be updating this page a bit to provide additional resources over the next week or so. Please be sure to press **Command-R** when referring to this page each day to pick up the latest changes.
+
+

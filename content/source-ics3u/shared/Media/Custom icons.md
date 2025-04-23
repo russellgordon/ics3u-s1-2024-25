@@ -7,6 +7,8 @@ dg-show-file-tree: false
 dg-show-toc: false
 dg-hide: true
 dg-hide-in-graph: true
+draft: true
+draftSectionTwo: true
 ---
 
 ![[ram.png]]

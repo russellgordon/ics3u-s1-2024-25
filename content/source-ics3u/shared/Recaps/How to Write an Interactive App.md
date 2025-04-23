@@ -1,14 +1,14 @@
 ---
 draft: false
-draftSectionTwo: true
+draftSectionTwo: false
 created: 2025-03-19T07:00:00.000-0400
-createdForSectionTwo: 2025-01-21T07:00:00.000-0400
+createdForSectionTwo: 2025-04-22T07:00:00.000-0400
 tags:
 ---
 
 ## Introduction
 
- In the third module of this course, a primary concept we learned was how to [[Separation of Concerns|separate concerns using the MVVM design pattern]].
+Earlier in this course, a primary concept we learned was how to [[Separation of Concerns|separate concerns using the MVVM design pattern]].
 
 Students then practiced [[Freeform Text Input|applying the MVVM design pattern to their arithmetic helper app]].
 
