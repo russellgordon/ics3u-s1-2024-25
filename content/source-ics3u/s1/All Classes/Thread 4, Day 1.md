@@ -5,7 +5,7 @@ tags:
 excludeBacklinks: true
 excludeFromExplorer: true
 enableToc: false
-created: 2025-03-06T07:00:00.000-0400
+created: 2025-04-23T07:00:00.000-0400
 ---
 ## Agenda
 1. Concept: [60 Second Prototyping](https://developer.apple.com/videos/play/wwdc2017/818)

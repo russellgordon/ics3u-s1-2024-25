@@ -1,9 +1,9 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
 enableToc: true
 excludeBacklinks: true
-created: 2024-12-06T07:00:00.000-0400
+created: 2025-04-25T07:00:00.000-0400
 createdForSectionTwo: 2025-04-12T07:00:00.000-0400
 tags:
 ---
@@ -42,4 +42,4 @@ You can copy-and-paste design elements, as needed, into your prototype.
 > 
 > The goal is to get feedback quickly, to make improvements quickly, to be sure that when you start to write code, you will be implementing an idea that will work and is fully thought through.
 > 
-> ![Screenshot 2025-04-12 at 8.33.33 AM.png]
+> ![[Screenshot 2025-04-12 at 8.33.33 AM.png|300]]
