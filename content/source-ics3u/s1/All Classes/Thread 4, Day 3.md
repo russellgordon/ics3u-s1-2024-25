@@ -8,10 +8,13 @@ enableToc: false
 created: 2025-04-26T07:00:00.000-0400
 ---
 ## Agenda
-1. Exercise: [[Interface Design Challenge#Feedback and revision|Interface Design Challenge]]
+1. Video: [Design Tips for Mobile App UI](https://www.youtube.com/watch?v=E3KjA8T_IPc)
+	- A super short two-minute video to give you some high-level ideas to consider.
+	- Here is a [related resource with 100 different colour combinations](https://www.canva.com/learn/100-color-combinations/#organic-color-inspiration) that you could adopt for your group's prototype or app.
+2. Exercise: [[Interface Design Challenge#Feedback and revision|Interface Design Challenge]]
 	- Work with your partner to refine the prototype you created earlier, and implement changes based on the feedback you received from your peers in class.<br/>
 	  ![[Screenshot 2025-04-12 at 8.33.33 AM.png|300]]
-2. Exercise: [[Get Ready for the Culminating Task]]
+3. Exercise: [[Get Ready for the Culminating Task]]
 	- Complete these pre-steps to prepare for your culminating task.
 	  > [!NOTE]
 	  >  
