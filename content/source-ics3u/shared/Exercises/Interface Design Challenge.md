@@ -62,6 +62,29 @@ The class will provide feedback.
 
 ### Make improvements
 
-Finally, your group has 20 minutes to make changes based on the feedback you have received.
+Finally, your group has 40 minutes to make changes based on the feedback you have received.
 
-Be sure to document the feedback received in your post for today's class, and to upload new screenshots and the revised Keynote file for today's class post.
+In your post for today's class:
+
+1. Be sure to document the feedback received yesterday.
+2. To upload new screenshots of your group's prototype and the revised Keynote file.
+
+#### Additional resources
+
+You may find these these [iOS Design elements](https://www.russellgordon.ca/lcs/2024-25/ICS3U/iOS-16-Keynote.zip) useful. Here is a sampling of what these elements look like:
+
+![[Pasted image 20250412084904.png]]
+
+![[Pasted image 20250412084922.png]]
+
+You can copy-and-paste design elements, as needed, into your group's prototype.
+
+> [!TIP]
+> 
+> Be careful!
+> 
+> Although the design elements are fun to use, when making a prototype, remember that your prototype does not need to be "pixel perfect".
+> 
+> The goal is to get feedback quickly, to make improvements quickly, to be sure that when you start to write code, you will be implementing an idea that will work and is fully thought through.
+> 
+> ![[Screenshot 2025-04-12 at 8.33.33 AM.png|300]]
