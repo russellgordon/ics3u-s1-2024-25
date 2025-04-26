@@ -3,7 +3,7 @@ draft: false
 draftSectionTwo: false
 enableToc: true
 excludeBacklinks: true
-created: 2025-04-25T07:00:00.000-0400
+created: 2025-04-26T07:00:00.000-0400
 createdForSectionTwo: 2025-04-12T07:00:00.000-0400
 tags:
 ---
@@ -26,7 +26,7 @@ Now select your favourite idea.
 
 Begin thinking through what the interface might look like, by starting to make a prototype of your desired app in Keynote.
 
-You may find these these [iOS Design elements](https://devimages-cdn.apple.com/design/resources/download/iOS-16-Keynote.dmg) useful. Here is a sampling of what these elements look like:
+You may find these these [iOS Design elements](https://www.russellgordon.ca/lcs/2024-25/ICS3U/iOS-16-Keynote.zip) useful. Here is a sampling of what these elements look like:
 
 ![[Pasted image 20250412084904.png]]
 
