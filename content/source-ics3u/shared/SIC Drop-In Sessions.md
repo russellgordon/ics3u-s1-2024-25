@@ -9,4 +9,4 @@ They are friendly, very knowledgeable, and staff drop-in sessions as well – si
 
 > [!NOTE]
 > 
-> In this week immediately after the April Long Weekend, there are no SIC Drop-In Sessions scheduled.
+> For the remainder of the school year, due to approaching AP exams, there are no SIC Drop-In sessions scheduled.
