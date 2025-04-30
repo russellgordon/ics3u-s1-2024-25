@@ -5,14 +5,14 @@ tags:
 excludeBacklinks: true
 excludeFromExplorer: true
 enableToc: false
-created: 2025-04-29T07:00:00.000-0400
+created: 2025-04-30T07:00:00.000-0400
 ---
 ## Agenda
 1. Task: [[Culminating]]
 	- Please see [[Culminating#Getting started|these notes]] that describe how to get started.
-	- If your prototype is complete, you will engage in a feedback session with a randomly assigned partner today.
-	- If your prototype is not yet complete, not a problem!
-		- Be sure to have it complete for tomorrow's class to receive feedback, so you can make revisions to your prototype in time for Friday's deadline (see below).
+	- You will engage in a feedback session with a randomly assigned partner today.
+	- Once you have received feedback, be sure to make a duplicate of your existing Keynote prototype, then make changes based on the feedback you received.
+		- Both versions of your Keynote prototype (the original, and the revised version) should be uploaded to your Culminating Task entry in your portfolio.
 
 > [!IMPORTANT]
 > 
