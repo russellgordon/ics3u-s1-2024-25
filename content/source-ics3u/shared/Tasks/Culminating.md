@@ -114,7 +114,7 @@ We use structures within the [[Separation of Concerns#Model|model layer]] in an 
 
 It is a common task in an app to organize many instances of the same type of data.
 
-Many instances of the same type of data will be held within a [[Lists|list]] (also called an array).
+Many instances of the same type of data will be held within a [[Arrays|list]] (also called an array).
 
 We often [[Abstraction Using Lists|create scrollable lists]] within an app, from which a user can [[Navigating to a Detail View|navigate to a detail view]].
 
