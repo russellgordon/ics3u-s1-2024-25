@@ -1,7 +1,7 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-12-05T07:00:00.000-0400
+created: 2025-05-05T07:00:00.000-0400
 createdForSectionTwo: 2025-01-28T07:00:00.000-0400
 tags:
 ---
@@ -244,4 +244,4 @@ In the next part of this tutorial, you will learn how fix these issues, making m
 
 > [!TIP]
 > 
-> When you have finished this part of the tutorial, when you next have some time on your hands, continue on to [[To-do List App, Pt. 3|part 3]].
+> When you have finished this part of the tutorial, and you next have some time on your hands, continue on to [[To-do List App, Pt. 3|part 3]].

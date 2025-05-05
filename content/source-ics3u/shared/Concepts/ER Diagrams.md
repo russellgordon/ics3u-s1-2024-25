@@ -1,8 +1,9 @@
 ---
+draft: false
+draftSectionTwo: false
+created: 2025-05-05T07:00:00.000-0400
+createdForSectionTwo: 2025-05-05T07:00:00.000-0400
 tags:
-created: 2024-06-05T07:00:00.000-0400
-draft: true
-draftSectionTwo: true
 ---
 Entity-relationship (ER) diagrams were created by Peter Chen, a computer scientist, in the 1970's.
 
@@ -142,32 +143,82 @@ The steps involved are:
 3. upload the photo to ChatGPT and provide an appropriate prompt to have it generate SQL that matches the ER diagram
 4. ask ChatGPT to build on it's initial output and generate example data, so that the database tables can be populated with information you can work with at first
 
-Mr. Gordon will guide you through this process.
+If needed, Mr. Gordon can guide you through this process.
 
-Here is a prompt that might be used with the the ER diagram we just authored:
-
-```
-This is a photo of a hand-drawn conceptual entity-relationship diagram. The diagram describes the data that will be stored by a library service to track what books patrons have borrowed. Please convert this image into valid SQL that will create database tables with columns, primary keys, and foreign keys where appropriate based on the cardinality described in the diagram. Do your best to infer data types for table columns based on the name of attributes given for each entity. Be certain that the SQL you generate is compatible with the PostgreSQL database software.
-```
-
-You can fill in the blanks, like this:
+Here is a template for a prompt that might be used to generate an ER diagram:
 
 ```
-This is a photo of a hand-drawn conceptual entity-relationship diagram. The diagram describes the data that (INSERT DESCRIPTION OF SYSTEM HERE). Please convert this image into valid SQL that will create database tables with columns, primary keys, and foreign keys where appropriate based on the cardinality described in the diagram. Do your best to infer data types for table columns based on the name of attributes given for each entity. Be certain that the SQL you generate is compatible with the PostgreSQL database software.
+This is a photo of a hand-drawn conceptual
+entity-relationship diagram. The diagram describes
+the data that *(INSERT DESCRIPTION OF SYSTEM HERE)*
+
+Please convert this image into valid SQL that will 
+create database tables with columns, primary keys,
+and foreign keys where appropriate based on the
+cardinality described in the diagram.
+
+Do your best to infer data types for table columns
+based on the name of attributes given for each entity.
+Any columns that will contain text data should have a
+datatype of "text". Any columns that contain integer
+data should have a datatype of "int8". Any columns that
+will contain a date or time should have a datatype of
+"timestamptz". Be certain that the SQL you generate is
+compatible with the PostgreSQL database software. Table
+and column names should always be lowercase. Use 
+snake_case to represent table and column names with
+multiple words.
 ```
 
-For the follow-up prompt, for the ER diagram we authored above, we might use the following:
+Filling in the blank, here is a prompt that might be used with the the ER diagram we just authored:
 
 ```
-That's great, thank-you! Now given the SQL you just produced to create the database tables that matched the ER diagram, can you produce some further SQL that will populate each table with reasonable sample data? Ensure that there are at least five patrons, across three genres, and at least ten books.
+This is a photo of a hand-drawn conceptual
+entity-relationship diagram. The diagram describes
+the data that will be *stored by a library service
+to track what books patrons have borrowed*.
+
+Please convert this image into valid SQL that will 
+create database tables with columns, primary keys,
+and foreign keys where appropriate based on the
+cardinality described in the diagram.
+
+Do your best to infer data types for table columns
+based on the name of attributes given for each entity.
+Any columns that will contain text data should have a
+datatype of "text". Any columns that contain integer
+data should have a datatype of "int8". Any columns that
+will contain a date or time should have a datatype of
+"timestamptz". Be certain that the SQL you generate is
+compatible with the PostgreSQL database software. Table
+and column names should always be lowercase. Use 
+snake_case to represent table and column names with
+multiple words.
 ```
 
-You can fill in the blanks, like this:
+The SQL produced can be used to create a database 
+
+For the follow-up prompt, we might use the following template:
 
 ```
-That's great, thank-you! Now given the SQL you just produced to create the database tables that matched the ER diagram, can you produce some further SQL that will populate each table with reasonable sample data? Ensure that there are (INSERT THE NUMBER OF DESIRED ROWS OF EXAMPLE DATA IN EACH TABLE).
+That's great, thank-you! Now given the SQL you
+just produced to create the database tables that
+matched the ER diagram, can you produce some
+further SQL that will populate each table with
+reasonable sample data? Ensure that there are
+*(INSERT THE NUMBER OF DESIRED ROWS OF EXAMPLE
+DATA IN EACH TABLE)*.
 ```
 
+We might fill in the blank like so, given the example used in this lesson:
 
-
+```
+That's great, thank-you! Now given the SQL you
+just produced to create the database tables that
+matched the ER diagram, can you produce some
+further SQL that will populate each table with
+reasonable sample data? Ensure that there are *at
+least five patrons, across three genres, and at
+least ten books*.
+```
 

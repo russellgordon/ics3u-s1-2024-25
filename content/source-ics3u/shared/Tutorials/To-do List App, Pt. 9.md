@@ -1,7 +1,9 @@
 ---
-created: 2024-05-30T07:00:00.000-0400
-draft: true
-draftSectionTwo: true
+draft: false
+draftSectionTwo: false
+created: 2025-05-05T07:00:00.000-0400
+createdForSectionTwo: 2025-05-05T07:00:00.000-0400
+tags:
 ---
 In [[To-do List App, Pt. 8|part eight]] of this task, you improved the user interface of the app in these ways:
 

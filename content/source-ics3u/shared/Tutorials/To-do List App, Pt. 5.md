@@ -1,7 +1,7 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-12-05T07:00:00.000-0400
+created: 2025-05-05T07:00:00.000-0400
 createdForSectionTwo: 2025-04-02T07:00:00.000-0400
 tags:
 ---
@@ -614,5 +614,8 @@ This is how Supabase sends us data (and in turn, how we send data to Supabase).
 
 It is all done by making requests over the World Wide Web – with information formatted [[Retrieving Data from a Remote Endpoint#JavaScript Object Notation|in JSON format]].
 
-In part 6 of this tutorial (our next class) you will learn a little more about the format of the data being sent from Supabase, and how to use the actual Supabase library to much more easily obtain data and use it within your to-do list app.
+In part 6 of this tutorial you will learn a little more about the format of the data being sent from Supabase, and how to use the actual Supabase library to much more easily obtain data and use it within your to-do list app.
 
+> [!TIP]
+> 
+> When you have finished this part of the tutorial, and you next have some time on your hands, continue on to [[To-do List App, Pt. 6|part 6]].

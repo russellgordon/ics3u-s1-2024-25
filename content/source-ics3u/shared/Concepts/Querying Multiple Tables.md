@@ -1,8 +1,9 @@
 ---
+draft: false
+draftSectionTwo: false
+created: 2025-05-05T07:00:00.000-0400
+createdForSectionTwo: 2025-05-05T07:00:00.000-0400
 tags:
-created: 2024-06-10T07:00:00.000-0400
-draft: true
-draftSectionTwo: true
 ---
 When completing [[To-do List App, Pt. 6|part six of the to-do list tutorial series]] you learned how to use the MVVM design pattern to query a single table hosted at Supabase.
 
@@ -40,62 +41,82 @@ Using a [[ER Diagrams#Conversion to a database|large language model such as Chat
 Here is the prompt Mr. Gordon used to do so:
 
 ```
-This is a photo of a hand-drawn conceptual entity-relationship diagram. The diagram describes the relationship between countries and cities.
+This is a photo of a hand-drawn conceptual
+entity-relationship diagram.
 
-Please convert this image into valid SQL that will create database tables with columns, primary keys, and foreign keys where appropriate based on the cardinality described in the diagram.
+The diagram describes the relationship between
+countries and cities. Please convert this image
+into valid SQL that will create database tables
+with columns, primary keys, and foreign keys where
+appropriate based on the cardinality described in
+the diagram.
 
-Do your best to infer data types for table columns based on the name of attributes given for each entity.
+Do your best to infer data types for table
+columns based on the name of attributes given for
+each entity. Any columns that will contain text
+data should have a datatype of "text". Any columns
+that contain integer data should have a datatype of
+"int8". Any columns that will contain a date or
+time should have a datatype of "timestamptz". Be
+certain that the SQL you generate is compatible
+with the PostgreSQL database software. Table
+and column names should always be lowercase. Use 
+snake_case to represent table and column names with
+multiple words.
 
-Be certain that the SQL you generate is compatible with the PostgreSQL database software.
+Once you have produced SQL that creates a database
+that matches this ER diagram, please create some
+reasonable sample data for each table.
 
-Once you have produced SQL that creates a database that matches this ER diagram, please create some reasonable sample data for each table. Ensure that the following countries are represented: Canada, United States, China, Germany, and Mexico. For each country provide two major cities.
+Ensure that the following countries are
+represented: Canada, United States, China,
+Germany, and Mexico. For each country provide two
+major cities.
 ```
 
 Here is the response Mr. Gordon received from ChatGPT:
 
-> Here is the SQL code to create the database tables as described in the provided ER diagram, along with the sample data for each table:
-
-```sql
--- Create the country table
-CREATE TABLE Country (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
-);
-
--- Create the city table
-CREATE TABLE City (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    country_id INT NOT NULL,
-    FOREIGN KEY (country_id) REFERENCES Country(id)
-);
-
--- Insert sample data into the country table
-INSERT INTO Country (name) VALUES ('Canada');
-INSERT INTO Country (name) VALUES ('United States');
-INSERT INTO Country (name) VALUES ('China');
-INSERT INTO Country (name) VALUES ('Germany');
-INSERT INTO Country (name) VALUES ('Mexico');
-
--- Insert sample data into the city table
-INSERT INTO City (name, country_id) VALUES ('Toronto', 1);
-INSERT INTO City (name, country_id) VALUES ('Vancouver', 1);
-INSERT INTO City (name, country_id) VALUES ('New York', 2);
-INSERT INTO City (name, country_id) VALUES ('Los Angeles', 2);
-INSERT INTO City (name, country_id) VALUES ('Beijing', 3);
-INSERT INTO City (name, country_id) VALUES ('Shanghai', 3);
-INSERT INTO City (name, country_id) VALUES ('Berlin', 4);
-INSERT INTO City (name, country_id) VALUES ('Munich', 4);
-INSERT INTO City (name, country_id) VALUES ('Mexico City', 5);
-INSERT INTO City (name, country_id) VALUES ('Guadalajara', 5);
-```
-
+> Here is the SQL code to create the database tables as described in the provided ER diagram, along with the sample data for each table:> 
+> 
+> ```sql
+> CREATE TABLE country (
+>     id int8 PRIMARY KEY,
+>     name text NOT NULL
+> );
+> 
+> CREATE TABLE city (
+>     id int8 PRIMARY KEY,
+>     name text NOT NULL,
+>     country_id int8 NOT NULL REFERENCES country(id)
+> );
+> 
+> -- Insert countries
+> INSERT INTO country (id, name) VALUES
+> (1, 'Canada'),
+> (2, 'United States'),
+> (3, 'China'),
+> (4, 'Germany'),
+> (5, 'Mexico');
+> 
+> -- Insert cities
+> INSERT INTO city (id, name, country_id) VALUES
+> (1, 'Toronto', 1),
+> (2, 'Vancouver', 1),
+> (3, 'New York', 2),
+> (4, 'Los Angeles', 2),
+> (5, 'Beijing', 3),
+> (6, 'Shanghai', 3),
+> (7, 'Berlin', 4),
+> (8, 'Munich', 4),
+> (9, 'Mexico City', 5),
+> (10, 'Guadalajara', 5);
+> ```
 > **Explanation:**
-> 1. **Country Table**:
+> 1. **country Table**:
 >    - `id`: Unique identifier for each country (Primary Key).
 >    - `name`: Name of the country.
 > 
-> 2. **City Table**:
+> 1. **city Table**:
 >    - `id`: Unique identifier for each city (Primary Key).
 >    - `name`: Name of the city.
 >    - `country_id`: Foreign key referencing the `id` column in the `Country` table, establishing the relationship between cities and their respective countries.
@@ -117,31 +138,25 @@ INSERT INTO City (name, country_id) VALUES ('Guadalajara', 5);
 > 
 > This SQL script sets up the database schema and populates it with sample data for the specified countries and cities.
 
-The response was an accurate representation of the ER diagram. Mr. Gordon prefers to use lowercase names for database tables, however, so he asked the LLM to revise the SQL so that the `Country` table was named `country`, for example, using this prompt:
-
-```
-Please revise the SQL you created so that database table names are always lowercase.
-```
-
 ### Reviewing the schema
 
 After that adjustment, Mr. Gordon created a new project at [Supabase](https://supabase.com), then pasted the SQL into the SQL Editor and ran the query:
 
-![[Screenshot 2024-06-08 at 12.41.21 PM.png]]
+![[Pasted image 20250505091636.png]]
 
 By then navigating to the **Database** panel:
 
-![[Screenshot 2024-06-08 at 12.41.35 PM.png]]
+![[Pasted image 20250505091702.png]]
 
 Then selecting **Schema Visualizer**:
 
-![[Screenshot 2024-06-08 at 12.43.14 PM.png]]
+![[Pasted image 20250505091933.png]]
 
 Mr. Gordon was able to obtain a visual representation of the table structure – this is called the *schema* for a database.
 
 Let's compare the ER diagram to the database schema:
 
-![[Screenshot 2024-06-08 at 12.48.50 PM.png]]
+![[Screenshot 2025-05-05 at 9.18.51 AM.png]]
 
 Two tables were created; attributes that are underlined are converted into *primary keys*. A primary key is a unique identifier for a row in a database. Values are typically integers that are auto-incremented for each new row that is added to the database table.
 
@@ -149,7 +164,7 @@ The `city` table has a *foreign key* connecting it to the `country` table.
 
 Reviewing the data used to populate these tables, we can see how the foreign key values in `country_id` tie multiple cities to a single country:
 
-![[Screenshot 2024-06-08 at 12.56.28 PM.png]]
+![[Screenshot 2025-05-05 at 9.21.21 AM.png]]
 
 ### Creating a project
 

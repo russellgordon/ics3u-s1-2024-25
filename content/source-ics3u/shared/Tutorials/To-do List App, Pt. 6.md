@@ -1,7 +1,7 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-12-05T07:00:00.000-0400
+created: 2025-05-05T07:00:00.000-0400
 createdForSectionTwo: 2025-04-03T07:00:00.000-0400
 tags:
 ---
@@ -931,3 +931,9 @@ Commit and push your work with this message:
 ```
 Specified the sort order so that to-do item positions in the list do not change when to-do items are modified.
 ```
+
+In this continuation of that tutorial, you will learn how to make search work within the to-do app and how to correct a critical security flaw with the current configuration of your Supabase project.
+
+> [!TIP]
+> 
+> When you have finished this part of the tutorial, and you next have some time on your hands, continue on to [[To-do List App, Pt. 7|part 7]].

@@ -1,7 +1,7 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-12-05T07:00:00.000-0400
+created: 2025-05-05T07:00:00.000-0400
 createdForSectionTwo: 2025-04-04T07:00:00.000-0400
 tags:
 ---
@@ -662,3 +662,14 @@ However, if you hold the **Option** key down and click the `authStateChanges` fu
 So far as Mr. Gordon can tell – this warning should not be showing up. It will probably go away in a future version of Xcode when this same code is run.
 
 Is it a bit annoying that the compiler shows a warning when it shouldn't? Yes, it certainly is. However, this is part of life as a software developer.
+
+> [!TIP]
+> 
+> When you have finished this part of the tutorial, and you next have some time on your hands, continue on to [[To-do List App, Pt. 8|part 8]].
+> 
+> In part 8, you will learn how to add some niceties to the user interface, such as:
+> 
+> - clearing the input field
+> - disabling the **Add** button when the user types nothing, or only spaces
+> - using a sheet that slides up to hold the user interface for adding an item
+> - a cue to the user about how to get started, when there are no to-do items

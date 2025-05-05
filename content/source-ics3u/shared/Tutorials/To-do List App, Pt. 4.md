@@ -1,7 +1,7 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-12-05T07:00:00.000-0400
+created: 2025-05-05T07:00:00.000-0400
 createdForSectionTwo: 2025-01-30T07:00:00.000-0400
 tags:
 ---
@@ -204,6 +204,8 @@ You have now made use of in-memory containers with SwiftData so that you can use
 
 The approaches shown here can be applied to any view that you wish to preview data within when using SwiftData.
 
-In the remaining parts of this tutorial series (to be provided at the start of our next module), you will learn how to persist data within a cloud-hosted database, so that if necessary, multiple users of your apps can see data created by one another. 
-
-However – that is a task for another day.
+> [!TIP]
+> 
+> When you have finished this part of the tutorial, and you next have some time on your hands, continue on to [[To-do List App, Pt. 5|part 5]].
+> 
+> In the remaining parts of this tutorial series you will learn how to persist data within a cloud-hosted database, so that if necessary, multiple users of your apps can see data created by one another. 

@@ -1,7 +1,9 @@
 ---
-created: 2024-05-27T07:00:00.000-0400
-draft: true
-draftSectionTwo: true
+draft: false
+draftSectionTwo: false
+created: 2025-05-05T07:00:00.000-0400
+createdForSectionTwo: 2025-05-05T07:00:00.000-0400
+tags:
 ---
 In [[To-do List App, Pt. 7|part seven]] of this task, you learned how to make search work within the app, and how to ensure that one user does not see another user's data by properly configuring row-level security on the `todos` table of your database hosted at Supabase.
 
@@ -670,3 +672,18 @@ Added a flag to differentiate between state of having no to-do items and waiting
 This concludes the series of usability improvements we will make for today.
 
 In the optional portion of this tutorial to come in our next class, you can learn how to attach an image to a to-do item and how to store those images in the cloud with Supabase.
+
+> [!TIP]
+> 
+> When you have finished this part of the tutorial, and you next have some time on your hands, continue on to [[To-do List App, Pt. 9|part 9]].
+> 
+> In part 9, which is entirely optional, you will learn how to attach images to a to-do item.
+> 
+> Here is a 90-second video showing how the revised app will function when you have completed today's tutorial:
+> 
+> <figure style="width: 350px;">
+> 	<video width="350" controls preload="metadata">
+> 	  <source src="https://www.russellgordon.ca/lcs/2023-24/ics3u/todo-list-with-images.mp4" type="video/mp4">
+> 	Your browser does not support the video tag.
+> 	</video>
+> </figure>

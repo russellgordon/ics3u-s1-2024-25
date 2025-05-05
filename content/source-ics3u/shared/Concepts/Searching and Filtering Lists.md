@@ -1,18 +1,40 @@
 ---
-draft: true
+draft: false
 draftSectionTwo: false
-created: 2024-12-11T07:00:00.000-0400
+created: 2025-05-05T07:00:00.000-0400
 createdForSectionTwo: 2025-04-10T07:34:55.000-0400
 tags:
 ---
 
 ## Introduction
 
-Please [fork and clone this repository](https://github.com/lcs-rgordon/SpellingMobile) to obtain the code for this project:
+To obtain the code for this project:
 
 ![[RocketSim_Screenshot_iPhone_16_Pro_6.3_2025-04-10_08.14.04.png|300]]
 
-Play the game with a partner.
+...please [fork and clone this repository](https://github.com/lcs-rgordon/SpellingMobile):
+
+![[Pasted image 20250505071255.png]]
+
+As shown in the screenshot above, be sure that you *un-check* the option to copy the `main` branch only. Then, press the green **Create fork** button.
+
+You'll know the fork succeeded when you see your own GitHub username in the top-left corner:
+
+![[Pasted image 20250505071513.png]]
+
+To clone the project into Xcode, press the green **Code** button, and choose **Open with Xcode**.
+
+After doing that, you will see the following in Xcode:
+
+![[Pasted image 20250505071647.png|400]]
+
+Be sure to change the drop-down menu from `main` to the `starter-code` option instead:
+
+![[Pasted image 20250505071817.png|400]]
+
+Once the project has been cloned and is open in Xcode, play the game with a partner by running it in the Simulator, or, by previewing the `QuizView` structure.
+
+## Consider
 
 What are some possible *beneficial effects* of this app?
 
@@ -151,6 +173,100 @@ Instead of filtering, what if the user could search the list of outcomes based o
 
 Write a function to allow for this. Use the `.searchable` view modifier on the scrollable list to allow the user to type in a search string.
 
-> [!TIP]
+> [!TIP]-
+> Here is a super-basic example (deliberately implemented in a single view to keep the code concise) that illustrates how to add the `.searchable` view modifier to a list:
 > 
-> An entry to explain the solution to this exercise is coming shortly.
+> ```swift
+> struct TinySeachExampleView: View {
+>     
+>     // MARK: Stored properties
+>     
+>     // The list of teachers to show
+>     @State var teachers = ["Braeckman", "Bemrose", "Harris", "Young"]
+>     
+>     // Holds the search string typed by the user
+>     @State var providedSearchText = ""
+>     
+>     // MARK: Computed properties
+>     
+>     // The user interface
+>     var body: some View {
+>         List(
+>             search(originalList: teachers, against: providedSearchText),
+>             id: \.self
+>         ) { teacher in
+>             Text(teacher)
+>         }
+>         .searchable(text: $providedSearchText)
+>         .navigationTitle("Teachers")
+>     }
+>     
+>     // MARK: Function(s)
+>     
+>     // When finished, would return an array that
+>     // only has names that contain the search string
+>     func search(
+>         originalList: [String],
+>         against searchText: String
+>     ) -> [String] {
+>         
+>         // When there is no search text, return the original array
+>         if searchText.isEmpty {
+>             return originalList
+>         }
+>         
+>         // Not actually searching anything yet;
+>         // just return a placeholder array
+>         // NOTE: Replace this code with something else
+>         return ["Need", "to", "actually", "implement", "the", "search", "algorithm"]
+>         
+>     }
+> }
+> 
+> #Preview {
+>     NavigationStack {
+>         TinySeachExampleView()
+>     }
+> }
+> ```
+> 
+> Consider copying the code above into a new project. Can you modify the `search` function so that it only returns names that contain the search text? Make use of [the `.contains` function](https://www.programiz.com/swift-programming/library/string/contains#:~:text=Example%202:%20Using%20contains()%20With%20if...else) that is built-in to the `String` data type.
+> 
+> If you can get that working, then try implementing the same concept in the Spelling project from this class.
+> 
+> You can read about searching and filtering patterns in great detail beginning on page 401 of SwiftUI Views Mastery:
+> 
+> ![[Screenshot 2025-05-05 at 7.26.08 AM.png|400]]
+
+> [!SOLUTION]-
+> 
+> In class we looked at how to search through and filter a list of food items using paper props.
+> 
+> We *iterated* over the list of items, meaning we looked at each item in the list, one after another.
+> 
+> Each item, while we were looking at it, was identified by the temporary label of `foodItem`.
+> 
+> For each item, we asked ourselves a question. For example: *"Is this food item a healthy food item?"* When the answer was *yes*, we copied that food item to a new list.
+> 
+> Finally, after iterating over the entire existing list, we had a new list that contained only the healthy food items. In code, we would return this list from a function.
+> 
+> Here is a short video where this same *algorithm* or sequence of steps is performed, but this time, to filter a list based on whether answers were *correct* or *incorrect*.
+> 
+> Please watch this video to familiarize yourself with the code:
+> 
+> <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081122590?h=b1f91900d3&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Filtering an Array Recap"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+> 
+> To make a list *searchable* based on some provided text, we use an identical algorithm. 
+> 
+> The only things that change are:
+> 
+> 1. One of the inputs – instead of an outcome (undetermined, correct, or incorrect) – the function accepts a string to search for in the food item name.
+> 2. The condition used to determine whether a given food item is copied from the original list into the filtered list.
+>    
+> In SwiftUI, we can use the `.searchable` view modifier to have a search field appear in the user interface. When text is entered in the search field, the `.searchable` view modifier will update a stored property. In turn, the view is refreshed, and we invoke the search function to obtain a filtered list that contains only what was typed in the search field.
+> 
+> Here is a brief video that explains how to implement this:
+> 
+> <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081124973?h=c8fffcc999&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Searching an Array - Solution"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+> 
+> As needed, please do drop by Grove Time or ask questions through your portfolio [on Notion](https://notion.so) to better understand how to implement searching and filtering of lists in your apps.

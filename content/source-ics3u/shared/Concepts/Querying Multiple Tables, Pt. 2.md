@@ -1,8 +1,9 @@
 ---
+draft: false
+draftSectionTwo: false
+created: 2025-05-05T07:00:00.000-0400
+createdForSectionTwo: 2025-05-05T07:00:00.000-0400
 tags:
-created: 2024-06-12T07:00:00.000-0400
-draft: true
-draftSectionTwo: true
 ---
 When completing [[To-do List App, Pt. 6|part six of the to-do list tutorial series]] you learned how to use the MVVM design pattern to query a single table hosted at Supabase.
 
@@ -41,21 +42,38 @@ Using a [[ER Diagrams#Conversion to a database|large language model such as Chat
 Here is the prompt Mr. Gordon used to do so:
 
 ```
-This is a photo of a hand-drawn conceptual entity-relationship diagram. The diagram describes the relationship between students and courses, for the purposes of enrolment.
+This is a photo of a hand-drawn conceptual entity-relationship
+diagram. The diagram describes the relationship between students
+and courses, for the purposes of enrolment.
 
-Please convert this image into valid SQL that will create database tables with columns, primary keys, and foreign keys where appropriate based on the cardinality described in the diagram. Ensure that table and column names are lowercased.
+Please convert this image into valid SQL that will create
+database tables with columns, primary keys, and foreign keys
+where appropriate based on the cardinality described in the
+diagram. Ensure that table and column names are lowercased.
 
-Do your best to infer data types for table columns based on the name of attributes given for each entity.
+Do your best to infer data types for table columns based on the
+name of attributes given for each entity.
 
-Be certain that the SQL you generate is compatible with the PostgreSQL database software.
+Be certain that the SQL you generate is compatible with the
+PostgreSQL database software.
 
-Once you have produced SQL that creates a database that matches this ER diagram, please create some reasonable sample data for each table.
+Once you have produced SQL that creates a database that matches
+this ER diagram, please create some reasonable sample data for
+each table.
 
-When creating the sample data ensure all of the following criteria are met:
+When creating the sample data ensure all of the following
+criteria are met:
 
 1. There are ten and only ten courses listed.
-2. The courses must be from grade 11 level of the Ontario secondary school curriculum. For example, one course at this level has a short code of ICS3U and a name of "Introduction to Computer Science". Another course example is MCR3U, named "Functions". Another course is ENG3U, named "English".
-3. The sample data is meant to describe enrolment in courses for a single half-year semester at a typical Ontario secondary school – all that this means is that a given student must be enrolled in exactly four courses for the semester.
+2. The courses must be from grade 11 level of the Ontario
+secondary school curriculum. For example, one course at this
+level has a short code of ICS3U and a name of "Introduction to 
+Computer Science". Another course example is MCR3U, named 
+"Functions". Another course is ENG3U, named "English".
+3. The sample data is meant to describe enrolment in courses 
+for a single half-year semester at a typical Ontario secondary 
+school – all that this means is that a given student must be 
+enrolled in exactly four courses for the semester.
 4. All students must be enrolled in ENG3U and MCR3U.
 ```
 
@@ -68,7 +86,11 @@ ChatGPT produced an accurate representation of the ER diagram, and met the sampl
 Mr. Gordon started with the following prompt:
 
 ```
-Please expand on the purpose of each table you have created. With reference to the sample data for the students named Emily Jones and John Doe, explain how the data added to the "enrols_in" table tracks the many-to-many relationship between the "student" and "course" tables.
+Please expand on the purpose of each table you have created. With
+reference to the sample data for the students named Emily Jones
+and John Doe, explain how the data added to the "enrols_in" table
+tracks the many-to-many relationship between the "student" and
+"course" tables.
 ```
 
 Mr. Gordon received a decent explanation, but he realized he could make a third prompt to address all three concerns noted above.
@@ -76,13 +98,22 @@ Mr. Gordon received a decent explanation, but he realized he could make a third 
 He provided a third prompt as follows:
 
 ```
-That explanation is very helpful. The original SQL you produced is also an accurate representation of the entity-relationship diagram I provided.
+That explanation is very helpful. The original SQL you produced
+is also an accurate representation of the entity-relationship
+diagram I provided.
 
-However, I would like to make some adjustments so that the SQL you have produced is easier for beginners to understand. Here are the changes I would like you to make:
+However, I would like to make some adjustments so that the SQL
+you have produced is easier for beginners to understand. Here are
+the changes I would like you to make:
 
-1. Please produce sample data for only three students.
-2. When populating the "enrols_in" table, populate the "course_id" column by assuming the "id" value based on the insertion order of data in the "course" table.
-3. Please provide an explanation of each table again, like you did before. With reference to the sample data for two of the three students, explain how the data added to the "enrols_in" table tracks the many-to-many relationship between the "student" and "course" tables.
+1. Please produce sample data for only three students. 2. When
+populating the "enrols_in" table, populate the "course_id" column
+by assuming the "id" value based on the insertion order of data
+in the "course" table. 3. Please provide an explanation of each
+table again, like you did before. With reference to the sample
+data for two of the three students, explain how the data added to
+the "enrols_in" table tracks the many-to-many relationship
+between the "student" and "course" tables.
 ```
 
 This time, Mr. Gordon received a good response. The response is included below:
