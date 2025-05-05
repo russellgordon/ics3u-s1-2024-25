@@ -1,13 +1,14 @@
 ---
+draft: false
+draftSectionTwo: false
+created: 2025-05-05T07:00:00.000-0400
+createdForSectionTwo: 2025-05-05T07:00:00.000-0400
 tags:
-created: 2024-04-02T07:00:00.000-0400
-draft: true
-draftSectionTwo: true
 ---
 
 ## Motivation for Joining Tables
 
-When writing queries for [[Databases|the exercise you completed before March Break]], you might have been forgiven for wondering whether some of the queries were very useful.
+When learning the SQL required to read information from a database earlier this year, you might have been forgiven for wondering whether some of the queries were very useful.
 
 For example, consider the solution to exercise 10:
 

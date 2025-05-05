@@ -69,7 +69,7 @@ Here are some suggestions about how to get rolling!
 > 
 > Mr. Gordon will be updating this section to provide additional resources over the coming weeks. If you have kept this page open in your web browser for a long time, please be sure to press **Command-R** to pick up the latest changes.
 > 
-> Here is a list of currently planned mini-tutorials:
+> Here is a list of currently planned mini-tutorials that will be added to what is already available below:
 > 
 > - Creating local notifications on an iOS device
 > - Parsing more complex JSON from web endpoints
@@ -78,7 +78,6 @@ Here are some suggestions about how to get rolling!
 > - Drag gestures (how to swipe left or right)
 > - Showing a slide-up sheet
 > - Working with dates and times
-
 
 ### User interfaces
 
@@ -176,7 +175,15 @@ Read this lesson:
 
 Once you have a database that has multiple tables connected by relationships, you will need to know how to read information from those tables.
 
-Read these lessons to learn how to do this:
+Here is a lesson that explains the *theory* of how to join tables, using an existing database schema:
+
+[[Joining Tables]]
+
+You can check your work for [[Joining Tables (Solutions)|the exercises connected to joining tables here]].
+
+Once you understand the theory of *how* and *why* we care about joining tables, you can continue to the lessons below.
+
+When using a database with tables connected by relationships, you will necessarily need to join those tables in a query. These lessons describe how to do that and how to build the related user interfaces:
 
 - [[Querying Multiple Tables]]
 - [[Querying Multiple Tables, Pt. 2]]

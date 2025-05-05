@@ -1,9 +1,9 @@
 ---
-excludeFromExplorer: true
+draft: false
+draftSectionTwo: false
+created: 2025-05-05T07:00:00.000-0400
+createdForSectionTwo: 2025-05-05T07:00:00.000-0400
 tags:
-created: 2024-04-02T07:00:00.000-0400
-draft: true
-draftSectionTwo: true
 ---
 ## 1
 
