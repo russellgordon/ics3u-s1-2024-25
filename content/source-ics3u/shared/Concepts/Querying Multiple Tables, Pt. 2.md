@@ -106,14 +106,14 @@ However, I would like to make some adjustments so that the SQL
 you have produced is easier for beginners to understand. Here are
 the changes I would like you to make:
 
-1. Please produce sample data for only three students. 2. When
-populating the "enrols_in" table, populate the "course_id" column
-by assuming the "id" value based on the insertion order of data
-in the "course" table. 3. Please provide an explanation of each
-table again, like you did before. With reference to the sample
-data for two of the three students, explain how the data added to
-the "enrols_in" table tracks the many-to-many relationship
-between the "student" and "course" tables.
+1. Please produce sample data for only three students.
+2. When populating the "enrols_in" table, populate the "course_id"
+column by assuming the "id" value based on the insertion order 
+of data in the "course" table.
+3. Please provide an explanation of each table again, like you did
+before. With reference to the sample data for two of the three 
+students, explain how the data added to the "enrols_in" table tracks 
+the many-to-many relationship between the "student" and "course" tables.
 ```
 
 This time, Mr. Gordon received a good response. The response is included below:
