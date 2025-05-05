@@ -77,6 +77,7 @@ Here are some suggestions about how to get rolling!
 > - How to play background audio
 > - Drag gestures (how to swipe left or right)
 > - Showing a slide-up sheet
+> - Working with dates and times
 
 
 ### User interfaces
