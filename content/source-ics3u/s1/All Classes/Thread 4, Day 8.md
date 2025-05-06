@@ -16,12 +16,6 @@ created: 2025-05-05T07:00:00.000-0400
 	- A new [[Culminating#Recaps and resources|recaps and resources section]] has been added the culminating task.
 		- More tutorials that will be useful to a subset of students in our class will be added over the coming days and weeks.
 
-> [!NOTE]
-> 
-> "AI and Computational Sociology Summer Program: [Inspirit AI](https://www.inspiritai.com/) is a 25-hour summer intensive that exposes students to project development with graduate-level Stanford, MIT, and Ivy researchers. Students will build research projects such as finding abnormalities in MRI scans. [Applications](https://inspiritai.paperform.co/?utm_campaign=a_intlvs_apr25) for summer are due May 15th."
-> 
-> David Li '25 attended this last summer, and may be willing to answer questions about his experience.
-
 ## Things to do before our next class
 
 - [ ] Write about what you made progress upon today in a portfolio entry on [Notion](https://notion.so) – daily posts can be a bit more brief – since it is expected that you are also filling out your culminating task template a little bit more each day.

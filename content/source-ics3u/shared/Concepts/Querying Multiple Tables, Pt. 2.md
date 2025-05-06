@@ -119,75 +119,75 @@ the many-to-many relationship between the "student" and "course" tables.
 This time, Mr. Gordon received a good response. The response is included below:
 
 > Sure, I'll make the adjustments as requested. I'll provide sample data for only three students, populate the `course_id` column by assuming the `id` value based on the insertion order of data in the `course` table, and provide an explanation of each table again.
-
+>
 > **SQL to Create Tables**
-
-```sql
--- Create the student table
-CREATE TABLE student (
-    id SERIAL PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50)
-);
-
--- Create the course table
-CREATE TABLE course (
-    id SERIAL PRIMARY KEY,
-    short_code VARCHAR(10) UNIQUE,
-    name VARCHAR(100)
-);
-
--- Create the enrols_in table to represent the many-to-many relationship
-CREATE TABLE enrols_in (
-    student_id INT REFERENCES student(id),
-    course_id INT REFERENCES course(id),
-    PRIMARY KEY (student_id, course_id)
-);
-```
-
+> 
+> ```sql
+> -- Create the student table
+> CREATE TABLE student (
+>     id SERIAL PRIMARY KEY,
+>     first_name VARCHAR(50),
+>     last_name VARCHAR(50)
+> );
+> 
+> -- Create the course table
+> CREATE TABLE course (
+>     id SERIAL PRIMARY KEY,
+>     short_code VARCHAR(10) UNIQUE,
+>     name VARCHAR(100)
+> );
+> 
+> -- Create the enrols_in table to represent the many-to-many relationship
+> CREATE TABLE enrols_in (
+>     student_id INT REFERENCES student(id),
+>     course_id INT REFERENCES course(id),
+>     PRIMARY KEY (student_id, course_id)
+> );
+> ```
+> 
 > **SQL to Insert Sample Data**
-
-```sql
--- Insert sample courses
-INSERT INTO course (short_code, name) VALUES
-('ICS3U', 'Introduction to Computer Science'), -- id = 1
-('MCR3U', 'Functions'), -- id = 2
-('ENG3U', 'English'), -- id = 3
-('SCH3U', 'Chemistry'), -- id = 4
-('SPH3U', 'Physics'), -- id = 5
-('SBI3U', 'Biology'), -- id = 6
-('CGG3O', 'Travel and Tourism: A Regional Geographic Perspective'), -- id = 7
-('CHW3M', 'World History to the End of the Fifteenth Century'), -- id = 8
-('FSF3U', 'Core French'), -- id = 9
-('AVI3M', 'Visual Arts'); -- id = 10
-
--- Insert sample students
-INSERT INTO student (first_name, last_name) VALUES
-('John', 'Doe'), -- id = 1
-('Jane', 'Smith'), -- id = 2
-('Emily', 'Jones'); -- id = 3
-
--- Insert sample enrolments ensuring each student is enrolled in exactly four courses including ENG3U and MCR3U
-INSERT INTO enrols_in (student_id, course_id) VALUES
--- John Doe
-(1, 3), -- ENG3U
-(1, 2), -- MCR3U
-(1, 1), -- ICS3U
-(1, 4), -- SCH3U
-
--- Jane Smith
-(2, 3), -- ENG3U
-(2, 2), -- MCR3U
-(2, 5), -- SPH3U
-(2, 6), -- SBI3U
-
--- Emily Jones
-(3, 3), -- ENG3U
-(3, 2), -- MCR3U
-(3, 7), -- CGG3O
-(3, 8); -- CHW3M
-```
-
+> 
+> ```sql
+> -- Insert sample courses
+> INSERT INTO course (short_code, name) VALUES
+> ('ICS3U', 'Introduction to Computer Science'), -- id = 1
+> ('MCR3U', 'Functions'), -- id = 2
+> ('ENG3U', 'English'), -- id = 3
+> ('SCH3U', 'Chemistry'), -- id = 4
+> ('SPH3U', 'Physics'), -- id = 5
+> ('SBI3U', 'Biology'), -- id = 6
+> ('CGG3O', 'Travel and Tourism: A Regional Geographic Perspective'), -- id = 7
+> ('CHW3M', 'World History to the End of the Fifteenth Century'), -- id = 8
+> ('FSF3U', 'Core French'), -- id = 9
+> ('AVI3M', 'Visual Arts'); -- id = 10
+> 
+> -- Insert sample students
+> INSERT INTO student (first_name, last_name) VALUES
+> ('John', 'Doe'), -- id = 1
+> ('Jane', 'Smith'), -- id = 2
+> ('Emily', 'Jones'); -- id = 3
+> 
+> -- Insert sample enrolments ensuring each student is enrolled in exactly four courses including ENG3U and MCR3U
+> INSERT INTO enrols_in (student_id, course_id) VALUES
+> -- John Doe
+> (1, 3), -- ENG3U
+> (1, 2), -- MCR3U
+> (1, 1), -- ICS3U
+> (1, 4), -- SCH3U
+> 
+> -- Jane Smith
+> (2, 3), -- ENG3U
+> (2, 2), -- MCR3U
+> (2, 5), -- SPH3U
+> (2, 6), -- SBI3U
+> 
+> -- Emily Jones
+> (3, 3), -- ENG3U
+> (3, 2), -- MCR3U
+> (3, 7), -- CGG3O
+> (3, 8); -- CHW3M
+> ```
+> 
 > **Explanation of Each Table**
 > 
 > 1. **student Table**
@@ -233,22 +233,22 @@ INSERT INTO enrols_in (student_id, course_id) VALUES
 >   - `SCH3U` (Chemistry) - `course_id` = 4
 > 
 > **Sample Data in the `enrols_in` Table:**
-```sql
--- Enrolments for Emily Jones
-INSERT INTO enrols_in (student_id, course_id) VALUES
-(3, 3), -- ENG3U
-(3, 2), -- MCR3U
-(3, 7), -- CGG3O
-(3, 8); -- CHW3M
-
--- Enrolments for John Doe
-INSERT INTO enrols_in (student_id, course_id) VALUES
-(1, 3), -- ENG3U
-(1, 2), -- MCR3U
-(1, 1), -- ICS3U
-(1, 4); -- SCH3U
-```
-
+> ```sql
+> -- Enrolments for Emily Jones
+> INSERT INTO enrols_in (student_id, course_id) VALUES
+> (3, 3), -- ENG3U
+> (3, 2), -- MCR3U
+> (3, 7), -- CGG3O
+> (3, 8); -- CHW3M
+> 
+> -- Enrolments for John Doe
+> INSERT INTO enrols_in (student_id, course_id) VALUES
+> (1, 3), -- ENG3U
+> (1, 2), -- MCR3U
+> (1, 1), -- ICS3U
+> (1, 4); -- SCH3U
+> ```
+> 
 > **Explanation:**
 > 
 > 1. **Emily Jones**
@@ -369,7 +369,7 @@ From `LandingView`:
 
 Here is a short demo:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_10.30.15.gif|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081593230?h=b2e3476b9b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Three Tab Overview - Enrolments in Courses"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 Mr. Gordon then committed his work.
 
@@ -451,7 +451,7 @@ Finally, Mr. Gordon added the necessary code to `CourseListView` so that it can 
 
 Here is how the app looks and works at this point:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_12.21.46.gif|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081594372?h=1385dfb8d2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding a New Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 Mr. Gordon then committed his work.
 
@@ -498,7 +498,7 @@ And here are the series of changes Mr. Gordon made to create new students:
 
 Here is how the app now looks and works at this point:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_13.03.22.gif|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081595301?h=252538b795&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding a New Student"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ## Listing enrolments
 
@@ -537,7 +537,7 @@ Then he hooked those two new views up to `EnrolmentsView` so that he could navig
 
 The app now works like this beginning at `EnrolmentsView`:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_15.42.24.gif|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081596122?h=6591fc92e3&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Navigating Down to Mock Course and Student Data"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 Mr. Gordon then committed that work.
 
@@ -743,7 +743,7 @@ Like this:
 
 Now, we can navigate down to see the live enrolment data by course, provided by the database:
 
-![[Screen Recording 2024-06-09 at 4.32.41 PM.gif]]
+![[Screen Recording 2024-06-09 at 4.32.41 PM.mp4]]
 
 This is good progress, so Mr. Gordon committed his changes.
 
@@ -791,7 +791,7 @@ So, to ensure this guide does not get too long, here is the series of changes Mr
 
 Here is how the app now looks and works at this point:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_17.50.31.gif|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081597915?h=e8d0ce4b70&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Count of Enrolments by Course and by Student"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ### Using selected course, limit the students shown
 
@@ -801,7 +801,7 @@ When we see a list of courses, and that for a given course, there are, say, thre
 
 Like this:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_19.55.46.gif|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081598700?h=314e538600&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Students Enrolled in a Given Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 Selecting a course and seeing the students enrolled in it is equivalent to running this raw SQL query – note the `WHERE` clause:
 
@@ -847,7 +847,7 @@ Here we have:
 
 Here is how these changes look in the app:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-10_06.07.48.gif|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081602646?h=25bf732b49&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Students Enrolled in a Given Course, from Database"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 These are a lot of important changes, so [Mr. Gordon committed his work at this point](https://github.com/lcs-rgordon/StudentsAndCourses/commit/31fc36720960c7fe05731710114c2e530ba5d1d8).
 
@@ -859,7 +859,7 @@ Likewise, when we see a list of students, and that a given student has enrolled 
 
 Like this:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_20.40.56.gif|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081603774?h=52997aae92&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Courses a Particular Student is Enrolled In"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 Selecting a student and seeing the courses they are enrolled in is equivalent to running this raw SQL query – note the `WHERE` clause:
 
@@ -893,7 +893,6 @@ To be able to select a student, and then navigate down to see only the courses t
 > 
 > The navigation link leads to the page that shows enrolments by course – only those courses that the student is enrolled in will be shown.
 
-
 Finally, when we are showing courses that a particular student is enrolled in (as opposed to showing all courses) the way `EnrolmentsByCourseView` presents information should differ:
 
 ![[Screenshot 2024-06-10 at 6.32.18 AM.png]]
@@ -905,7 +904,7 @@ Here we:
 
 When those edits have been made, the result is as follows:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-10_06.33.14.gif]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081604992?h=febe6ba977&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Courses Enrollments by Student"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 These are a lot of important changes, so [Mr. Gordon committed his work at this point](https://github.com/lcs-rgordon/StudentsAndCourses/commit/383ea6344530a1d21dcf0eb2a1ebc0e828c2819c).
 
@@ -923,7 +922,7 @@ For example, we can look up what courses Jane Smith is enrolled in:
 
 This is how that now looks, through our app's user interface:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_20.49.10.gif|350]]
+![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_20.49.10.mp4|350]]
 
 From the other direction, we can look up what students enrolled in Functions:
 
@@ -931,11 +930,11 @@ From the other direction, we can look up what students enrolled in Functions:
 
 This is how that now looks, through our app's user interface:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_20.51.03.gif|350]]
+![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_20.51.03.mp4|350]]
 
 What's really fun, though? Regardless of how the user begins exploring enrolments (either by student, or by course) they can now go as deep as they want, exploring that data. Check it out:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_21.06.31.gif|350]]
+![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_21.06.31.mp4|350]]
 
 When the user wants to get back to their entry point, they can long-press on the **Back** button, and navigate all the way up to the top of the stack – or anywhere in between. That functionality is a little more useful when there are many courses and many students – but it's very cool. We are moving through the many-to-many relationship repeatedly – *as many times as we want*. That's some awesome abstraction! 🚀
 
@@ -952,7 +951,7 @@ When looking at enrolments for a course, we might want to add a student.
 
 We want to add a course that a student will take, when viewing their current enrolments, like this:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.11.52.gif|350]]
+![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.11.52.mp4|350]]
 
 This is equivalent to adding a row to the `enrols_in` table using raw SQL, like this:
 
@@ -1079,7 +1078,7 @@ Since Mr. Gordon set up the preview for `AddEnrolmentFromStudentView` as follows
 
 Let's try it out – here is what that looks like:
 
-![[Screen Recording 2024-06-11 at 6.17.12 AM.gif]]
+![[Screen Recording 2024-06-11 at 6.17.12 AM.mp4]]
 
 Now, we can run a query to check what courses John Doe is enrolled in:
 
@@ -1094,7 +1093,7 @@ The final step is to hook up this view, `AddEnrolmentFromStudentView`, to the vi
 > [!NOTE]
 > It's at this moment that Mr. Gordon realized he had named `AddEnrolmentFromStudentView` incorrectly. When working with data in a many-to-many relationship, careful naming of views is *really* important to keep our code understandable. Although `EnrolmentsByCourseView` shows a student's name at the top after navigating to select a student:
 > 
-> ![[Identifying Views - 01.gif]]
+> ![[Identifying Views - 01.mp4]]
 > 
 > ... it is showing the enrolments by course – showing what enrolments there are, in this case, for a given student.
 > 
@@ -1127,7 +1126,7 @@ With the refactoring out of the way, Mr. Gordon made these edits to `EnrolmentsB
 
 Here is what that looks like:
 
-![[Untitled.gif]]
+![[Untitled.mp4]]
 
 Notice there is no + sign at first, when all courses are being shown – once we navigate back to `EnrolmentsByCourseView` we see just the enrolments for a specific student – then the + sign shows up.
 
@@ -1141,7 +1140,7 @@ After we add an enrolment for a student, the view model for `EnrolmentsByCourseV
 
 Here is what happens right now:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.10.24.gif|350]]
+![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.10.24.mp4|350]]
 
 The course *does* get added in the database, but the view does not see this.
 
@@ -1151,7 +1150,7 @@ The solution is to add a *callback* – a small block of code that will be run o
 
 In this way, after the sheet that allows for a new course to be added is dismissed, we immediately see the new course show up. Here is what this now looks like:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.11.52.gif|350]]
+![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.11.52.mp4|350]]
 
 ### Add a student to a course
 
