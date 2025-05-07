@@ -922,7 +922,7 @@ For example, we can look up what courses Jane Smith is enrolled in:
 
 This is how that now looks, through our app's user interface:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_20.49.10.mp4|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082360608?h=f55c166445&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Enrolments for Jane Smith"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 From the other direction, we can look up what students enrolled in Functions:
 
@@ -930,14 +930,13 @@ From the other direction, we can look up what students enrolled in Functions:
 
 This is how that now looks, through our app's user interface:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_20.51.03.mp4|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082361387?h=bfe0542100&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Enrolments in Functions"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 What's really fun, though? Regardless of how the user begins exploring enrolments (either by student, or by course) they can now go as deep as they want, exploring that data. Check it out:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-09_21.06.31.mp4|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082361787?h=1b03c312d9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Creating a Stack of Navigations"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 When the user wants to get back to their entry point, they can long-press on the **Back** button, and navigate all the way up to the top of the stack – or anywhere in between. That functionality is a little more useful when there are many courses and many students – but it's very cool. We are moving through the many-to-many relationship repeatedly – *as many times as we want*. That's some awesome abstraction! 🚀
-
 
 ## Creating new enrolments
 
@@ -951,7 +950,7 @@ When looking at enrolments for a course, we might want to add a student.
 
 We want to add a course that a student will take, when viewing their current enrolments, like this:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.11.52.mp4|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082364621?h=68bf36187a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Enrol a Student in a Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 This is equivalent to adding a row to the `enrols_in` table using raw SQL, like this:
 
@@ -1093,7 +1092,7 @@ The final step is to hook up this view, `AddEnrolmentFromStudentView`, to the vi
 > [!NOTE]
 > It's at this moment that Mr. Gordon realized he had named `AddEnrolmentFromStudentView` incorrectly. When working with data in a many-to-many relationship, careful naming of views is *really* important to keep our code understandable. Although `EnrolmentsByCourseView` shows a student's name at the top after navigating to select a student:
 > 
-> ![[Identifying Views - 01.mp4]]
+> <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082367383?h=d79b336e25&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Identifying Views"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 > 
 > ... it is showing the enrolments by course – showing what enrolments there are, in this case, for a given student.
 > 
@@ -1140,7 +1139,7 @@ After we add an enrolment for a student, the view model for `EnrolmentsByCourseV
 
 Here is what happens right now:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.10.24.mp4|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082367906?h=e9d25ab076&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="List of Courses is Not Refreshed"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 The course *does* get added in the database, but the view does not see this.
 
@@ -1150,7 +1149,7 @@ The solution is to add a *callback* – a small block of code that will be run o
 
 In this way, after the sheet that allows for a new course to be added is dismissed, we immediately see the new course show up. Here is what this now looks like:
 
-![[RocketSim_Recording_iPhone_15_Pro_6.1_2024-06-11_07.11.52.mp4|350]]
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082368053?h=3bc442372d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="List of Courses is Now Refreshed"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ### Add a student to a course
 
