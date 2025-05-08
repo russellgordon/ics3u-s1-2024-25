@@ -163,8 +163,12 @@ Any columns that will contain text data should have a
 datatype of "text". Any columns that contain integer
 data should have a datatype of "int8". Any columns that
 will contain a date or time should have a datatype of
-"timestamptz". Be certain that the SQL you generate is
-compatible with the PostgreSQL database software. Table
+"timestamptz". Ensure that primary key columns are 
+defined as an identity so that the database will 
+automatically assign a sequential unique number to
+the column when a new row is added to a table.
+Be certain that the SQL you generate is compatible
+with the PostgreSQL database software. Table
 and column names should always be lowercase. Use 
 snake_case to represent table and column names with
 multiple words.
@@ -189,8 +193,12 @@ Any columns that will contain text data should have a
 datatype of "text". Any columns that contain integer
 data should have a datatype of "int8". Any columns that
 will contain a date or time should have a datatype of
-"timestamptz". Be certain that the SQL you generate is
-compatible with the PostgreSQL database software. Table
+"timestamptz". Ensure that primary key columns are 
+defined as an identity so that the database will 
+automatically assign a sequential unique number to
+the column when a new row is added to a table.
+Be certain that the SQL you generate is compatible
+with the PostgreSQL database software. Table
 and column names should always be lowercase. Use 
 snake_case to represent table and column names with
 multiple words.

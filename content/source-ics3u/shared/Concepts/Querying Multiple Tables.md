@@ -51,14 +51,17 @@ with columns, primary keys, and foreign keys where
 appropriate based on the cardinality described in
 the diagram.
 
-Do your best to infer data types for table
-columns based on the name of attributes given for
-each entity. Any columns that will contain text
-data should have a datatype of "text". Any columns
-that contain integer data should have a datatype of
-"int8". Any columns that will contain a date or
-time should have a datatype of "timestamptz". Be
-certain that the SQL you generate is compatible
+Do your best to infer data types for table columns
+based on the name of attributes given for each entity.
+Any columns that will contain text data should have a
+datatype of "text". Any columns that contain integer
+data should have a datatype of "int8". Any columns that
+will contain a date or time should have a datatype of
+"timestamptz". Ensure that primary key columns are 
+defined as an identity so that the database will 
+automatically assign a sequential unique number to
+the column when a new row is added to a table.
+Be certain that the SQL you generate is compatible
 with the PostgreSQL database software. Table
 and column names should always be lowercase. Use 
 snake_case to represent table and column names with
@@ -72,91 +75,124 @@ Ensure that the following countries are
 represented: Canada, United States, China,
 Germany, and Mexico. For each country provide two
 major cities.
+
+Please include an explanation of each table and its 
+columns, along with a summary of the sample data.
 ```
 
 Here is the response Mr. Gordon received from ChatGPT:
 
-> Here is the SQL code to create the database tables as described in the provided ER diagram, along with the sample data for each table: 
+> 
+> 💡 **Entity-Relationship Analysis**
+> 
+> - **Entities**:
+>     
+>     - `country` with attributes `id`, `name`
+>         
+>     - `city` with attributes `id`, `name`
+>         
+> - **Relationship**:
+>     
+>     - A country _has_ cities.
+>         
+>     - The arrowhead pointing from the `has` relationship toward the `country` entity suggests that many cities can belong to one country (a **many-to-one** relationship from city to country).
+> 
+> ✅ **PostgreSQL-Compatible SQL Code**
 > 
 > ```sql
+> -- Table: country
 > CREATE TABLE country (
->     id int8 PRIMARY KEY,
+>     id int8 PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 >     name text NOT NULL
 > );
 > 
+> -- Table: city
 > CREATE TABLE city (
->     id int8 PRIMARY KEY,
+>     id int8 PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 >     name text NOT NULL,
->     country_id int8 NOT NULL REFERENCES country(id)
+>     country_id int8 NOT NULL,
+>     CONSTRAINT fk_country FOREIGN KEY (country_id)
+>         REFERENCES country (id)
+>         ON DELETE CASCADE
 > );
-> 
-> -- Insert countries
-> INSERT INTO country (id, name) VALUES
-> (1, 'Canada'),
-> (2, 'United States'),
-> (3, 'China'),
-> (4, 'Germany'),
-> (5, 'Mexico');
-> 
-> -- Insert cities
-> INSERT INTO city (id, name, country_id) VALUES
-> (1, 'Toronto', 1),
-> (2, 'Vancouver', 1),
-> (3, 'New York', 2),
-> (4, 'Los Angeles', 2),
-> (5, 'Beijing', 3),
-> (6, 'Shanghai', 3),
-> (7, 'Berlin', 4),
-> (8, 'Munich', 4),
-> (9, 'Mexico City', 5),
-> (10, 'Guadalajara', 5);
 > ```
-> **Explanation:**
-> 1. **country Table**:
->    - `id`: Unique identifier for each country (Primary Key).
->    - `name`: Name of the country.
 > 
-> 1. **city Table**:
->    - `id`: Unique identifier for each city (Primary Key).
->    - `name`: Name of the city.
->    - `country_id`: Foreign key referencing the `id` column in the `Country` table, establishing the relationship between cities and their respective countries.
+> 🧾 **Explanation of Tables**
 > 
-> **Sample Data:**
-> - **Countries**:
->   - Canada
->   - United States
->   - China
->   - Germany
->   - Mexico
+>  `country`
 > 
-> - **Cities**:
->   - Canada: Toronto, Vancouver
->   - United States: New York, Los Angeles
->   - China: Beijing, Shanghai
->   - Germany: Berlin, Munich
->   - Mexico: Mexico City, Guadalajara
+> Represents countries in the world.
 > 
-> This SQL script sets up the database schema and populates it with sample data for the specified countries and cities.
+> - `id`: A unique identifier for each country (`int8`, auto-incremented).   
+> - `name`: The name of the country (`text`).
+> 
+> 
+>  `city`
+> 
+> Represents cities, each of which belongs to a country.
+> 
+> - `id`: A unique identifier for each city (`int8`, auto-incremented).    
+> - `name`: The name of the city (`text`).
+> - `country_id`: A foreign key linking the city to its country (`int8`), referencing `country.id`.
+> 
+> 🌍 **Sample Data**
+> 
+> ```sql
+> -- Insert sample countries
+> INSERT INTO country (name) VALUES
+> ('Canada'),
+> ('United States'),
+> ('China'),
+> ('Germany'),
+> ('Mexico');
+> 
+> -- Insert sample cities
+> -- Canada
+> INSERT INTO city (name, country_id) VALUES
+> ('Toronto', (SELECT id FROM country WHERE name = 'Canada')),
+> ('Vancouver', (SELECT id FROM country WHERE name = 'Canada'));
+> 
+> -- United States
+> INSERT INTO city (name, country_id) VALUES
+> ('New York', (SELECT id FROM country WHERE name = 'United States')),
+> ('Los Angeles', (SELECT id FROM country WHERE name = 'United States'));
+> 
+> -- China
+> INSERT INTO city (name, country_id) VALUES
+> ('Beijing', (SELECT id FROM country WHERE name = 'China')),
+> ('Shanghai', (SELECT id FROM country WHERE name = 'China'));
+> 
+> -- Germany
+> INSERT INTO city (name, country_id) VALUES
+> ('Berlin', (SELECT id FROM country WHERE name = 'Germany')),
+> ('Munich', (SELECT id FROM country WHERE name = 'Germany'));
+> 
+> -- Mexico
+> INSERT INTO city (name, country_id) VALUES
+> ('Mexico City', (SELECT id FROM country WHERE name = 'Mexico')),
+> ('Guadalajara', (SELECT id FROM country WHERE name = 'Mexico'));
+> ```
+>
 
 ### Reviewing the schema
 
-After that adjustment, Mr. Gordon created a new project at [Supabase](https://supabase.com), then pasted the SQL into the SQL Editor and ran the query:
+Mr. Gordon then created a new project at [Supabase](https://supabase.com), then pasted the SQL into the SQL Editor and ran the query:
 
-![[Pasted image 20250505091636.png]]
+![[Pasted image 20250508092111.png]]
 
 By then navigating to the **Database** panel:
 
-![[Pasted image 20250505091702.png]]
+![[Pasted image 20250508092143.png]]
 
 Then selecting **Schema Visualizer**:
 
-![[Pasted image 20250505091933.png]]
+![[Pasted image 20250508092228.png]]
 
 Mr. Gordon was able to obtain a visual representation of the table structure – this is called the *schema* for a database.
 
 Let's compare the ER diagram to the database schema:
 
-![[Screenshot 2025-05-05 at 9.18.51 AM.png]]
+![[Screenshot 2025-05-08 at 9.22.49 AM (2).png]]
 
 Two tables were created; attributes that are underlined are converted into *primary keys*. A primary key is a unique identifier for a row in a database. Values are typically integers that are auto-incremented for each new row that is added to the database table.
 
@@ -164,7 +200,7 @@ The `city` table has a *foreign key* connecting it to the `country` table.
 
 Reviewing the data used to populate these tables, we can see how the foreign key values in `country_id` tie multiple cities to a single country:
 
-![[Screenshot 2025-05-05 at 9.21.21 AM.png]]
+![[Screenshot 2025-05-08 at 9.24.34 AM (2).png]]
 
 ### Creating a project
 
@@ -177,19 +213,19 @@ To query the data in this newly created database, Mr. Gordon:
 
 Like this:
 
-![[Screenshot 2024-06-08 at 1.08.19 PM.png]]
+![[Pasted image 20250508093249.png]]
 
 The database connection information was obtained from the **Data API** section of **Project Settings**:
 
-![[Screenshot 2024-06-08 at 1.06.00 PM.png]]
+![[Pasted image 20250508092936.png]]
 
-Next Mr. Gordon added the [[To-do List App, Pt. 6#Adding the Supabase framework|package dependency for Supabase]]:
+Next Mr. Gordon added the [[To-do List App, Pt. 6#Adding the Supabase framework|package dependency]] for [Supabase]([github.com/supabase-community/supabase-swift](https://github.com/supabase-community/supabase-swift)):
 
-![[Screenshot 2024-06-08 at 1.09.33 PM.png]]
+![[Screenshot 2025-05-08 at 9.35.08 AM (2).png]]
 
 He then made sure that all six package products were being compiled into the app:
 
-![[Screenshot 2024-06-08 at 1.10.18 PM.png]]
+![[Pasted image 20250508093638.png]]
 
 Before proceeding, Mr. Gordon committed his work.
 
@@ -205,7 +241,7 @@ After committing that work, Mr. Gordon next created a `Country` model:
 
 ... to match the `country` database table:
 
-![[Screenshot 2024-06-08 at 1.20.12 PM.png]]
+![[Pasted image 20250508094118.png]]
 
 After committing that work, Mr. Gordon then created a view model, to load countries data from the database:
 
@@ -239,7 +275,7 @@ FROM country
 
 Here is what that query returns at Supabase:
 
-![[Screenshot 2024-06-08 at 1.57.37 PM.png]]
+![[Pasted image 20250508094332.png]]
 
 To do this, Mr. Gordon first created a model that matches this one to many relationship between a country and it's cities:
 
@@ -394,7 +430,7 @@ How might we create a new city within the database, using an interface that look
 
 We'd need to write code that could add a row to the `city` table:
 
-![[Screenshot 2024-06-08 at 3.53.23 PM.png]]
+![[Pasted image 20250508094435.png]]
 
 To do so, we'd need to know the city name, as well as the `id` value of the country the city is in.
 
@@ -441,7 +477,7 @@ Here is the result after making these changes:
 
 We can see that the new cities were in fact added in the `city` database:
 
-![[Screenshot 2024-06-08 at 4.16.14 PM.png]]
+![[Pasted image 20250508094639.png]]
 
 ### Listing cities with their country (many to one)
 
@@ -464,7 +500,7 @@ ORDER BY city.name;
 
 Here is what that query returns at Supabase:
 
-![[Screenshot 2024-06-08 at 5.24.48 PM.png]]
+![[Pasted image 20250508094811.png]]
 
 In the app, that information might be presented like so:
 
