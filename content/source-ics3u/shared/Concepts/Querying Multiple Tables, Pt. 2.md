@@ -1153,11 +1153,220 @@ In this way, after the sheet that allows for a new course to be added is dismiss
 
 ### Add a student to a course
 
-When viewing a course, and seeing the list of students enrolled, it should be possible to enrol a given student into that course.
+When viewing a course, and seeing the list of students enrolled, it should be possible to enrol a new student into that course.
 
-That is just adding a new row to the `enrols_in` table, but from the other direction.
+That would look like this, once completed:
 
-This process is very similar to what was just done in the [[Querying Multiple Tables, Pt. 2#Add a course for a student|prior section]]. To avoid having this guide get any longer, Mr. Gordon is choosing to omit an explanation of this part of the app.
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082387228?h=83b9e86eab&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding a Student to a Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+How to do this?
+
+It is just a matter of adding a new row to the `enrols_in` table, but coming from the other direction – from the point of view of a course.
+
+When selecting a student to add to a course, we don't want to be able to select students already enrolled in the course.
+
+So, first, Mr. Gordon wrote a database function that allowed us to find only students that are not already enrolled in a given course:
+
+```sql
+-- Get available stduents for a given course
+CREATE OR REPLACE FUNCTION get_available_students(
+  for_course_id int
+) 
+RETURNS TABLE (
+  id int,
+  first_name varchar,
+  last_name varchar
+)
+LANGUAGE plpgsql
+AS 
+$$
+ 
+BEGIN
+  RETURN QUERY
+  -- Students available to a course
+  SELECT student.id as "id", student.first_name as "first_name", student.last_name as "last_name"
+  FROM student
+  WHERE student.id NOT IN (
+    -- Students already enrolled in a given course
+    SELECT
+      enrols_in.student_id as "enrolment_student_id"
+    FROM enrols_in
+    WHERE enrols_in.course_id = for_course_id       -- Only select students enrolled in given course
+  )
+  ORDER BY last_name, first_name;
+ 
+END;
+$$;
+```
+
+Then, he wrote a view model that makes use of this function:
+
+```swift
+import Foundation
+import PostgREST
+
+@Observable
+class AddEnrolmentFromEnrolmentsbyStudentViewModel: Observable {
+    
+    // MARK: Stored properties
+    
+    var availableStudents: [Student] = []
+    
+    let currentCourse: Course
+    
+    // MARK: Initializer(s)
+    init(availableTo course: Course) {
+        
+        // Save a reference to the current course
+        self.currentCourse = course
+        
+        // Get students from the database that are not enrolled in the provided course
+        Task {
+            try await getStudents(availableTo: course)
+        }
+    }
+    
+    // MARK: Functions
+    func getStudents(availableTo course: Course) async throws {
+        
+        do {
+            // Get a list of students available to the course
+            // (the students not already enrolled in this course)
+            let results: [Student] = try await supabase.rpc(
+                "get_available_students",
+                params: ["for_course_id": AnyJSON.integer(course.id!)]
+              )
+              .execute()
+              .value
+            
+            self.availableStudents = results
+            dump(self.availableStudents)
+            
+        } catch {
+            debugPrint(error)
+        }
+        
+    }
+    
+    func saveEnrolment(forStudentWithId studentId: Int) async throws {
+        
+        // Create the enrolment record
+        let newEnrolment = Enrolment(studentId: studentId, courseId: currentCourse.id!)
+        
+        do {
+            // Write the new enrolment to the database
+            try await supabase
+                .from("enrols_in")
+                .insert(newEnrolment)
+                .execute()
+
+        } catch {
+            debugPrint(error)
+        }
+        
+    }
+    
+}
+```
+
+Next, he made a view to allow a student to be selected for enrolment in a course:
+
+```swift
+import SwiftUI
+
+struct AddEnrolmentFromEnrolmentsByStudentView: View {
+    
+    // MARK: Stored properties
+    
+    // Is this view showing in a sheet?
+    @Binding var isShowing: Bool
+    
+    // Receive a reference to our view model
+    let viewModel: AddEnrolmentFromEnrolmentsbyStudentViewModel
+    
+    // Stores the selected student
+    @State private var selectedStudentId: Int = 0
+
+    // MARK: Computed properties
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    Picker("Enrol what student?", selection: $selectedStudentId) {
+                        ForEach(viewModel.availableStudents) { student in
+                            // NOTE: Student data type defines the id
+                            //       as an optional. We know the id must
+                            //       be defined since we retrieve the list
+                            //       of available courses from the database.
+                            //       So, it is safe to force unwrap.
+                            Text("\(student.lastName), \(student.firstName)").tag(student.id!)
+                        }
+                    }
+                    .pickerStyle(.navigationLink)
+                }
+            }
+            .navigationTitle("New Enrolment")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        Task {
+                            try await viewModel.saveEnrolment(
+                                forStudentWithId: selectedStudentId
+                            )
+                            isShowing = false
+                        }
+                    } label: {
+                        Text("Enrol")
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    
+    // Create a view to attach a sheet to
+    Text("Example parent view")
+        // Present AddEnrolmentFromEnrolmentsByStudentView in a sheet
+        .sheet(isPresented: Binding.constant(true)) {
+            
+            // Show the instance of AddEnrolmentFromStudentView
+            // and provide it with an instance of it's view model
+            // so it can talk to the database
+            AddEnrolmentFromEnrolmentsByStudentView(
+                
+                isShowing: Binding.constant(true),
+                viewModel: AddEnrolmentFromEnrolmentsbyStudentViewModel(
+                    availableTo: Course(
+                        id: 1,
+                        shortCode: "ICS3U",
+                        name: "Introduction to Computer Science"
+                    )
+                )
+                
+            )
+            
+        }
+}
+```
+
+He then tested the view and confirmed that a new student could be enrolled in a course:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082383890?h=8d9bbc1f29&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Testing the Enrolment of a Student in a Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+Mr. Gordon then [committed these code changes](https://github.com/lcs-rgordon/StudentsAndCourses/commit/2c3b22f1151c10be103803edc21a9fdfb02b2fea).
+
+Next, all that remained was to make this sheet available when viewing students enrolled in a course, via the `+` sign button – this required edits to `EnrolmentsByStudentView`:
+
+![[Pasted image 20250507212646.png]]
+
+Here is Mr. Gordon testing out the changes:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082386408?h=12dd1c8bc9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Testing the Enrolment of a Student in a Course from Toolbar"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+Mr. Gordon then [committed these changes](https://github.com/lcs-rgordon/StudentsAndCourses/commit/644a4c2fcaf2f95b91d5ef0e187512d4da4475db).
 
 ## Source code
 

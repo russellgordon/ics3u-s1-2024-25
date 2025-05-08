@@ -65,6 +65,20 @@ Here are some suggestions about how to get rolling!
 
 ## Recaps and resources
 
+> [!TIP]
+> 
+> Mr. Gordon will be updating this section to provide additional resources over the coming weeks. If you have kept this page open in your web browser for a long time, please be sure to press **Command-R** to pick up the latest changes.
+> 
+> Here is a list of currently planned mini-tutorials that will be added to what is already available below:
+> 
+> - Creating local notifications on an iOS device
+> - Parsing more complex JSON from web endpoints
+> - Showing a map with annotations
+> - How to play background audio
+> - Drag gestures (how to swipe left or right)
+> - Showing a slide-up sheet
+> - Working with dates and times
+
 ### User interfaces
 
 Whether as a recap or a resource for new techniques you might find useful, Paul Hudson has authored a nice summary of how to build layouts, or user interfaces, using SwiftUI:
@@ -129,8 +143,48 @@ When information that we want to persist for a user never needs to be seen or sh
 
 When information *will* need to be shared or seen by others, we will need to keep that information in a [[To-do List App, Pt. 5#Supabase|cloud-hosted database]].
 
+#### Databases
+
+Based on the (excellent) prototypes students in our class have produced, many students are planning to integrate a database into their app to persist data.
+
+Here is a summary of existing and new tutorials to support those students who wish to exceed grade-level expectations by integrating a database into their culminating task app.
+
+First, the following tutorial series introduces and demonstrates a lot of techniques, using a database with a single table, to implement a to-do list app (many of you have already completed most of these tutorials):
+
+- [[To-do List App]]
+- [[To-do List App, Pt. 2]]
+- [[To-do List App, Pt. 3]]
+- [[To-do List App, Pt. 4]]
+- [[To-do List App, Pt. 5]]
+- [[To-do List App, Pt. 6]]
+- [[To-do List App, Pt. 7]]
+- [[To-do List App, Pt. 8]]
+- [[To-do List App, Pt. 9]]
+
+Next, while a cloud-hosted database is useful for an app that requires only a single table (like in the to-do list), databases really show their power when we create databases with multiple tables that describe *relationships*.
+
+Read this lesson:
+
+- [[ER Diagrams]]
+
+... then try defining an ER diagram that describes relationships between entities that would need to exist for your app. 
+
 > [!TIP]
 > 
-> Mr. Gordon will be updating this page a bit to provide additional resources over the next week or so. Please be sure to press **Command-R** when referring to this page each day to pick up the latest changes.
+> Mr. Gordon is quite willing to be a sounding board as you work through the creation of your app's ER diagram. He can also assist you with getting a database created and populated with the example data you will have after reading the lesson above. Come to Grove Time!
 
+Once you have a database that has multiple tables connected by relationships, you will need to know how to read information from those tables.
+
+Here is a lesson that explains the *theory* of how to join tables, using an existing database schema:
+
+[[Joining Tables]]
+
+You can check your work for [[Joining Tables (Solutions)|the exercises connected to joining tables here]].
+
+Once you understand the theory of *how* and *why* we care about joining tables, you can continue to the lessons below.
+
+When using a database with tables connected by relationships, you will necessarily need to join those tables in a query. These lessons describe how to do that and how to build the related user interfaces:
+
+- [[Querying Multiple Tables]]
+- [[Querying Multiple Tables, Pt. 2]]
 
