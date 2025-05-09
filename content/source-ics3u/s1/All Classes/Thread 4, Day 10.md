@@ -15,7 +15,7 @@ created: 2025-05-09T07:00:00.000-0400
 	- Add the Supabase package.
 	- Get database connection settings from Data API panel on Supabase.
 3. Task: [[Querying Multiple Tables]]
-	- Begin by [[Querying Multiple Tables#Listing countries alone|*showing* sample information from a single table]] in a one-to-many relationship, then make it possible to add new information.
+	- Begin by [[Querying Multiple Tables#Listing countries alone|showing sample information from a single table]] in a one-to-many relationship, then make it possible to add new information.
 4. Task: [[Culminating]]
 	- Use the [[Culminating#Recaps and resources|recaps and resources]] and make progress on your culminating task.
 	- Remember to make a daily post to share your progress in your portfolio [on Notion](https://notion.so).
