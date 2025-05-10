@@ -71,6 +71,7 @@ Here are some suggestions about how to get rolling!
 > 
 > Here is a list of currently planned mini-tutorials that will be added to what is already available below:
 > 
+> - Using log messages to more easily debug logical errors
 > - Creating local notifications on an iOS device
 > - Parsing more complex JSON from web endpoints
 > - Showing a map with annotations

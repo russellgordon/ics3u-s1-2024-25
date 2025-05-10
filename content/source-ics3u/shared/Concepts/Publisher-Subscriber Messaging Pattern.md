@@ -1,6 +1,6 @@
 ---
-draft: false
-draftSectionTwo: false
+draft: true
+draftSectionTwo: true
 created: 2025-05-05T07:00:00.000-0400
 createdForSectionTwo: 2025-05-05T07:00:00.000-0400
 tags:
@@ -1381,7 +1381,3 @@ If you click the link at right for any given commit:
 ![[Screenshot 2024-06-11 at 7.19.31 AM.png]]
 
 Lines shown in green were added; lines shown in red were removed.
-
-> [!TIP]
-> 
-> You are also welcome to [[Forking a Repository|fork and clone]] the [repository](https://github.com/lcs-rgordon/StudentsAndCourses) or [download a Zip file](https://github.com/lcs-rgordon/StudentsAndCourses/archive/644a4c2fcaf2f95b91d5ef0e187512d4da4475db.zip) of the code to try it out.
