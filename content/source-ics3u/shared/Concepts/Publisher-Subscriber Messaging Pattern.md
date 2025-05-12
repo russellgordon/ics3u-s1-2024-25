@@ -5,1379 +5,353 @@ created: 2025-05-05T07:00:00.000-0400
 createdForSectionTwo: 2025-05-05T07:00:00.000-0400
 tags:
 ---
-When completing [[To-do List App, Pt. 6|part six of the to-do list tutorial series]] you learned how to use the MVVM design pattern to query a single table hosted at Supabase.
 
-In part one of this guide, you learned how to [[Querying Multiple Tables|query and display results from two tables joined by a  one-to-many / many-to-one relationship]].
+## Introduction
 
-In this second and final part of this guide, you will learn how to query, display, and update data in tables joined by a *many-to-many* relationship.
+Before reviewing this lesson you are encouraged to have at least read through [[Querying Multiple Tables, Pt. 2]] and have [downloaded the finished form of the Enrolments app](https://github.com/lcs-rgordon/StudentsAndCourses/archive/644a4c2fcaf2f95b91d5ef0e187512d4da4475db.zip) to try it out.
 
-# Students and courses
+The approach to seeing up-to-date data shared in *this* lesson *may* be necessary for your app – it depends on how users navigate through different views within your app.
 
-How is a student related to a course? How is a course related to a student?
+If you do try out the app, you may notice an issue – watch this video carefully:
 
-## ER diagram
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083182394?h=8e6b8f01ad&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Updates Not Seen in Other Views"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
-Consider this entity-relationship diagram identifying how a student is related to a course, for the purposes of enrolment – tracking which student is taking which course:
+At first, this might seem surprising – after all – didn't we add the new courses first and *then* navigate to the tab that shows enrolment counts by course? Therefore, shouldn't the newly added courses show up?
 
-![[IMG_4313 Large.png]]
+The answer is *no* because of the way SwiftUI works. It needs to compute (put together) all of the views that might be immediately visited by a user *when the app launches*.
+
+So in the case of this app, the list of views already created when the app first launches are:
+
+
+```mermaid
+flowchart TD
+
+id1["App Entry Point<br/>"] --> id2["LandingView"]
+id2 --> id3["TabView"]
+id3 --> id4["EnrolmentsView<br/>(.tabItem)"]
+id3 --> id5["CoursesListView<br/>(.tabItem)"]
+id3 --> id6["StudentsListView<br/>(.tabItem)"]
+```
+
+Each of those views are created when the app launches. Each view creates the following view models:
+
+|View|View Model(s)|
+|-|-|
+|`EnrolmentsView`|&#8226;`EnrolmentsByCourseViewModel`<br/>&#8226;`EnrolmentsByStudentViewModel`|
+|`CoursesListView`|`CoursesListViewModel`|
+|`StudentsListView`|`StudentsListViewModel`|
+
+So in the video above, the user goes to `CoursesListView` and adds a couple of courses. `CoursesListViewModel` handles sending the new courses to the database. `CoursesListViewModel` (since it knows a new course was just added) asks the database for a refreshed list of courses.
+
+However, `EnrolmentsView` and the two view models it creates were made *before the user added the courses* on `CoursesListView` . Consequently, those two view models are left with out-of-date information. They have no way of knowing that the database has been changed.
+
+How can we deal with this?
+
+## A dangerous path
+
+Apple states that: "SwiftUI offers a declarative \[and reactive\] approach to user interface design..."
+
+This means that we don't have to handle the messy details of precisely laying out a user interface, nor do we have to manually tell parts of our user interface to update when data changes.
+
+So while we might initially think:
+
+> "OK, well if those view models have out of date information, I'll just tell them – after adding a new course – to refresh themselves!"
+
+That would be a mistake. That is exactly the type of situation that SwiftUI was designed to help programmers avoid. Put another way:
+
+<figure>
+<img src="/Media/Here-Be-Dragons-Key-Art.png">
+<figcaption>
+<small>
+<strong>Image source:</strong> <a href="https://screenrant.com/here-be-dragons-game-review/">Here Be Dragons Review: A Sinking Sense of Humor</a></small>
+</figcaption>
+</figure>
+
+Rather than thinking about how we can manually *tell* parts of our app when to update their data, we need to find a way to *find out* when data has changed, and *react* accordingly. 
+
+Reacting to changes in data – to changes in state – is much easier to deal with in practice. It eliminates an entire category of potential bugs – namely – forgetting to tell parts of an app when it needs to update.
+
+## Publish-subscribe
 
 > [!NOTE]
-> The diagram is deliberately simplified. In a complete database meant for this purpose, there would be additional attributes on the entities shown, and additional entities – such as, but not limited to, a `teacher` entity to keep track of what teacher(s) are teaching a given course.
+> 
+> Mr. Gordon used ChatGPT to "boil down" the essence of the publisher-subscriber messaging pattern into wording appropriate for use in a high-school level computer science class.
+> 
+> Some of the text in this section of this lesson is directly quoted from his conversation with the large language model.
 
-Thinking of the relationship in each direction:
+Publish-subscribe (or pub/sub) is a messaging pattern where:
 
-- student to course
-	- A given student enrols in *many* courses.
-- course to student
-	- A given course has *many* students enrolled in it.
+- **Publishers** send messages (events, updates) without knowing who will receive them.
+- **Subscribers** listen for specific messages and react when they arrive.
 
-Looking from student to course, overall now, there is a *many-to-many* relationship.
+Here are the key ideas:
 
-Looking from course to student, overall now, there is a *many-to-many* relationship.
+| Role                  | Responsibility                                                  |
+| --------------------- | --------------------------------------------------------------- |
+| **Publisher**         | Says, “Hey, something happened!”                                |
+| **Subscriber**        | Says, “Tell me when this kind of thing happens.”                |
+| **Broker (optional)** | Mediates communication (e.g., a notification center, event bus) |
 
-## Creating a database
+Pub/sub is **one-to-many**:
 
-Using a [[ER Diagrams#Conversion to a database|large language model such as ChatGPT]], we can obtain SQL that will create a database that matches the ER diagram above, and populate it with sample data.
+- One publisher can notify many subscribers.
+- The publisher doesn’t need to know who’s listening.
 
-Here is the prompt Mr. Gordon used to do so:
+Here is how the pub/sub concept can be applied to resolve the problem with getting up-to-date data in all parts of our app.
 
-```
-This is a photo of a hand-drawn conceptual entity-relationship
-diagram. The diagram describes the relationship between students
-and courses, for the purposes of enrolment.
+The *source of truth* for data within our app is our Supabase database. Supabase offers a feature known as *realtime channels*. Whenever data changes within some (or any) part of our database, Supabase can broadcast this event to interested parties. A Supabase realtime channel is a **publisher**.
 
-Please convert this image into valid SQL that will create
-database tables with columns, primary keys, and foreign keys
-where appropriate based on the cardinality described in the
-diagram. Ensure that table and column names are lowercased.
+We will add an observable class to our app named `EnrollmentChangeNotifier`. It will use the Supabase framework to **subscribe** to a realtime channel, and will thereby be notified whenever the database is updated.
 
-Do your best to infer data types for table columns based on the
-name of attributes given for each entity.
+So, `EnrollmentChangeNotifier` is a *broker* that handles the job of knowing when the database is updated. It will in turn contain a single stored property named `changeCount` that is an integer. Whenever the database is updated, `EnrollmentChangeNotifier` will increment `changeCount` by one – that makes it a **publisher** within our app.
 
-Be certain that the SQL you generate is compatible with the
-PostgreSQL database software.
+Why is this? It is because every view in our app that has its own view model will observe `changeCount` on `EnrollentChangeNotifier`  through the environment. Using a `.onChange(of:)` view modifier, each view **subscribes** to the broker, `EnrollmentChangeNotifier`. When a view sees that `changeCount` has been incremented, it will ask its view model to refresh data (to fetch new information from the database).
 
-Once you have produced SQL that creates a database that matches
-this ER diagram, please create some reasonable sample data for
-each table.
+This will let us **fan out** a single event (e.g.: a database change) to any number of views within our app (including but not limited to `EnrolmentsView`, `CoursesListView`, `StudentsListView`).
 
-When creating the sample data ensure all of the following
-criteria are met:
+Here is a picture of what this looks like:
 
-1. There are ten and only ten courses listed.
-2. The courses must be from grade 11 level of the Ontario
-secondary school curriculum. For example, one course at this
-level has a short code of ICS3U and a name of "Introduction to 
-Computer Science". Another course example is MCR3U, named 
-"Functions". Another course is ENG3U, named "English".
-3. The sample data is meant to describe enrolment in courses 
-for a single half-year semester at a typical Ontario secondary 
-school – all that this means is that a given student must be 
-enrolled in exactly four courses for the semester.
-4. All students must be enrolled in ENG3U and MCR3U.
-```
+```mermaid
+flowchart TD
 
-ChatGPT produced an accurate representation of the ER diagram, and met the sample data requirements, but there were three issues that Mr. Gordon wanted to correct:
+    subgraph Supabase
+        DB["Database"]
+        RTC["Realtime Channel<br>(Publisher)"]
+        DB -->|Data Change| RTC
+    end
 
-1. There were too many students – three will be sufficient for the purposes of this guide.
-2. The LLM did not produce an explanation of the purpose of each database table beyond the comments included in the SQL it generated.
-3. The way that sample data was added to the `enrols_in` table made the purpose of that table less than clear.
+    RTC --> Notifier["EnrollmentChangeNotifier<br>(Subscriber to channel + Publisher within app)"]
+    Notifier -->|changeCount incremented| EnrolmentsView
+    Notifier -->|changeCount incremented| CoursesListView
+    Notifier -->|changeCount incremented| StudentsListView
 
-Mr. Gordon started with the following prompt:
+    EnrolmentsView -->|onChange of changeCount| EnrolmentsVM["EnrolmentsByCourseViewModel<br>EnrolmentsByStudentViewModel<br><b>(both view models refresh)</b>"]
+    CoursesListView -->|onChange of changeCount| CoursesVM["CoursesListViewModel"]
+    StudentsListView -->|onChange of changeCount| StudentsVM["StudentsListViewModel"]
 
-```
-Please expand on the purpose of each table you have created. With
-reference to the sample data for the students named Emily Jones
-and John Doe, explain how the data added to the "enrols_in" table
-tracks the many-to-many relationship between the "student" and
-"course" tables.
+    EnrolmentsVM -->|refreshes| Supabase
+    CoursesVM -->|refreshes| Supabase
+    StudentsVM -->|refreshes| Supabase
 ```
 
-Mr. Gordon received a decent explanation, but he realized he could make a third prompt to address all three concerns noted above.
+Summarized:
 
-He provided a third prompt as follows:
+- The **Supabase database** sends a change notification via a **Realtime Channel**.
+- This message is received by our app’s **EnrollmentChangeNotifier**, which then acts as a **publisher** inside the app.
+- All views (`EnrolmentsView`, `CoursesListView`, `StudentsListView`) listen for updates to `changeCount`.
+- When notified, each view tells its **view model** to fetch fresh data from Supabase.
 
-```
-That explanation is very helpful. The original SQL you produced
-is also an accurate representation of the entity-relationship
-diagram I provided.
+The advantage of this approach is that we have just **one** subscription to the realtime channel in our database. This conserves database server resources. As well, the code required to subscribe to a realtime channel is somewhat lengthy. By contrast, having a view watch the `changeCount` property of `EnrollmentChangeNotifier` through the environment is only a few lines of code.
 
-However, I would like to make some adjustments so that the SQL
-you have produced is easier for beginners to understand. Here are
-the changes I would like you to make:
+## Applying the pattern
 
-1. Please produce sample data for only three students.
-2. When populating the "enrols_in" table, populate the "course_id"
-column by assuming the "id" value based on the insertion order 
-of data in the "course" table.
-3. Please provide an explanation of each table again, like you did
-before. With reference to the sample data for two of the three 
-students, explain how the data added to the "enrols_in" table tracks 
-the many-to-many relationship between the "student" and "course" tables.
-```
+### Enable realtime updates on database
 
-This time, Mr. Gordon received a good response. The response is included below:
+To start, we need to turn on realtime updates in the database. This makes the database a publisher.
 
-> Sure, I'll make the adjustments as requested. I'll provide sample data for only three students, populate the `course_id` column by assuming the `id` value based on the insertion order of data in the `course` table, and provide an explanation of each table again.
->
-> **SQL to Create Tables**
-> 
-> ```sql
-> -- Create the student table
-> CREATE TABLE student (
->     id SERIAL PRIMARY KEY,
->     first_name VARCHAR(50),
->     last_name VARCHAR(50)
-> );
-> 
-> -- Create the course table
-> CREATE TABLE course (
->     id SERIAL PRIMARY KEY,
->     short_code VARCHAR(10) UNIQUE,
->     name VARCHAR(100)
-> );
-> 
-> -- Create the enrols_in table to represent the many-to-many relationship
-> CREATE TABLE enrols_in (
->     student_id INT REFERENCES student(id),
->     course_id INT REFERENCES course(id),
->     PRIMARY KEY (student_id, course_id)
-> );
-> ```
-> 
-> **SQL to Insert Sample Data**
-> 
-> ```sql
-> -- Insert sample courses
-> INSERT INTO course (short_code, name) VALUES
-> ('ICS3U', 'Introduction to Computer Science'), -- id = 1
-> ('MCR3U', 'Functions'), -- id = 2
-> ('ENG3U', 'English'), -- id = 3
-> ('SCH3U', 'Chemistry'), -- id = 4
-> ('SPH3U', 'Physics'), -- id = 5
-> ('SBI3U', 'Biology'), -- id = 6
-> ('CGG3O', 'Travel and Tourism: A Regional Geographic Perspective'), -- id = 7
-> ('CHW3M', 'World History to the End of the Fifteenth Century'), -- id = 8
-> ('FSF3U', 'Core French'), -- id = 9
-> ('AVI3M', 'Visual Arts'); -- id = 10
-> 
-> -- Insert sample students
-> INSERT INTO student (first_name, last_name) VALUES
-> ('John', 'Doe'), -- id = 1
-> ('Jane', 'Smith'), -- id = 2
-> ('Emily', 'Jones'); -- id = 3
-> 
-> -- Insert sample enrolments ensuring each student is enrolled in exactly four courses including ENG3U and MCR3U
-> INSERT INTO enrols_in (student_id, course_id) VALUES
-> -- John Doe
-> (1, 3), -- ENG3U
-> (1, 2), -- MCR3U
-> (1, 1), -- ICS3U
-> (1, 4), -- SCH3U
-> 
-> -- Jane Smith
-> (2, 3), -- ENG3U
-> (2, 2), -- MCR3U
-> (2, 5), -- SPH3U
-> (2, 6), -- SBI3U
-> 
-> -- Emily Jones
-> (3, 3), -- ENG3U
-> (3, 2), -- MCR3U
-> (3, 7), -- CGG3O
-> (3, 8); -- CHW3M
-> ```
-> 
-> **Explanation of Each Table**
-> 
-> 1. **student Table**
->    - **Purpose:** Stores information about students.
->    - **Columns:**
->      - `id`: A unique identifier for each student (Primary Key).
->      - `first_name`: The first name of the student.
->      - `last_name`: The last name of the student.
-> 
-> 2. **course Table**
->    - **Purpose:** Stores information about courses.
->    - **Columns:**
->      - `id`: A unique identifier for each course (Primary Key).
->      - `short_code`: A short code for the course (e.g., ENG3U for "English"), which is unique.
->      - `name`: The full name of the course.
-> 
-> 3. **enrols_in Table**
->    - **Purpose:** Tracks the enrolment of students in courses, representing the many-to-many relationship between students and courses.
->    - **Columns:**
->      - `student_id`: The ID of the student (Foreign Key referencing `student(id)`).
->      - `course_id`: The ID of the course (Foreign Key referencing `course(id)`).
-> 
-> **Tracking the Many-to-Many Relationship**
-> 
-> The `enrols_in` table is the junction table that links students to the courses they are enrolled in. Each row in the `enrols_in` table represents a unique enrolment of a student in a course. This allows a student to be enrolled in multiple courses and a course to have multiple students.
-> 
-> **Example: Emily Jones and John Doe**
-> 
-> **Emily Jones**
-> - **Student ID:** 3
-> - **Courses Enrolled:**
->   - `ENG3U` (English) - `course_id` = 3
->   - `MCR3U` (Functions) - `course_id` = 2
->   - `CGG3O` (Travel and Tourism: A Regional Geographic Perspective) - `course_id` = 7
->   - `CHW3M` (World History to the End of the Fifteenth Century) - `course_id` = 8
-> 
-> **John Doe**
-> - **Student ID:** 1
-> - **Courses Enrolled:**
->   - `ENG3U` (English) - `course_id` = 3
->   - `MCR3U` (Functions) - `course_id` = 2
->   - `ICS3U` (Introduction to Computer Science) - `course_id` = 1
->   - `SCH3U` (Chemistry) - `course_id` = 4
-> 
-> **Sample Data in the `enrols_in` Table:**
-> ```sql
-> -- Enrolments for Emily Jones
-> INSERT INTO enrols_in (student_id, course_id) VALUES
-> (3, 3), -- ENG3U
-> (3, 2), -- MCR3U
-> (3, 7), -- CGG3O
-> (3, 8); -- CHW3M
-> 
-> -- Enrolments for John Doe
-> INSERT INTO enrols_in (student_id, course_id) VALUES
-> (1, 3), -- ENG3U
-> (1, 2), -- MCR3U
-> (1, 1), -- ICS3U
-> (1, 4); -- SCH3U
-> ```
-> 
-> **Explanation:**
-> 
-> 1. **Emily Jones**
->    - `student_id` = 3 (Emily Jones)
->    - `course_id` values are assigned based on the insertion order in the `course` table:
->      - `ENG3U` (English) - `course_id` = 3
->      - `MCR3U` (Functions) - `course_id` = 2
->      - `CGG3O` (Travel and Tourism: A Regional Geographic Perspective) - `course_id` = 7
->      - `CHW3M` (World History to the End of the Fifteenth Century) - `course_id` = 8
->    - Each pair (3, course_id) is inserted into the `enrols_in` table, representing Emily's enrolments.
-> 
-> 2. **John Doe**
->    - `student_id` = 1 (John Doe)
->    - `course_id` values are assigned based on the insertion order in the `course` table:
->      - `ENG3U` (English) - `course_id` = 3
->      - `MCR3U` (Functions) - `course_id` = 2
->      - `ICS3U` (Introduction to Computer Science) - `course_id` = 1
->      - `SCH3U` (Chemistry) - `course_id` = 4
->    - Each pair (1, course_id) is inserted into the `enrols_in` table, representing John's enrolments.
-> 
-> By using the `student_id` and `course_id` pairs, the `enrols_in` table effectively manages and tracks the enrolments, allowing you to query which students are enrolled in which courses and vice versa. This structure supports the many-to-many relationship between students and courses.
+To do this, from the project overview page, select **Table Editor**:
 
-It's always important to model good manners (even when interacting with a non-sentient large language model that produces responses based on statistical probabilities and associations between words) so Mr. Gordon finished with this prompt:
+![[Pasted image 20250512091000.png]]
 
-```
-Thank-you! That response is what I was looking for.
-```
+You will see the list of tables in your database:
 
-Here is the response received:
+![[Pasted image 20250512091105.png]]
 
->  You're welcome! I'm glad it was helpful and met your needs. If you have any more questions or need further assistance with SQL or any other topic, feel free to ask!
+At this point you need to decide – do you want to have changes to just *some* database tables published for subscribers to receive notifications about – or *all* database tables?
 
-## Reviewing the schema
+In the context of this example – students and courses in an enrolment scenario – changes to any table will impact what should be shown to users in the app.
 
-Mr. Gordon next created a new project at [Supabase](https://supabase.com), then pasted the SQL into the SQL Editor and ran the query to create tables:
+So, Mr. Gordon has edited each table in turn:
 
-![[Screenshot 2024-06-09 at 9.38.05 AM.png]]
+![[Pasted image 20250512091315.png]]
 
-Next he ran the query to create the sample data:
+... and enabled realtime:
 
-![[Screenshot 2024-06-09 at 9.39.07 AM.png]]
-
-By then navigating to the **Database** panel:
-
-![[Screenshot 2024-06-09 at 9.41.07 AM.png]]
-
-Then selecting **Schema Visualizer**:
-
-![[Screenshot 2024-06-09 at 9.40.16 AM.png]]
-
-Mr. Gordon was able to obtain a visual representation of the table structure – this is called the *schema* for a database.
-
-> [!NOTE]
-> You can drag tables around to better see the connections between them in the Schema Visualizer.
-
-Let's compare the ER diagram to the database schema:
-
-![[Screenshot 2024-06-09 at 9.47.08 AM.png]]
-
-Three tables were created; attributes that are underlined are converted into *primary keys*. A primary key is a unique identifier for a row in a database. Values are typically integers that are auto-incremented for each new row that is added to the database table.
-
-The `enrols_in` table is a *junction* table, which also referred to as a *look-up* table. The `enrols_in` table tracks the relationship between the `student` table and the `course` table. It's foreign key connections to the `student` table and the `course` table allow us to see, for a given student, what courses they are enrolled in. Looking in the other direction, for a given course, we can see what students enrolled.
-
-## Reviewing the sample data
-
-For example, we can look up what courses Jane Smith is enrolled in:
-
-![[Screenshot 2024-06-09 at 9.52.29 AM.png]]
-
-From the other direction, we can look up what students enrolled in Functions:
-
-![[Screenshot 2024-06-09 at 9.52.29 AM 1.png]]
-
-## Creating a project
-
-To query the data in this newly created database, Mr. Gordon:
-
-- created a new project in Xcode, ensuring source control was enabled
-- created a GitHub remote
-- created groups for the model, views, view models, and helper code
-- created a file named `Supabase.swift` that contains the database information required to connect to his database hosted at Supabase
-
-Like this:
-
-![[Screenshot 2024-06-09 at 10.10.40 AM.png]]
-
-The database connection information was obtained from the **API** section of **Project Settings**:
-
-![[Screenshot 2024-06-09 at 10.10.56 AM.png]]
-
-Next Mr. Gordon added the [[To-do List App, Pt. 6#Adding the Supabase framework|package dependency for Supabase]]:
-
-![[Screenshot 2024-06-09 at 10.12.58 AM.png]]
-
-He then made sure that all six package products were being compiled into the app:
-
-![[Screenshot 2024-06-09 at 10.13.41 AM.png]]
-
-Before proceeding, Mr. Gordon committed his work.
-
-## App interface
-
-A three-tab interface might work for this app.
-
-Here is Mr. Gordon's rough plan for that, with a `LandingView` added that the app opens to, and three starter views:
-
-1. A view to show enrolments: `EnrolmentsView`.
-2. A view to list courses; a sheet accessible from this view will allow new courses to be added: `CoursesListView`.
-3. A view to list students; a sheet accessible from this view will allow new students to be added: `StudentsListView`.
-
-This is what that looks like, from the app entry point:
-
-![[Screenshot 2024-06-09 at 10.29.09 AM.png]]
-
-From `LandingView`:
-
-![[Screenshot 2024-06-09 at 10.29.01 AM.png]]
-
-Here is a short demo:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081593230?h=b2e3476b9b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Three Tab Overview - Enrolments in Courses"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-Mr. Gordon then committed his work.
-
-## Listing courses
-
-To get started with simply listing the courses in the database, Mr. Gordon at first modified `CoursesListView` to display a few static values:
-
-![[Screenshot 2024-06-09 at 11.27.29 AM.png]]
-
-After committing that work, Mr. Gordon next created a `Course` model:
-
-![[Screenshot 2024-06-09 at 11.32.30 AM.png]]
-
-... to match the `course` database table:
-
-![[Screenshot 2024-06-09 at 11.29.54 AM.png]]
-
-After committing that work, Mr. Gordon then created a view model, to load courses data from the database:
-
-![[Screenshot 2024-06-09 at 11.37.08 AM.png]]
-
-After committing that work, Mr. Gordon then made the view use the view model, rather than simply showing static data:
-
-![[Screenshot 2024-06-09 at 11.39.36 AM.png]]
-
-Mr. Gordon then committed his work.
-
-## Creating courses
-
-An app to track course enrolments in a school would need the ability to create a new course, when the school decides to offer something new to students.
-
-This is relatively straightforward, since a course can exist in the `course` table on it's own, without any references to data from other tables. In other words, a new course will not have any students enrolled in it.
-
-So, we need to:
-
-1. Add a function to the view model to create a course.
-2. Make a view that allows the user to provide details for a new course.
-3. Provide access to the view that allows for addition of a new course from the courses list view.
-
-First, Mr. Gordon modified `CoursesListViewModel`, so that it has a function that allows a new course to be created:
-
-![[Screenshot 2024-06-09 at 11.46.26 AM.png]]
-
-The current contents of the `course` table at Supabase are:
-
-![[Screenshot 2024-06-09 at 11.47.53 AM.png]]
-
-To test that the function to create a course is working, Mr. Gordon temporarily added this code to `CoursesListView` – it will be run once when the view appears:
-
-![[Screenshot 2024-06-09 at 11.52.17 AM.png]]
-
-Mr. Gordon knew that the function worked, because the new course now appears in the user interface. As expected, this is what is now in the `courses` table at Supabase:
-
-![[Screenshot 2024-06-09 at 11.51.23 AM.png]]
-
-Knowing that the new function in the view model is working, Mr. Gordon removed the temporary code from `CoursesListView`:
-
-![[Screenshot 2024-06-09 at 11.54.51 AM.png]]
-
-...and then committed his work.
-
-Next, Mr. Gordon created a view that allows the user to enter course details:
-
-![[Screenshot 2024-06-09 at 12.03.33 PM.png]]
-
-The view to add a course needs access to the view model, which it receives through the environment.
-
-> [!NOTE]
-> To be able to test the appearance of the view in isolation within the Xcode Previews interface, Mr. Gordon provides the preview with an instance of the view model and shows the new view inside a sheet.
-
-Mr. Gordon then committed his work.
-
-Finally, Mr. Gordon added the necessary code to `CourseListView` so that it can present the sheet to add a new course:
-
-![[Screenshot 2024-06-09 at 12.17.15 PM.png]]
+![[Pasted image 20250512091446.png]]
 
 > [!IMPORTANT]
-> Since `AddCourseView` pulls the view model out of the environment, `CoursesListView` must insert it into the environment. An alternative would be [[To-do List App, Pt. 6#Using @Bindable|passing a reference to the child view as a binding]].
-
-Here is how the app looks and works at this point:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081594372?h=1385dfb8d2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding a New Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-Mr. Gordon then committed his work.
-
-Mr. Gordon realized that the courses were showing up in the order they were originally inserted into the `courses` table.
-
-It would likely be better that those courses be sorted by their short codes.
-
-So, Mr. Gordon modified the view model, like so:
-
-![[Screenshot 2024-06-09 at 12.24.42 PM.png]]
-
-Courses are now listed in alphabetical order, ascending, based on their short codes:
-
-![[RocketSim_Screenshot_iPhone_15_Pro_6.1_2024-06-09_12.25.04.png|350]]
-
-Mr. Gordon committed his work at this point.
-
-## Listing and creating students
-
-If you consider the database schema:
-
-![[Screenshot 2024-06-09 at 12.27.03 PM.png]]
-
-... you can see that the `student` table is very similar to the `course` table.
-
-A row in the `student` table can exist in its own, without a reference to any other data. This would represent, perhaps, a new student who has registered at the school, but not yet enrolled in any courses.
-
-The point here is that the process of listing and creating students in the app is identical to the process of listing and creating courses. 
-
-This will be true of any two entities, or two tables in a database, that relate to each other in a many-to-many relationship. 
-
-So, to ensure this guide does not get too long, here is the series of changes Mr. Gordon made to list students:
-
-1. [Modified `StudentsListView` so it displays a few static values.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/7f3a9f88a6c8885b158d9a63491280753fb35854)
-2. [Made a `Student` model to match the `student` table in the database.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/ffff628bf259c1ac44b51a261d78402812dd43c2)
-3. [Made a `StudentsListViewModel` to load students data from the database.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/3654825e42daf76f36cd4feeedb245bf3e5114ee)
-4. [Modified `StudentsListView` so that it uses the view model.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/0e3c7cc680e8bcaa61021bf32fdf1d346628987c)
-
-And here are the series of changes Mr. Gordon made to create new students:
-
-1. [Added a function to `StudentsListViewModel` to create a student.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/c0c3eb2256c72a5a927c707bfea8658ffe119211)
-2. [Made a view that allows the user to provide details for a new student.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/201aa49f4744c1fda0a97546aced475cf400c4a5)
-3. [Provided access to the view that allows for addition of a new student from the students list view.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/462d5fbf8d6c177ad62d1ac0b178e1e4707bfe63)
-
-Here is how the app now looks and works at this point:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081595301?h=252538b795&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding a New Student"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-## Listing enrolments
-
-When listing enrolments, we can approach the relationship from two sides:
-
-![[Screenshot 2024-06-09 at 12.27.03 PM.png]]
-
-1. From the point of view of a student – what courses are they enrolled in?
-2. From the point of view of a course – what students have enrolled in that course?
-
-To first help us understand how this will look in the app, we can mock it out with static data.
-
-Mr. Gordon started this process by modifying `EnrolmentsView` like so:
-
-![[Screenshot 2024-06-09 at 3.24.30 PM.png]]
-
-Let's say the user chooses to view enrolments by course, from that screen.
-
-When they arrive at `EnrolmentsByCourseView` they should see all courses.
-
-Let's stay instead that the user chooses to view enrolments by student, from that screen above.
-
-When they arrive at `EnrolmentsByStudentView` they should see all students.
-
-For now, Mr. Gordon mocked this out by adding static data for a few courses:
-
-![[Screenshot 2024-06-09 at 3.38.07 PM.png]]
-
-Then, for a few students:
-
-![[Screenshot 2024-06-09 at 3.36.48 PM.png]]
-
-Then he hooked those two new views up to `EnrolmentsView` so that he could navigate down to them:
-
-![[Screenshot 2024-06-09 at 3.41.10 PM.png]]
-
-The app now works like this beginning at `EnrolmentsView`:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081596122?h=6591fc92e3&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Navigating Down to Mock Course and Student Data"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-Mr. Gordon then committed that work.
-
-Of course, all of those enrolment views are operating with static data, so next it is time to hook the views up to the database to show live data instead.
-
-### By course
-
-To view enrolments by course, first we need a model file that encapsulates the join that will occur across the `enrols_in` lookup table.
-
-Mr. Gordon created the `CourseStudent` model file like so:
-
-![[Screenshot 2024-06-09 at 3.46.17 PM.png]]
-
-Next we need a view model that can fetch all courses, and by joining to the `student` table, include what students are enrolled in each course.
-
-Mr. Gordon created the `EnrolmentsByCourseViewModel`:
-
-![[Screenshot 2024-06-09 at 3.51.52 PM.png]]
-
-The `select` statement on line 30 in that screenshot is equivalent to running this raw SQL directly against the database:
-
-![[Screenshot 2024-06-09 at 3.57.33 PM.png]]
-
-One of the really nice things about the Supabase framework is that it is able to automatically determine when two tables are joined in a many-to-many relationship based on the foreign keys that are present. As a programmer using their framework, selecting from the `course` table and joining to the `student` table, we can omit any mention of the `enrols_in` table. Supabase takes care of the tedious part of the join process for us.
-
-When the `getCoursesWithStudents` function is invoked in the view model, Supabase returns this JSON-formatted data:
-
-```json
-[
-   {
-      "id":1,
-      "short_code":"ICS3U",
-      "name":"Introduction to Computer Science",
-      "student":[
-         {
-            "id":1,
-            "last_name":"Doe",
-            "first_name":"John"
-         }
-      ]
-   },
-   {
-      "id":2,
-      "short_code":"MCR3U",
-      "name":"Functions",
-      "student":[
-         {
-            "id":1,
-            "last_name":"Doe",
-            "first_name":"John"
-         },
-         {
-            "id":2,
-            "last_name":"Smith",
-            "first_name":"Jane"
-         },
-         {
-            "id":3,
-            "last_name":"Jones",
-            "first_name":"Emily"
-         }
-      ]
-   },
-   {
-      "id":3,
-      "short_code":"ENG3U",
-      "name":"English",
-      "student":[
-         {
-            "id":1,
-            "last_name":"Doe",
-            "first_name":"John"
-         },
-         {
-            "id":2,
-            "last_name":"Smith",
-            "first_name":"Jane"
-         },
-         {
-            "id":3,
-            "last_name":"Jones",
-            "first_name":"Emily"
-         }
-      ]
-   },
-   {
-      "id":4,
-      "short_code":"SCH3U",
-      "name":"Chemistry",
-      "student":[
-         {
-            "id":1,
-            "last_name":"Doe",
-            "first_name":"John"
-         }
-      ]
-   },
-   {
-      "id":5,
-      "short_code":"SPH3U",
-      "name":"Physics",
-      "student":[
-         {
-            "id":2,
-            "last_name":"Smith",
-            "first_name":"Jane"
-         }
-      ]
-   },
-   {
-      "id":6,
-      "short_code":"SBI3U",
-      "name":"Biology",
-      "student":[
-         {
-            "id":2,
-            "last_name":"Smith",
-            "first_name":"Jane"
-         }
-      ]
-   },
-   {
-      "id":7,
-      "short_code":"CGG3O",
-      "name":"Travel and Tourism: A Regional Geographic Perspective",
-      "student":[
-         {
-            "id":3,
-            "last_name":"Jones",
-            "first_name":"Emily"
-         }
-      ]
-   },
-   {
-      "id":8,
-      "short_code":"CHW3M",
-      "name":"World History to the End of the Fifteenth Century",
-      "student":[
-         {
-            "id":3,
-            "last_name":"Jones",
-            "first_name":"Emily"
-         }
-      ]
-   },
-   {
-      "id":9,
-      "short_code":"FSF3U",
-      "name":"Core French",
-      "student":[
-         
-      ]
-   },
-   {
-      "id":10,
-      "short_code":"AVI3M",
-      "name":"Visual Arts",
-      "student":[
-         
-      ]
-   },
-   {
-      "id":11,
-      "short_code":"ADA3M",
-      "name":"Drama",
-      "student":[
-         
-      ]
-   },
-   {
-      "id":23,
-      "short_code":"AMU3M",
-      "name":"Music",
-      "student":[
-         
-      ]
-   }
-]
-```
-
-The view and view model we wrote above take care of converting this JSON-formatted data into the `coursesWithStudents` array for us:
-
-![[Screenshot 2024-06-09 at 4.09.47 PM.png]]
-
-Take note of this key code in the model – on line 23 – it provides a hint to the Swift compiler, telling it to decode the array of `student` data provided in the JSON response into the Swift array named `students`:
-
-![[Screenshot 2024-06-09 at 4.12.01 PM.png]]
-
-Finally, Mr. Gordon will hook up the view model to the `EnrolmentsByCourseView` so that it shows live data rather than the mock, static data:
-
-![[Screenshot 2024-06-09 at 4.29.33 PM.png]]
-
-> [!IMPORTANT]
-> Note that `EnrolmentsByCourseView` does not create its own instance of  `EnrolmentsByCourseViewModel`. Instead, it asks to be provided with an instance of the view model as an argument to populate the stored property. The reason for this choice will be explained shortly.
-
-Since `EnrolmentsByCourseView` expects to be provided with its view model by the view that creates it (the caller, or parent view) we must modify `EnrolmentsView` to do so:
-
-![[Screenshot 2024-06-09 at 4.30.28 PM.png]]
-
-Like this:
-
-![[Screenshot 2024-06-09 at 4.31.02 PM.png]]
-
-Now, we can navigate down to see the live enrolment data by course, provided by the database:
-
-![[Screen Recording 2024-06-09 at 4.32.41 PM.mp4]]
-
-This is good progress, so Mr. Gordon committed his changes.
-
-Although we can see all the courses, the information is not very useful at this point in time.
-
-One way we can improve the view is to show how many students are enrolled in each course:
-
-![[Screenshot 2024-06-09 at 4.38.35 PM.png]]
-
-At this point Mr. Gordon noticed that the courses appear to be listed by the order that the courses were added to the database.
-
-Instead, it will be better to list the courses alphabetically, by the course short code.
-
-This requires a change to the view model:
-
-![[Screenshot 2024-06-09 at 4.42.03 PM.png]]
-
-That looks better in the view:
-
-![[Screenshot 2024-06-09 at 4.42.23 PM.png]]
-
-This is good for now, although more changes here will be made later.
-
-Mr. Gordon committed his work at this point.
-
-### By student
-
-If you consider the database schema:
-
-![[Screenshot 2024-06-09 at 12.27.03 PM.png]]
-
-... you can see that the `student` table is very similar to the `course` table.
-
-A row in the `student` table can exist in its own, without a reference to any other data. This would represent, perhaps, a new student who has registered at the school, but not yet enrolled in any courses.
-
-The point here is that the process of listing all students, and showing how many courses they are enrolled in, is very similar to the process we just engaged in when showing courses and the number of students enrolled in each course.
-
-This will be true of any two entities, or two tables in a database, that relate to each other in a many-to-many relationship. 
-
-So, to ensure this guide does not get too long, here is the series of changes Mr. Gordon made to list students and the count of courses they are enrolled in:
-
-1. [Add a model to represent live student enrolment data.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/ad0cc49af84302b5c9d60e7fae45ddedb1c42446)
-2. [Add a view model to query the student table and join to the courses table.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/8945516bddfa26612854a5b3df88dc5465e22698)
-3. [Made view changes so we can see live student enrolment data.](https://github.com/lcs-rgordon/StudentsAndCourses/commit/dffd8aff4031c1d136753bb253ab62745926d756)
-
-Here is how the app now looks and works at this point:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081597915?h=e8d0ce4b70&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Count of Enrolments by Course and by Student"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-### Using selected course, limit the students shown
-
-When we see a list of courses, and that for a given course, there are, say, three students enrolled... we want to see *who* those students are for that course:
-
-![[RocketSim_Screenshot_iPhone_15_Pro_6.1_2024-06-09_19.54.25.png|350]]
-
-Like this:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081598700?h=314e538600&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Students Enrolled in a Given Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-Selecting a course and seeing the students enrolled in it is equivalent to running this raw SQL query – note the `WHERE` clause:
-
-![[Screenshot 2024-06-10 at 6.14.08 AM.png]]
-
-To do this in the app interface, we must enable navigation from `EnrolmentsByCourseView` to `EnrolmentsByStudentView`. When we arrive at `EnrolmentsByStudentView`, we want to see just the students enrolled in the selected course, instead of all students.
-
-First, we modify `EnrolmentsByStudentViewModel`  and add a function that limits the results returned based on a provided course:
-
-![[Screenshot 2024-06-10 at 5.52.24 AM.png]]
-
-In the same view model, at the top of the file, we:
-
-1.  modify the initializer so that it:
-	- optionally accepts a course (if one is not provided, course is set to `nil`)
-	- saves that course in a stored property
-	- checks whether a course has been provided, and then invokes the appropriate function to populate the `studentsWithCourses` array
-2.  add a stored property to track the course we are filtering on (if any)
-3.  add a computed property to make it easier to tell when this view model is filtering student enrolments based on a course
-
-Here are those edits, annotated so that it's clear where each change was made:
-
-![[Screenshot 2024-06-10 at 5.53.53 AM.png]]
-
-To be able to select a course, and then navigate down to see only the students enrolled in that course, we need to modify `EnrolmentsByCourseView` to use a `NavigationLink`:
-
-![[Screenshot 2024-06-10 at 6.02.49 AM.png]]
-
-> [!IMPORTANT]
-> Where previously we just showed information about a course, now that information is the label for a navigation link.
 > 
-> The navigation link leads to the page that shows enrolments by student – which will now be limited to those students who are enrolled in the course the user selects.
+> Be sure to enable realtime on all tables you want to receive notifications about changes on.
 
-Finally, when we are showing students enrolled in a specific course (as opposed to showing all students) the way `EnrolmentsByStudentView` presents information should differ:
+### Subscribe to a channel
 
-![[Screenshot 2024-06-10 at 6.06.21 AM.png]]
+Now that the database is broadcasting (publishing) changes to database tables, we need to add code that subscribes (receives notifications) of those changes.
 
-Here we have:
-
-1. Made the course name show up when filtering by a course.
-2. Made the enrolled course count only show up when *not* filtering by a course.
-3. Made the course short code show as the navigation title when filtering by a course.
-
-Here is how these changes look in the app:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081602646?h=25bf732b49&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Students Enrolled in a Given Course, from Database"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-These are a lot of important changes, so [Mr. Gordon committed his work at this point](https://github.com/lcs-rgordon/StudentsAndCourses/commit/31fc36720960c7fe05731710114c2e530ba5d1d8).
-
-### Using selected student, limit the courses shown
-
-Likewise, when we see a list of students, and that a given student has enrolled in four courses... we want to see *which* courses those are:
-
-![[RocketSim_Screenshot_iPhone_15_Pro_6.1_2024-06-09_20.42.53.png|350]]
-
-Like this:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081603774?h=52997aae92&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Courses a Particular Student is Enrolled In"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-Selecting a student and seeing the courses they are enrolled in is equivalent to running this raw SQL query – note the `WHERE` clause:
-
-![[Screenshot 2024-06-10 at 6.17.22 AM.png]]
-
-To do this in the app interface, we must enable navigation from `EnrolmentsByStudentView` to `EnrolmentsByCourseView`. When we arrive at `EnrolmentsByCourseView`, we want to see just the courses the selected student enrolled in, instead of all courses.
-
-First, we modify the `EnrolmentsByCourseViewModel` to add a function that limits the results returned based on a provided student:
-
-![[Screenshot 2024-06-10 at 6.21.27 AM.png]]
-
-In the same view model, at the top of the file, we:
-
-1. modify the initializer so that it:
-	- optionally accepts a student (if one is not provided, student is set to `nil`)
-	- saves that student in a stored property
-	- checks whether a student has been provided, and then invokes the appropriate function to populate the `coursesWithStudents` array
-2. add a stored property to track the student we are filtering on (if any)
-3. add a computed property to make it easier to tell when this view model is filtering the courses shown to be those a given student is enrolled in
-
-Here are those edits, annotated so that it's clear where each change was made:
-
-![[Screenshot 2024-06-10 at 6.23.23 AM.png]]
-
-To be able to select a student, and then navigate down to see only the courses that student is enrolled in, we need to modify `EnrolmentsByStudentView` to use a `NavigationLink`:
-
-![[Screenshot 2024-06-10 at 6.28.45 AM.png]]
-
-> [!IMPORTANT]
-> Where previously we just showed information about a student, now that information is the label for a navigation link.
-> 
-> The navigation link leads to the page that shows enrolments by course – only those courses that the student is enrolled in will be shown.
-
-Finally, when we are showing courses that a particular student is enrolled in (as opposed to showing all courses) the way `EnrolmentsByCourseView` presents information should differ:
-
-![[Screenshot 2024-06-10 at 6.32.18 AM.png]]
-
-Here we:
-
-1. Only show the enrolled student count when *not* filtering by a student.
-2. Made the navigation title show the student name when we *are* filtering by a student.
-
-When those edits have been made, the result is as follows:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1081604992?h=febe6ba977&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Courses Enrollments by Student"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-These are a lot of important changes, so [Mr. Gordon committed his work at this point](https://github.com/lcs-rgordon/StudentsAndCourses/commit/383ea6344530a1d21dcf0eb2a1ebc0e828c2819c).
-
-### So that's why it's called a NavigationStack!
-
-Consider the database schema one more time:
-
-![[Screenshot 2024-06-09 at 12.27.03 PM.png]]
-
-After making the edits in the last two sections, we have allowed our user to explore enrolments – the data stored in the `enrols_in` lookup table – from both directions.
-
-For example, we can look up what courses Jane Smith is enrolled in:
-
-![[Screenshot 2024-06-09 at 9.52.29 AM.png]]
-
-This is how that now looks, through our app's user interface:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082360608?h=f55c166445&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Enrolments for Jane Smith"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-From the other direction, we can look up what students enrolled in Functions:
-
-![[Screenshot 2024-06-09 at 9.52.29 AM 1.png]]
-
-This is how that now looks, through our app's user interface:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082361387?h=bfe0542100&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Enrolments in Functions"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-What's really fun, though? Regardless of how the user begins exploring enrolments (either by student, or by course) they can now go as deep as they want, exploring that data. Check it out:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082361787?h=1b03c312d9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Creating a Stack of Navigations"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-When the user wants to get back to their entry point, they can long-press on the **Back** button, and navigate all the way up to the top of the stack – or anywhere in between. That functionality is a little more useful when there are many courses and many students – but it's very cool. We are moving through the many-to-many relationship repeatedly – *as many times as we want*. That's some awesome abstraction! 🚀
-
-## Creating new enrolments
-
-There is a final bit of functionality needed to complete this app.
-
-When looking at the enrolments a student has, we might want to add a course.
-
-When looking at enrolments for a course, we might want to add a student.
-
-### Add a course for a student
-
-We want to add a course that a student will take, when viewing their current enrolments, like this:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082364621?h=68bf36187a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Enrol a Student in a Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-This is equivalent to adding a row to the `enrols_in` table using raw SQL, like this:
-
-![[Screenshot 2024-06-10 at 6.40.41 AM.png]]
-
-To do this, first we need a model file to represent a new row in the `enrols_in` table:
-
-![[Screenshot 2024-06-10 at 6.49.14 AM.png]]
-
-Next we need a new view model – the first job of this view model is to find what courses are available to the student:
-
-![[Screenshot 2024-06-10 at 10.02.26 AM.png]]
-
-Here, we need to step back and discuss what is happening in the `getCourses` function shown. This code is running a database function named `get_available_courses`. This function was defined by Mr. Gordon on the database. What does it do, though? And why do we need to use a function?
-
-First, let's explore this using raw SQL queries.
-
-Given a student ID, we can find what courses they are already enrolled in by running a query like this:
-
-![[Screenshot 2024-06-10 at 10.05.09 AM.png]]
-
-That result shows the courses that the student John Doe is enrolled in, which we can confirm here by inspection of the raw data in the tables:
-
-![[Screenshot 2024-06-10 at 10.13.26 AM (2).png]]
-
-If we use that query as a sub-query, we can find all the courses that a given student has not already signed up for, like this:
-
-![[Screenshot 2024-06-10 at 10.18.10 AM.png]]
-
-Here, we can see that the courses available to John Doe are all the courses whose ID is not 1, 2, 3, or 4.
-
-**The issue is this** – at present time, there does not seem to be an easy way to run a query that contains a sub-query through the Supabase framework directly from our SwiftUI app.
-
-So instead, we define a function, like this:
-
-```sql
-CREATE OR REPLACE FUNCTION get_available_courses(
-  for_student_id int
-) 
-RETURNS TABLE (
-  id int,
-  short_code varchar,
-  name varchar
-)
-LANGUAGE plpgsql
-AS 
-$$
-
-BEGIN
-  RETURN QUERY
-  -- Courses available to a student
-  SELECT course.id as "id", course.short_code as "short_code", course.name as "name"
-  FROM course
-  WHERE course.id NOT IN (
-    -- Courses a given student is already enrolled in
-    SELECT
-      enrols_in.course_id as "enrolment_course_id"
-    FROM enrols_in
-    WHERE enrols_in.student_id = for_student_id       -- Only select courses this student is in
-  )
-  ORDER BY name;
-
-END;
-$$;
-```
-
-That syntax is *ugly*, but, it does what we need. It accepts a parameter named `for_student_id`. It returns the list of courses a student has not already enrolled in. You are welcome to adapt this function as needed for your own purposes in your own project.
-
-To create the function on our database, we just run it in the SQL Editor:
-
-![[Screenshot 2024-06-10 at 10.26.07 AM.png]]
-
-We can try out this function directly on our database through the SQL Editor:
-
-![[Screenshot 2024-06-10 at 10.23.03 AM.png]]
-
-That is the function we are invoking in the view model:
-
-![[Screenshot 2024-06-10 at 10.24.07 AM.png]]
-
-The idea is that the view model will only supply courses the student has not already enrolled in, so they do not pick a duplicate.
-
-If we temporarily place this code on `LandingView`:
-
-![[Screenshot 2024-06-10 at 10.29.25 AM.png]]
-
-We can run the app in the Simulator, and see the debug output from that `dump` statement:
-
-![[Screenshot 2024-06-10 at 10.30.07 AM.png]]
-
-... and we can see they are the same courses we get when running the raw SQL query against the database:
-
-![[Screenshot 2024-06-10 at 10.18.10 AM.png]]
-
-This is less elegant that Mr. Gordon would like, but it will have to do.
-
-Mr. Gordon next removed the temporary code from `LandingView`, then, he created this view to allow a new course enrolment to be created for a student:
-
-![[Screenshot 2024-06-10 at 10.44.30 AM.png]]
-
-The view receives a reference to it's view model. This allows the picker to be populated with the list of courses available to the student.
-
-Before continuing, Mr. Gordon [chose to commit his work](https://github.com/lcs-rgordon/StudentsAndCourses/commit/4f907504ebbe3f304a815033b8ad62d8aebcaac0). Although the job of saving a new course enrolment for a student is not finished, what we have so far works. It's worth stopping to commit before continuing.
-
-Now, in the screenshot above, note that on line 45, Mr. Gordon has defined a "to-do" – a bit of code that needs to be filled in. **We still need to actually add the enrolment for a given student.**
-
-To start on this, Mr. Gordon modified the view model to hold on to a reference to the student we are working with:
-
-![[Screenshot 2024-06-10 at 10.51.09 AM.png]]
-
-Now, we will add a function to the view model that saves the enrolment in the selected course:
-
-![[Screenshot 2024-06-10 at 12.01.12 PM.png]]
-
-Then we can come back to the view and invoke this function when the user presses the **Enrol** button:
-
-![[Screenshot 2024-06-10 at 12.02.29 PM.png]]
-
-Since Mr. Gordon set up the preview for `AddEnrolmentFromStudentView` as follows:
-
-![[Screenshot 2024-06-11 at 6.16.01 AM.png]]
-
-... he can try it out. The preview is hard-coded to enrol the student with an ID of `1` – that's John Doe – into the selected course.
-
-Let's try it out – here is what that looks like:
-
-![[Screen Recording 2024-06-11 at 6.17.12 AM.mp4]]
-
-Now, we can run a query to check what courses John Doe is enrolled in:
-
-![[Screenshot 2024-06-11 at 6.19.16 AM.png]]
-
-... and we see that Travel and Tourism is now one of those courses.
-
-This is great progress, so [Mr. Gordon committed his work](https://github.com/lcs-rgordon/StudentsAndCourses/commit/5200feebfb184a4440377bbe78ba2f2c7ab806d8).
-
-The final step is to hook up this view, `AddEnrolmentFromStudentView`, to the view it needs to be accessed on...
-
-> [!NOTE]
-> It's at this moment that Mr. Gordon realized he had named `AddEnrolmentFromStudentView` incorrectly. When working with data in a many-to-many relationship, careful naming of views is *really* important to keep our code understandable. Although `EnrolmentsByCourseView` shows a student's name at the top after navigating to select a student:
-> 
-> <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082367383?h=d79b336e25&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Identifying Views"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-> 
-> ... it is showing the enrolments by course – showing what enrolments there are, in this case, for a given student.
-> 
-> `EnrolmentsByCourseView` is the view where it makes sense to hook up the view currently named `AddEnrolmentFromStudentView`.
-> 
-> So... here is where Mr. Gordon did some refactoring.
-> 
-> 1. `AddEnrolmentFromStudentView` was renamed to `AddEnrolmentFromEnrolmentsbyCourseView`.
-> 2. `AddEnrolmentFromStudentViewModel` was renamed to `AddEnrolmentFromEnrolmentsbyCourseViewModel`.
-> 
-> Are the names a bit long? Yes – but they are descriptive. Since the auto-complete feature in Xcode does most of the typing for us, it's better to type a long (but descriptive) name once, rather than read a short (but confusing) name many times.
-> 
-> Mr. Gordon refactored using this command in Xcode (after right clicking on the name where each structure is defined):
-> 
-> ![[Screenshot 2024-06-11 at 6.38.34 AM.png]]
-> 
-> ... like this:
-> 
-> ![[Screenshot 2024-06-11 at 6.39.50 AM.png]]
-> 
-> After refactoring to rename the view model as well, here is what the project looked like:
-> 
-> ![[Screenshot 2024-06-11 at 6.42.15 AM.png]]
-> 
-> Mr. Gordon committed his work at this point.
-
-With the refactoring out of the way, Mr. Gordon made these edits to `EnrolmentsByCourseView` so that there is a toolbar button showing a + sign, which allows for an enrolment to be added – but only when we are displaying the courses for a given student:
-
-![[Screenshot 2024-06-11 at 6.50.17 AM.png]]
-
-Here is what that looks like:
-
-![[Untitled.mp4]]
-
-Notice there is no + sign at first, when all courses are being shown – once we navigate back to `EnrolmentsByCourseView` we see just the enrolments for a specific student – then the + sign shows up.
-
-Mr. Gordon [committed his work at this point](https://github.com/lcs-rgordon/StudentsAndCourses/commit/f0e123a3784d5969cb4dd3e4bb09d548600be5f1).
-
-There is (truly) one last final change that needs to be made.
-
-The view to add an enrolment has it's own view model – generally, each view in a project will have it's own view model.
-
-After we add an enrolment for a student, the view model for `EnrolmentsByCourseView` needs to refresh the list of courses that are shown for that student.
-
-Here is what happens right now:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082367906?h=e9d25ab076&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="List of Courses is Not Refreshed"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-The course *does* get added in the database, but the view does not see this.
-
-The solution is to add a *callback* – a small block of code that will be run only when the sheet has been dismissed:
-
-![[Screenshot 2024-06-11 at 7.07.38 AM.png]]
-
-In this way, after the sheet that allows for a new course to be added is dismissed, we immediately see the new course show up. Here is what this now looks like:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082368053?h=3bc442372d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="List of Courses is Now Refreshed"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-### Add a student to a course
-
-When viewing a course, and seeing the list of students enrolled, it should be possible to enrol a new student into that course.
-
-That would look like this, once completed:
-
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082387228?h=83b9e86eab&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding a Student to a Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
-How to do this?
-
-It is just a matter of adding a new row to the `enrols_in` table, but coming from the other direction – from the point of view of a course.
-
-When selecting a student to add to a course, we don't want to be able to select students already enrolled in the course.
-
-So, first, Mr. Gordon wrote a database function that allowed us to find only students that are not already enrolled in a given course:
-
-```sql
--- Get available stduents for a given course
-CREATE OR REPLACE FUNCTION get_available_students(
-  for_course_id int
-) 
-RETURNS TABLE (
-  id int,
-  first_name varchar,
-  last_name varchar
-)
-LANGUAGE plpgsql
-AS 
-$$
- 
-BEGIN
-  RETURN QUERY
-  -- Students available to a course
-  SELECT student.id as "id", student.first_name as "first_name", student.last_name as "last_name"
-  FROM student
-  WHERE student.id NOT IN (
-    -- Students already enrolled in a given course
-    SELECT
-      enrols_in.student_id as "enrolment_student_id"
-    FROM enrols_in
-    WHERE enrols_in.course_id = for_course_id       -- Only select students enrolled in given course
-  )
-  ORDER BY last_name, first_name;
- 
-END;
-$$;
-```
-
-Then, he wrote a view model that makes use of this function:
+You are welcome to copy the following code and adapt it to your own project:
 
 ```swift
-import Foundation
-import PostgREST
-
-@Observable
-class AddEnrolmentFromEnrolmentsbyStudentViewModel: Observable {
-    
-    // MARK: Stored properties
-    
-    var availableStudents: [Student] = []
-    
-    let currentCourse: Course
-    
-    // MARK: Initializer(s)
-    init(availableTo course: Course) {
-        
-        // Save a reference to the current course
-        self.currentCourse = course
-        
-        // Get students from the database that are not enrolled in the provided course
-        Task {
-            try await getStudents(availableTo: course)
-        }
-    }
-    
-    // MARK: Functions
-    func getStudents(availableTo course: Course) async throws {
-        
-        do {
-            // Get a list of students available to the course
-            // (the students not already enrolled in this course)
-            let results: [Student] = try await supabase.rpc(
-                "get_available_students",
-                params: ["for_course_id": AnyJSON.integer(course.id!)]
-              )
-              .execute()
-              .value
-            
-            self.availableStudents = results
-            dump(self.availableStudents)
-            
-        } catch {
-            debugPrint(error)
-        }
-        
-    }
-    
-    func saveEnrolment(forStudentWithId studentId: Int) async throws {
-        
-        // Create the enrolment record
-        let newEnrolment = Enrolment(studentId: studentId, courseId: currentCourse.id!)
-        
-        do {
-            // Write the new enrolment to the database
-            try await supabase
-                .from("enrols_in")
-                .insert(newEnrolment)
-                .execute()
-
-        } catch {
-            debugPrint(error)
-        }
-        
-    }
-    
-}
-```
-
-Next, he made a view to allow a student to be selected for enrolment in a course:
-
-```swift
+import OSLog
+import Supabase
 import SwiftUI
 
-struct AddEnrolmentFromEnrolmentsByStudentView: View {
-    
+@Observable @MainActor
+class EnrollmentChangeNotifier: Observable {
+
     // MARK: Stored properties
     
-    // Is this view showing in a sheet?
-    @Binding var isShowing: Bool
+    // Subscribing views will monitor this property
+    // and ask their view models to refresh data when
+    // it changes
+    var changeCount = 0
+        
+    // Stores a channel to that we will subscribe to
+    // and receive realtime updates from
+    private var channel: RealtimeChannelV2?
     
-    // Receive a reference to our view model
-    let viewModel: AddEnrolmentFromEnrolmentsbyStudentViewModel
-    
-    // Stores the selected student
-    @State private var selectedStudentId: Int = 0
-
-    // MARK: Computed properties
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section {
-                    Picker("Enrol what student?", selection: $selectedStudentId) {
-                        ForEach(viewModel.availableStudents) { student in
-                            // NOTE: Student data type defines the id
-                            //       as an optional. We know the id must
-                            //       be defined since we retrieve the list
-                            //       of available courses from the database.
-                            //       So, it is safe to force unwrap.
-                            Text("\(student.lastName), \(student.firstName)").tag(student.id!)
-                        }
-                    }
-                    .pickerStyle(.navigationLink)
-                }
-            }
-            .navigationTitle("New Enrolment")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        Task {
-                            try await viewModel.saveEnrolment(
-                                forStudentWithId: selectedStudentId
-                            )
-                            isShowing = false
-                        }
-                    } label: {
-                        Text("Enrol")
-                    }
-
-                }
-            }
-        }
+    // MARK: Initializer(s)
+    init() {
+        
+        Logger.database.info("EnrollmentChangeNotifier: Initializer is starting.")
+        
+        // Subscribe to changes
+        self.subscribe()
+        
     }
-}
-
-#Preview {
     
-    // Create a view to attach a sheet to
-    Text("Example parent view")
-        // Present AddEnrolmentFromEnrolmentsByStudentView in a sheet
-        .sheet(isPresented: Binding.constant(true)) {
-            
-            // Show the instance of AddEnrolmentFromStudentView
-            // and provide it with an instance of it's view model
-            // so it can talk to the database
-            AddEnrolmentFromEnrolmentsByStudentView(
-                
-                isShowing: Binding.constant(true),
-                viewModel: AddEnrolmentFromEnrolmentsbyStudentViewModel(
-                    availableTo: Course(
-                        id: 1,
-                        shortCode: "ICS3U",
-                        name: "Introduction to Computer Science"
-                    )
-                )
-                
+    // MARK: Function(s)
+    func subscribe() {
+        
+        Logger.database.info("EnrollmentChangeNotifier: About to create channel to receive realtime updates.")
+
+        // Create a channel to that we will subscribe to
+        // and receive realtime updates from
+        self.channel = supabase.channel("enrollment-updates")
+        if let channel = self.channel {
+
+            Logger.database.info("EnrollmentChangeNotifier: Successfully created channel to receive realtime updates.")
+
+            // We are going to observe all changes
+            // (insertions, updates, deletions)
+            // on any table in the database
+            let changeStream = channel.postgresChange(
+                AnyAction.self,
+                schema: "public"
             )
             
+            Task {
+                
+                // Subscribe to notifications on the channel
+                await channel.subscribe()
+
+                Logger.database.info("EnrollmentChangeNotifier: Now subscribed to channel to receive realtime updates.")
+
+                // When a change occurs, run this code block
+                for await change in changeStream {
+                    
+                    Logger.database.info("EnrollmentChangeNotifier: Database changed; incrementing change counter.")
+
+                    // Update the count of changes to tell subscribing views
+                    // to ask their view models to update
+                    changeCount += 1
+                    
+                }
+                
+            }
+
+        } else {
+            
+            Logger.database.info("EnrollmentChangeNotifier: Unable to create channel to receive realtime updates.")
+
         }
+        
+    }
+    
+    func unsubscribe() {
+        Logger.database.info("EnrollmentChangeNotifier: About to unsubscribe from realtime updates channel.")
+        Task {
+            if let channel = channel {
+                await supabase.removeChannel(channel)
+                Logger.database.info("EnrollmentChangeNotifier: Successfully unsubscribed from realtime updates channel.")
+            } else {
+                Logger.database.info("EnrollmentChangeNotifier: Could not unsubscribe from realtime updates channel.")
+            }
+
+        }
+    }
+        
 }
 ```
 
-He then tested the view and confirmed that a new student could be enrolled in a course:
+Mr. Gordon chose to add this file to the **Helpers** group in his project:
 
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082383890?h=8d9bbc1f29&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Testing the Enrolment of a Student in a Course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+![[Pasted image 20250512093002.png]]
 
-Mr. Gordon then [committed these code changes](https://github.com/lcs-rgordon/StudentsAndCourses/commit/2c3b22f1151c10be103803edc21a9fdfb02b2fea).
+If you were to add that file to your project, you would immediately see the same error message come up that shows in the screenshot above.
 
-Next, all that remained was to make this sheet available when viewing students enrolled in a course, via the `+` sign button – this required edits to `EnrolmentsByStudentView`:
+In order to better debug logical errors in this app – especially as we begin using a publisher-subscriber messaging pattern – it's helpful to know when certain things are happening in our code.
 
-![[Pasted image 20250507212646.png]]
+We can enable this by using *logging*, which will be explained shortly. The gist of the idea is that we include little messages to ourselves as developers throughout our code. Then, as we use our app, it makes it easier to know everything is working the way we intend.
 
-Here is Mr. Gordon testing out the changes:
+Mr. Gordon prefers to create a **Logging** group:
 
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1082386408?h=12dd1c8bc9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Testing the Enrolment of a Student in a Course from Toolbar"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+![[Pasted image 20250512093609.png]]
 
-Mr. Gordon then [committed these changes](https://github.com/lcs-rgordon/StudentsAndCourses/commit/644a4c2fcaf2f95b91d5ef0e187512d4da4475db).
+He then added this code:
 
-## Source code
+```swift
+import OSLog
 
-If you wish to review the source used in these examples, commit-by-commit, [you can do so here](https://github.com/lcs-rgordon/StudentsAndCourses/commits/main/).
+extension Logger {
 
-If you click the link at right for any given commit:
+    // Using your bundle identifier is a great way to ensure a unique identifier.
+    private static var subsystem = Bundle.main.bundleIdentifier!
 
-![[Screenshot 2024-06-11 at 7.18.00 AM.png]]
+    // Logs the view cycles like a view that appeared
+    static let viewCycle = Logger(subsystem: subsystem, category: "viewcycle")
 
-... you can then see the changes that were made in that commit:
+    // All logs related to tracking and analytics
+    static let statistics = Logger(subsystem: subsystem, category: "statistics")
 
-![[Screenshot 2024-06-11 at 7.19.31 AM.png]]
+    // All logs related to database operations
+    static let database = Logger(subsystem: subsystem, category: "database")
 
-Lines shown in green were added; lines shown in red were removed.
+    // All logs related to user authentication
+    static let authentication = Logger(subsystem: subsystem, category: "authentication")
+
+}
+```
+
+... to a file named `Logger.swift`:
+
+![[Pasted image 20250512093747.png]]
+
+If we click back to `EnrollmentChangeNotifier` we see that the error message has resolved:
+
+![[Pasted image 20250512094639.png]]
+
+It's good to have at least an initial understanding of code that we add to our projects, so, let's examine it more closely:
+
+![[Pasted image 20250512094624.png]]
+
+In order:
+
+> [!DISCUSSION]
+> 
+> 1. The `EnrollmentChangeNotifier` class must conform to the `Observable` protocol, so that our views can watch the class for changes and respond accordingly.
+> 2. `@MainActor` should be added to all classes that will drive changes to the user interface. This ensures that the code in the class will run on the main thread of our application, rather than a background thread. By running on the main thread, we ensure that the user interface updates in a timely manner. Read this for [more background on what threads are](https://www.hackingwithswift.com/quick-start/concurrency/understanding-threads-and-queues), if desired.
+> 3. In the initializer of the class, we run the `subscribe` function so that we can receive notifications when the database changes.
+> 4. Here we create a channel to subscribe to. Select a name that makes sense for the context of your app; here, Mr. Gordon chooses `enrollment-updates`.
+> 5. With this code we configure what kind of updates we want to be notified about, and from what tables. This code asks for all types of updates (*insertions* of a new row to a table, *updates* to an existing row, and *deletions* of a row). This code also asks for notifications on every database table, not just a single table.
+> 6. Create an asynchronous task block (line 56) that will run and wait for update notifications from the database – then – subscribe to the channel we created earlier (line 59).
+> 7. The code from lines 64 to 72 can be thought of as a loop that will iterate – run its code block – only when a change notification is received from the database.
+> 8. There are times when we want to *unsubscribe* from receiving database update notifications – more on that in a moment.
+
+Now that we have these changes made, we need to create an instance of the `EnrollmentChangeNotifier` class at the app entry point, and insert it into the environment.
+
+Here are the changes that make this happen:
+
+![[Pasted image 20250512102333.png]]
+
+That code needs a bit of explanation too, so let's go over it:
+
+> [!DISCUSSION]
+> 
+> 1. Here is where the instance of `EnrollmentChangeNotifier` is created.
+> 2. We insert the instance of `EnrollmentChangeNotifier` into the environment so that views can (later) observe it for changes.
+> 3. We create a stored property that tracks changes to *scenes* in our app. This is used to identify when our app is closed or backgrounded on a device.
+> 4. This code handles subscribing to database change notifications (when the app is active) or unsubscribing (when the app goes to the background).
+
+### Subscribe views to change notifier
+
+### Reviewing the finished product
+

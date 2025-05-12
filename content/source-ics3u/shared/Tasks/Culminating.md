@@ -100,6 +100,10 @@ It is also possible to create [[Creating Custom Color Sets in Xcode|custom colou
 
 When used sparingly, [[Lottie Animations|third-party pre-built animations]] can be a useful addition to an app.
 
+You can obtain commonly used symbols using the [SF Symbols app](https://developer.apple.com/sf-symbols/) or by using the **Library** feature in Xcode:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083513370?h=70c293f03b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding SF Symbols"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 ### Describing data
 
 We use variables or constants and [[Data Types#Variables, Constants, Data Types|three basic data types]] to build [[Structures|custom structures]] that [[Defining and Using Structures|model something]] from our world.
