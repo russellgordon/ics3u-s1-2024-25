@@ -490,4 +490,70 @@ With these changes, we now have `EnrolmentsView` watching the change notifier cl
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083683009?h=4314ed0bd9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Changes Propagate Throughout the App"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 That is it!
+
 Any other views (within a larger app) that need to update their data when the database changes can use the same approach to subscribe to `EnrollmentChangeNotifier` and then update their view model, as needed.
+
+## More about logging
+
+As our apps grow, log messages make it easier to understand what is happening when our app runs, and to debug logical errors.
+
+We can use the debug console to filter out messages and show only the messages we care about.
+
+Earlier we added this code to the project:
+
+```swift
+import OSLog
+
+extension Logger {
+
+    // Using your bundle identifier is a great way to ensure a unique identifier.
+    private static var subsystem = Bundle.main.bundleIdentifier!
+
+    // Logs the view cycles like a view that appeared
+    static let viewCycle = Logger(subsystem: subsystem, category: "viewcycle")
+
+    // All logs related to tracking and analytics
+    static let statistics = Logger(subsystem: subsystem, category: "statistics")
+
+    // All logs related to database operations
+    static let database = Logger(subsystem: subsystem, category: "database")
+
+    // All logs related to user authentication
+    static let authentication = Logger(subsystem: subsystem, category: "authentication")
+
+}
+```
+
+`OSLog` is the framework that Apple provides to make logging easy to do.
+
+Above, we have defined four *categories* that we can publish log messages under.
+
+When we added code to the change notifier class and the view models that retrieve data from the database, we logged messages under the `database` category:
+
+![[Pasted image 20250513125342.png]]
+
+When we added code to `EnrolmentsView` so that it could observe `changeCount` on the change notifier class, we logged messages under the `viewCycle` category:
+
+![[Pasted image 20250513125455.png]]
+
+Why does this matter? In a large app that records many log messages while running, we might want to *filter* log messages by category.
+
+Here is a screenshot of all the log messages recorded when running the **StudentsAndCourses** app for just a short period of time:
+
+![[Screenshot 2025-05-13 at 1.02.06 PM (3).png]]
+
+There are a lot of messages to wade through.
+
+We can filter by the category, to see just messages connected to database operations:
+
+![[Screenshot 2025-05-13 at 1.03.10 PM (3).png]]
+
+We could filter by category, and see just messages related to views:
+
+![[Screenshot 2025-05-13 at 1.03.18 PM (3).png]]
+
+We can also filter just by typing text to search.
+
+Here is a super-brief video that shows all of this in action:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083979790?h=2f56e8502a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Using the Debug Console to Filter Log Messages"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>

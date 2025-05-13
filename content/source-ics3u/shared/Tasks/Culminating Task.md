@@ -191,3 +191,7 @@ When using a database with tables connected by relationships, you will necessari
 The following lesson explains how, in a larger app with many views, you can use something called the *publisher-subscriber messaging pattern* to ensure that data within your app always stays up-to-date with what is in your database:
 
 [[Publisher-Subscriber Messaging Pattern]]
+
+> [!TIP]
+> 
+> A sub-topic of the lesson above – [[Publisher-Subscriber Messaging Pattern#Add logging|adding log messages]] – might be helpful too if you are trying to [[Publisher-Subscriber Messaging Pattern#More about logging|debug logical errors within your app]].
