@@ -1,8 +1,8 @@
 ---
-draft: true
-draftSectionTwo: true
-created: 2025-05-05T07:00:00.000-0400
-createdForSectionTwo: 2025-05-05T07:00:00.000-0400
+draft: false
+draftSectionTwo: false
+created: 2025-05-13T07:00:00.000-0400
+createdForSectionTwo: 2025-05-13T07:00:00.000-0400
 tags:
 ---
 
@@ -22,7 +22,6 @@ The answer is *no* because of the way SwiftUI works. It needs to compute (put to
 
 So in the case of this app, the list of views already created when the app first launches are:
 
-
 ```mermaid
 flowchart TD
 
@@ -33,7 +32,7 @@ id3 --> id5["CoursesListView<br/>(.tabItem)"]
 id3 --> id6["StudentsListView<br/>(.tabItem)"]
 ```
 
-Each of those views are created when the app launches. Each view creates the following view models:
+Each of those views creates the following view models:
 
 |View|View Model(s)|
 |-|-|
@@ -67,7 +66,7 @@ That would be a mistake. That is exactly the type of situation that SwiftUI was 
 </figcaption>
 </figure>
 
-Rather than thinking about how we can manually *tell* parts of our app when to update their data, we need to find a way to *find out* when data has changed, and *react* accordingly. 
+Rather than thinking about how we can manually *tell* parts of our app when to update their data, we need our app to *notice* when data has changed, and *react* accordingly. 
 
 Reacting to changes in data – to changes in state – is much easier to deal with in practice. It eliminates an entire category of potential bugs – namely – forgetting to tell parts of an app when it needs to update.
 
@@ -101,15 +100,15 @@ Here is how the pub/sub concept can be applied to resolve the problem with getti
 
 The *source of truth* for data within our app is our Supabase database. Supabase offers a feature known as *realtime channels*. Whenever data changes within some (or any) part of our database, Supabase can broadcast this event to interested parties. A Supabase realtime channel is a **publisher**.
 
-We will add an observable class to our app named `EnrollmentChangeNotifier`. It will use the Supabase framework to **subscribe** to a realtime channel, and will thereby be notified whenever the database is updated.
+We will add an observable class to our app named `EnrollmentChangeNotifier`. It will use the Supabase framework to **subscribe** to a realtime channel, and will therefore be notified whenever the database is updated.
 
-So, `EnrollmentChangeNotifier` is a *broker* that handles the job of knowing when the database is updated. It will in turn contain a single stored property named `changeCount` that is an integer. Whenever the database is updated, `EnrollmentChangeNotifier` will increment `changeCount` by one – that makes it a **publisher** within our app.
+`EnrollmentChangeNotifier` is also a **publisher**, as it contains a single stored property named `changeCount`. Whenever the database is updated, `EnrollmentChangeNotifier` will increment `changeCount` by one. We can describe `EnrollmentChangeNotifier` as a *broker* because it acts as both a subscriber and a publisher.
 
-Why is this? It is because every view in our app that has its own view model will observe `changeCount` on `EnrollentChangeNotifier`  through the environment. Using a `.onChange(of:)` view modifier, each view **subscribes** to the broker, `EnrollmentChangeNotifier`. When a view sees that `changeCount` has been incremented, it will ask its view model to refresh data (to fetch new information from the database).
+In turn, within our app, view(s) that would otherwise be unaware of database changes will observe `changeCount` on `EnrollentChangeNotifier`  through the environment. Using a `.onChange(of:)` view modifier, each view **subscribes** to the broker, `EnrollmentChangeNotifier`. When a view sees that `changeCount` has been incremented, it will ask its view model to refresh data (to fetch new information from the database).
 
-This will let us **fan out** a single event (e.g.: a database change) to any number of views within our app (including but not limited to `EnrolmentsView`, `CoursesListView`, `StudentsListView`).
+This will let us **fan out** a single event (e.g.: a database change) to one or more views within our app.
 
-Here is a picture of what this looks like:
+For the students and courses app we are looking at for this lesson, here is how this will work:
 
 ```mermaid
 flowchart TD
@@ -122,26 +121,24 @@ flowchart TD
 
     RTC --> Notifier["EnrollmentChangeNotifier<br>(Subscriber to channel + Publisher within app)"]
     Notifier -->|changeCount incremented| EnrolmentsView
-    Notifier -->|changeCount incremented| CoursesListView
-    Notifier -->|changeCount incremented| StudentsListView
 
     EnrolmentsView -->|onChange of changeCount| EnrolmentsVM["EnrolmentsByCourseViewModel<br>EnrolmentsByStudentViewModel<br><b>(both view models refresh)</b>"]
-    CoursesListView -->|onChange of changeCount| CoursesVM["CoursesListViewModel"]
-    StudentsListView -->|onChange of changeCount| StudentsVM["StudentsListViewModel"]
+    CoursesListView -->|course is added| CoursesVM["CoursesListViewModel"]
+    StudentsListView -->|student is added| StudentsVM["StudentsListViewModel"]
 
     EnrolmentsVM -->|refreshes| Supabase
-    CoursesVM -->|refreshes| Supabase
-    StudentsVM -->|refreshes| Supabase
+    CoursesVM -->|updates| Supabase
+    StudentsVM -->|updates| Supabase
 ```
 
 Summarized:
 
 - The **Supabase database** sends a change notification via a **Realtime Channel**.
 - This message is received by our app’s **EnrollmentChangeNotifier**, which then acts as a **publisher** inside the app.
-- All views (`EnrolmentsView`, `CoursesListView`, `StudentsListView`) listen for updates to `changeCount`.
-- When notified, each view tells its **view model** to fetch fresh data from Supabase.
+- Subscribing views listen for updates to `changeCount`.
+- Each subscribed view tells its **view model** to fetch fresh data from Supabase.
 
-The advantage of this approach is that we have just **one** subscription to the realtime channel in our database. This conserves database server resources. As well, the code required to subscribe to a realtime channel is somewhat lengthy. By contrast, having a view watch the `changeCount` property of `EnrollmentChangeNotifier` through the environment is only a few lines of code.
+The advantage of this approach is that we have just **one** subscription to the realtime channel in our database. This conserves database server resources. 
 
 ## Applying the pattern
 
@@ -173,11 +170,78 @@ So, Mr. Gordon has edited each table in turn:
 > 
 > Be sure to enable realtime on all tables you want to receive notifications about changes on.
 
+### Check Supabase version
+
+Before continuing, please double-check that you are using version 2.24.1 of the Supabase framework.
+
+If you don't see that at the bottom of the Project Navigator in Xcode:
+
+![[Pasted image 20250512151042.png|300]]
+
+... then please watch this brief video to learn how to change to the correct version.
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083649047?h=ae6a57ddd3&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Getting the Correct Version of the Supabase Framework"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+### Add logging
+
+Before we add code to implement the pub/sub messaging pattern in our app, it will be helpful to take a detour and talk about logging.
+
+> [!TIP]
+> 
+> If you *really* want to dive in to what logging within an app is, watch this 13-minute WWDC video published by Apple:
+> 
+> [Debug with structured logging](https://developer.apple.com/videos/play/wwdc2023/10226)
+> 
+> Mr. Gordon will give you the short version below.
+
+As our apps grow in complexity, they become harder to debug. We need to know what is happening and when. That is where *log messages* or *logging* can help.
+
+The gist of the idea is to sprinkle messages to ourselves (as developers) throughout our app. End users will never see these messages, but they can help us as developers to debug logical errors during the development process, and potentially, to understand what went wrong if we happen to ship an app with a bug to our end-users.
+
+We can organize our log messages into different categories. Let's start doing this now, by copying this code:
+
+```swift
+import OSLog
+
+extension Logger {
+
+    // Using your bundle identifier is a great way to ensure a unique identifier.
+    private static var subsystem = Bundle.main.bundleIdentifier!
+
+    // Logs the view cycles like a view that appeared
+    static let viewCycle = Logger(subsystem: subsystem, category: "viewcycle")
+
+    // All logs related to tracking and analytics
+    static let statistics = Logger(subsystem: subsystem, category: "statistics")
+
+    // All logs related to database operations
+    static let database = Logger(subsystem: subsystem, category: "database")
+
+    // All logs related to user authentication
+    static let authentication = Logger(subsystem: subsystem, category: "authentication")
+
+}
+```
+
+... to a file named `Logger.swift` in a group named `Logging`, like this:
+
+![[Pasted image 20250512153506.png]]
+
+What this allows us to do is record log messages but keep track of them within different categories. More on that in a moment.
+
+For now, before continuing, Mr. Gordon committed his changes with this message:
+
+```
+Switched to Supabase 2.24.1 and added support for structured (categorized) log messages.
+```
+
 ### Subscribe to a channel
 
-Now that the database is broadcasting (publishing) changes to database tables, we need to add code that subscribes (receives notifications) of those changes.
+Earlier we [[#Enable realtime updates on database|configured the database to broadcast (publish) changes to database tables]].
 
-You are welcome to copy the following code and adapt it to your own project:
+Now that the database is broadcasting changes to database tables, we need to add code that that subscribes to and receives those notifications.
+
+You are welcome to copy the following code and adapt it to your own project (all you would likely be changing is the name of the *class* and the *channel*):
 
 ```swift
 import OSLog
@@ -194,19 +258,16 @@ class EnrollmentChangeNotifier: Observable {
     // it changes
     var changeCount = 0
         
-    // Stores a channel to that we will subscribe to
+    // Stores a channel that we will subscribe to
     // and receive realtime updates from
     private var channel: RealtimeChannelV2?
     
     // MARK: Initializer(s)
     init() {
         
-        Logger.database.info("EnrollmentChangeNotifier: Initializer is starting.")
+        Logger.database.info("EnrollmentChangeNotifier: Initializer has completed.")
         
-        // Subscribe to changes
-        self.subscribe()
-        
-    }
+	}
     
     // MARK: Function(s)
     func subscribe() {
@@ -228,6 +289,8 @@ class EnrollmentChangeNotifier: Observable {
                 schema: "public"
             )
             
+            Logger.database.info("EnrollmentChangeNotifier: Successfully created stream to identify scope of database changes we will subscribe to (all types of changes, on all database tables).")
+		
             Task {
                 
                 // Subscribe to notifications on the channel
@@ -274,54 +337,11 @@ class EnrollmentChangeNotifier: Observable {
 
 Mr. Gordon chose to add this file to the **Helpers** group in his project:
 
-![[Pasted image 20250512093002.png]]
+![[Pasted image 20250512153926.png]]
 
-If you were to add that file to your project, you would immediately see the same error message come up that shows in the screenshot above.
+It's good to understand code that we add to our projects, so, let's examine this more closely:
 
-In order to better debug logical errors in this app – especially as we begin using a publisher-subscriber messaging pattern – it's helpful to know when certain things are happening in our code.
-
-We can enable this by using *logging*, which will be explained shortly. The gist of the idea is that we include little messages to ourselves as developers throughout our code. Then, as we use our app, it makes it easier to know everything is working the way we intend.
-
-Mr. Gordon prefers to create a **Logging** group:
-
-![[Pasted image 20250512093609.png]]
-
-He then added this code:
-
-```swift
-import OSLog
-
-extension Logger {
-
-    // Using your bundle identifier is a great way to ensure a unique identifier.
-    private static var subsystem = Bundle.main.bundleIdentifier!
-
-    // Logs the view cycles like a view that appeared
-    static let viewCycle = Logger(subsystem: subsystem, category: "viewcycle")
-
-    // All logs related to tracking and analytics
-    static let statistics = Logger(subsystem: subsystem, category: "statistics")
-
-    // All logs related to database operations
-    static let database = Logger(subsystem: subsystem, category: "database")
-
-    // All logs related to user authentication
-    static let authentication = Logger(subsystem: subsystem, category: "authentication")
-
-}
-```
-
-... to a file named `Logger.swift`:
-
-![[Pasted image 20250512093747.png]]
-
-If we click back to `EnrollmentChangeNotifier` we see that the error message has resolved:
-
-![[Pasted image 20250512094639.png]]
-
-It's good to have at least an initial understanding of code that we add to our projects, so, let's examine it more closely:
-
-![[Pasted image 20250512094624.png]]
+![[Pasted image 20250512154214.png]]
 
 In order:
 
@@ -329,18 +349,18 @@ In order:
 > 
 > 1. The `EnrollmentChangeNotifier` class must conform to the `Observable` protocol, so that our views can watch the class for changes and respond accordingly.
 > 2. `@MainActor` should be added to all classes that will drive changes to the user interface. This ensures that the code in the class will run on the main thread of our application, rather than a background thread. By running on the main thread, we ensure that the user interface updates in a timely manner. Read this for [more background on what threads are](https://www.hackingwithswift.com/quick-start/concurrency/understanding-threads-and-queues), if desired.
-> 3. In the initializer of the class, we run the `subscribe` function so that we can receive notifications when the database changes.
-> 4. Here we create a channel to subscribe to. Select a name that makes sense for the context of your app; here, Mr. Gordon chooses `enrollment-updates`.
-> 5. With this code we configure what kind of updates we want to be notified about, and from what tables. This code asks for all types of updates (*insertions* of a new row to a table, *updates* to an existing row, and *deletions* of a row). This code also asks for notifications on every database table, not just a single table.
-> 6. Create an asynchronous task block (line 56) that will run and wait for update notifications from the database – then – subscribe to the channel we created earlier (line 59).
-> 7. The code from lines 64 to 72 can be thought of as a loop that will iterate – run its code block – only when a change notification is received from the database.
+> 3. Here we create a channel to subscribe to. Select a name that makes sense for the context of your app; here, Mr. Gordon chooses `enrollment-updates`.
+> 4. With this code we configure what kind of updates we want to be notified about, and from what tables. This code asks for all types of updates (*insertions* of a new row to a table, *updates* to an existing row, and *deletions* of a row). This code also asks for notifications on every database table, not just a single table.
+> 5. Create an asynchronous task block (line 55) that will run and wait for update notifications from the database.
+> 6. Subscribe to the channel we created earlier (line 58).
+> 7. The code from lines 63 to 71 can be thought of as a loop that will iterate – run its code block – only when a change notification is received from the database.
 > 8. There are times when we want to *unsubscribe* from receiving database update notifications – more on that in a moment.
 
 Now that we have these changes made, we need to create an instance of the `EnrollmentChangeNotifier` class at the app entry point, and insert it into the environment.
 
 Here are the changes that make this happen:
 
-![[Pasted image 20250512102333.png]]
+![[Pasted image 20250512154644.png]]
 
 That code needs a bit of explanation too, so let's go over it:
 
@@ -349,9 +369,125 @@ That code needs a bit of explanation too, so let's go over it:
 > 1. Here is where the instance of `EnrollmentChangeNotifier` is created.
 > 2. We insert the instance of `EnrollmentChangeNotifier` into the environment so that views can (later) observe it for changes.
 > 3. We create a stored property that tracks changes to *scenes* in our app. This is used to identify when our app is closed or backgrounded on a device.
-> 4. This code handles subscribing to database change notifications (when the app is active) or unsubscribing (when the app goes to the background).
+> 4. This code (lines 27 to 40) handles subscribing to database change notifications (when the app is active) or unsubscribing (when the app goes to the background).
 
-### Subscribe views to change notifier
+Here is what the code looks like when the app runs:
 
-### Reviewing the finished product
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083666575?h=145e51692a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Demonstration of the Change Notifier Class in Action"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
+Our logging code creates the messages that show in the debug console. We can see that the `EnrollmentChangeNotifier` class is subscribing to updates when the app is opened, and unsubscribing when the app is backgrounded.
+
+These are important changes, so Mr. Gordon committed his code at this point with the following message:
+
+>  `Added change notifier class to subscribe and unsubscribe to database changes as needed.`
+
+### Use @MainActor on all view models
+
+Using the pub/sub messaging pattern means that:
+
+- our views will subscribe to the change notifier class
+- when a view observes a change to `changeCount`, it will ask its view model to refresh its data from the database
+- data in the view model will change
+- we want to the updated data in our user interface
+
+**To be sure that we see these changes reliably, we must run view models on the main thread of our application.**
+
+As mentioned earlier, that means adding `@MainActor` to the declaration of each view model class, like this...
+
+In `CoursesListViewModel`:
+
+![[Pasted image 20250512162403.png]]
+
+In `StudentsListViewModel`:
+
+![[Pasted image 20250512162444.png]]
+
+In `EnrolmentsByCourseViewModel`:
+
+![[Pasted image 20250512162555.png]]
+
+In `EnrolmentsByStudentViewModel`:
+
+![[Pasted image 20250512162617.png]]
+
+In `AddEnrolmentFromEnrolmentsbyCourseViewModel`:
+
+![[Pasted image 20250512162654.png]]
+
+In `AddEnrolmentFromEnrolmentsbyStudentViewModel`
+
+![[Pasted image 20250512162717.png]]
+
+Mr. Gordon then committed his changes with this message:
+
+> `Before having views observe changes to the change notifier class, made sure each view model is running on the main thread of our application.`
+
+### Subscribe view to change notifier
+
+Recall that there are *three* views created when the app launches:
+
+```mermaid
+flowchart TD
+
+id1["App Entry Point<br/>"] --> id2["LandingView"]
+id2 --> id3["TabView"]
+id3 --> id4["EnrolmentsView<br/>(.tabItem)"]
+id3 --> id5["CoursesListView<br/>(.tabItem)"]
+id3 --> id6["StudentsListView<br/>(.tabItem)"]
+```
+
+Visually, within the app:
+
+![[Pasted image 20250512161645.png|350]]
+
+`EnrolmentsView` has view models whose data becomes out of date when a new course is added (on `CoursesListView`) or when a new student is added (on `StudentsListView`).
+
+Since the view models made within `EnrolmentsView` are created *when the app launches* we need to make that view watch for changes that are published by `EnrollmentChangeNotifier`. Then, it will know when to ask its view models to refresh their data.
+
+#### Update view models
+
+We must begin by modifying the view models to add a `refresh` method to each one.
+
+`EnrolmentsByCourseViewModel` looks like this right now:
+
+![[Pasted image 20250512164858.png]]
+
+We can adjust `EnrolmentsByCourseViewModel` like so:
+
+![[Pasted image 20250512165318.png]]
+
+All that we have done is:
+
+1. Moved code out of the initializer and into the `refresh` method.
+2. Added some additional logging messages to aid with debugging logical errors in the future.
+
+Next, we make similar changes to `EnrolmentsByStudentViewModel`. It looks like this now:
+
+![[Pasted image 20250512165436.png]]
+
+We make these adjustments:
+
+![[Pasted image 20250512165611.png]]
+
+#### Update view
+
+Next, we adjust `EnrolmentsView` in three ways.
+
+First, we retrieve a reference to the change notifier class from the environment:
+
+![[Pasted image 20250512164147.png]]
+
+Next, we create its view models as stored properties – these are in turn passed as arguments to the views that use them:
+
+![[Pasted image 20250512164311.png]]
+
+Finally, we make `EnrolmentsView` observe the change notifier and update its view models when a database change occurs:
+
+![[Pasted image 20250512165734.png]]
+
+With these changes, we now have `EnrolmentsView` watching the change notifier class, and refreshing its view models when a database change occurs. Let's see what this looks like:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083683009?h=4314ed0bd9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Seeing Changes Propagate Throughout the App"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+That is it!
+Any other views (within a larger app) that need to update their data when the database changes can use the same approach to subscribe to `EnrollmentChangeNotifier` and then update their view model, as needed.
