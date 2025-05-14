@@ -81,7 +81,7 @@ Here are some suggestions about how to get rolling!
 > - How to play background audio
 > - Drag gestures (how to swipe left or right)
 > - Showing a slide-up sheet
-> - Working with dates and times
+> - [[Culminating#Dates and times|Working with dates and times]] ✅
 
 ### User interfaces
 
@@ -209,3 +209,25 @@ The following lesson explains how, in a larger app with many views, you can use 
 When building larger applications, adding *log messages* to your app is essential to help debug logical errors – that is, errors that occur when your app actually compiles and runs – but does not do exactly what you want it to.
 
 Read more about [[Publisher-Subscriber Messaging Pattern#More about logging|how to write and use log messages here]].
+
+### Dates and times
+
+> [!TIP]
+> 
+> For a variety of reasons, working with dates and times is challenging, but... the good news is that Apple developers have done the hard work for us. Our job is just to know what built-in features of Swift and SwiftUI to use to handle dates. For more on this, read the section below.
+
+The `Date` data type is used in Swift to store dates and times. In Supabase, dates and times should always be stored in a column of type `timestamptz`.
+
+Do your users need to select a date or time in your app? You should consult the `DatePicker` section of SwiftUI Views Mastery, from pages 225 through 231 – anything you need in a user interface related to selecting a date or a time is described here:
+
+![[Pasted image 20250514133926.png]]
+
+[Paul Hudson](https://www.hackingwithswift.com/about) is a prolific author of Swift and SwiftUI tutorials. Here are several that will be useful to you when working with dates and times:
+
+- [Working with `DatePicker`](https://www.hackingwithswift.com/books/ios-swiftui/selecting-dates-and-times-with-datepicker)
+- [How to compare two dates to see if they are similar](https://www.hackingwithswift.com/example-code/system/how-to-check-whether-one-date-is-similar-to-another)
+- [How to tell if a given date is within a range of dates](https://www.hackingwithswift.com/example-code/language/how-to-check-whether-a-date-is-inside-a-date-range)
+- [How to show relative dates, such as "3 minutes ago" or "5 days ago"](https://www.hackingwithswift.com/example-code/system/how-to-show-a-relative-date-and-time-using-relativedatetimeformatter)
+- [How to create dates at particular times of day, show only certain components of a date, or how to format dates for presentation to users](https://www.hackingwithswift.com/books/ios-swiftui/working-with-dates)
+
+
