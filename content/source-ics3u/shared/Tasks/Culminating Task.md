@@ -69,8 +69,12 @@ Here are some suggestions about how to get rolling!
 > 
 > Mr. Gordon will be updating this section to provide additional resources over the coming weeks. If you have kept this page open in your web browser for a long time, please be sure to press **Command-R** to pick up the latest changes.
 > 
+> Tutorials Mr. Gordon has now completed are marked with a ✅.
+> 
 > Here is a list of currently planned mini-tutorials that will be added to what is already available below:
 > 
+> - [[Culminating Task#Debugging|Using log messages to more easily debug logical errors]] ✅
+> - [[Publisher-Subscriber Messaging Pattern|Ensuring all users of an app see up-to-date information]] ✅
 > - Creating local notifications on an iOS device
 > - Parsing more complex JSON from web endpoints
 > - Showing a map with annotations
@@ -195,3 +199,9 @@ The following lesson explains how, in a larger app with many views, you can use 
 > [!TIP]
 > 
 > A sub-topic of the lesson above – [[Publisher-Subscriber Messaging Pattern#Add logging|adding log messages]] – might be helpful too if you are trying to [[Publisher-Subscriber Messaging Pattern#More about logging|debug logical errors within your app]].
+
+### Debugging
+
+When building larger applications, adding *log messages* to your app is essential to help debug logical errors – that is, errors that occur when your app actually compiles and runs – but does not do exactly what you want it to.
+
+Read more about [[Publisher-Subscriber Messaging Pattern#More about logging|how to write and use log messages here]].

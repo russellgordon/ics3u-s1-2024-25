@@ -12,6 +12,12 @@ Before reviewing this lesson you are encouraged to have at least read through [[
 
 The approach to seeing up-to-date data shared in *this* lesson *may* be necessary for your app – it depends on how users navigate through different views within your app.
 
+> [!TIP]
+> 
+> If your app involves showing data that is shared (seen) by multiple users of your app, you will definitely need to (eventually) implement this pattern for tracking database changes within your app.
+> 
+> For example, Mr. Gordon's *Bone Appétit* app – for letting family members track when their dog has been fed – would need to use this messaging pattern. Why? When one users has fed the dog, the other app users who care for that dog need to know that the feeding has occurred. 
+
 If you do try out the app, you may notice an issue – watch this video carefully:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083182394?h=8e6b8f01ad&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Updates Not Seen in Other Views"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
@@ -499,7 +505,7 @@ As our apps grow, log messages make it easier to understand what is happening wh
 
 We can use the debug console to filter out messages and show only the messages we care about.
 
-Earlier we added this code to the project:
+[[Publisher-Subscriber Messaging Pattern#Add logging|Earlier]] we added this code to the project:
 
 ```swift
 import OSLog
