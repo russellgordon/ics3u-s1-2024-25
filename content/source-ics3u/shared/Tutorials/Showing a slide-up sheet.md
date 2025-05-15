@@ -125,7 +125,7 @@ Let's break this code down a little bit.
 > 3. Shows a title of **Students** for this view.
 > 4. Initializes a stored property named `showingAddStudentView` to control whether the slide-up sheet is shown or not. It begins as `false` so that the sheet does not show at first. 
 > 5. Adds the + button in the toolbar (lines 31 to 40). This button causes the `showingAddStudentView` stored property to become `true`. This will trigger the appearance of the slide-up sheet.
-> 6. This is the view modifier that is used to cause a sheet to appear. The `isPresented` parameter is bound to the `showingAddStudentView` stored property. When the + button makes that stored property become true, the sheet appears and presents `AddStudentView`.
+> 6. This is the view modifier that is used to cause a sheet to appear. The `isPresented` parameter is bound to the `showingAddStudentView` stored property. When the + button makes that stored property become `true`, the sheet appears and presents `AddStudentView`.
 > 7. The `.presentationDetents` view modifier accepts an array of sizes to present the sheet with. In this code, the sheet is presented such that it occupies 40% of the available height on the device. The user can optionally expand the size of the slide-up sheet to "medium" which is roughly half the available height of the device.
 > 8. A reference to the view model is inserted into the environment so that the view that allows for the addition of a student can use the view model.
 
@@ -172,7 +172,7 @@ So, the toolbar button labelled **Done**, when it is pressed:
 
  ... causes the `isShowing` binding to change back to `false`.
  
- In turn, `showingAddStudentView` back on `StudentsListView` also becomes false, causing the sheet to disappear, like this:
+ In turn, `showingAddStudentView` back on `StudentsListView` also becomes `false`, causing the sheet to disappear, like this:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1084732941?h=02be31a4e3&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Dismissing a Sheet"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
