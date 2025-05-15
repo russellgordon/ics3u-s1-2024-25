@@ -80,7 +80,7 @@ Here are some suggestions about how to get rolling!
 > - Showing a map with annotations
 > - How to play background audio
 > - Drag gestures (how to swipe left or right)
-> - Showing a slide-up sheet
+> - [[Showing a slide-up sheet]] ✅
 > - [[Culminating#Dates and times|Working with dates and times]] ✅
 
 ### User interfaces
@@ -106,6 +106,9 @@ When used sparingly, [[Lottie Animations|third-party pre-built animations]] can 
 You can obtain commonly used symbols using the [SF Symbols app](https://developer.apple.com/sf-symbols/) or by using the **Library** feature in Xcode:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083513370?h=70c293f03b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Adding SF Symbols"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+You can [[Showing a slide-up sheet|show a slide-up sheet]] when adding new data to a list of existing data.
+
 
 ### Describing data
 
