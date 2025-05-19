@@ -21,7 +21,7 @@ Mr. Gordon has authored [a complete exemplar](https://lakefieldcs.notion.site/IC
 > 
 > The best way to understand the requirements for the culminating task is by [reviewing the exemplar](https://lakefieldcs.notion.site/ICS3U-Culminating-Task-2025-Exemplar-1d2d4a49de51802f9513ed3a61b82056).
 
-## Second Exemplar
+## Second exemplar
 
 The first exemplar described above *meets* expectations. It was specifically designed to showcase a simple app.
 
