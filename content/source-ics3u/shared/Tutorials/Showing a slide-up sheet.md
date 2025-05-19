@@ -295,3 +295,6 @@ When the **Add student** button is pressed, this key line of code (highlighted):
 
 This is a convenience feature. It's not strictly necessary, but it makes it faster for a user to be able to add many students in a row. 🚀
 
+> [!TIP]
+> 
+> You are welcome to browse the [complete source code for **SlideUpSheetExample** here](https://github.com/lcs-rgordon/SlideUpSheetExample).

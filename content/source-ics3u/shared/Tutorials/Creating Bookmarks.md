@@ -3,8 +3,6 @@ draft: false
 draftSectionTwo: false
 created: 2024-10-07T07:00:00.000-0400
 createdForSectionTwo: 2024-09-16T07:00:00.000-0400
-enableToc: false
-excludeBacklinks: true
 tags:
 ---
 ## Make a bookmark

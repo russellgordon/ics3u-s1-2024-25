@@ -21,6 +21,16 @@ Mr. Gordon has authored [a complete exemplar](https://lakefieldcs.notion.site/IC
 > 
 > The best way to understand the requirements for the culminating task is by [reviewing the exemplar](https://lakefieldcs.notion.site/ICS3U-Culminating-Task-2025-Exemplar-1d2d4a49de51802f9513ed3a61b82056).
 
+## Second Exemplar
+
+The first exemplar described above *meets* expectations. It was specifically designed to showcase a simple app.
+
+Knowing that many students are interested in exceeding expectations (and making more interesting and useful apps that require a database) Mr. Gordon has chosen to author a second exemplar for the culminating task.
+
+For this exemplar, Mr. Gordon is going to (mostly) adopt an "alter ego" – a student named *Walter* Gordon who is going to build out the *Bone Appétit* app that we used to learn how to make prototypes in Keynote earlier in the school year.
+
+If you are interested in seeing, essentially, a live-streamed process of authoring a database-driven app from start to finish, you can review the [[Building Bone Appétit]] article.
+
 ## Obtain the template
 
 Please go to [Notion](https://notion.so) and add a page based on the culminating task template:
@@ -75,7 +85,7 @@ Here are some suggestions about how to get rolling!
 > 
 > - [[Culminating Task#Debugging|Using log messages to more easily debug logical errors]] ✅
 > - [[Publisher-Subscriber Messaging Pattern|Ensuring all users of an app see up-to-date information]] ✅
-> - Creating local notifications on an iOS device
+> - [[Creating Local Notifications|Creating local notifications on an iOS device]] ✅
 > - Parsing more complex JSON from web endpoints
 > - Showing a map with annotations
 > - How to play background audio

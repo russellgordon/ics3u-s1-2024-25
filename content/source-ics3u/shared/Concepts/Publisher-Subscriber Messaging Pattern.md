@@ -563,3 +563,7 @@ We can also filter just by typing text to search.
 Here is a super-brief video that shows all of this in action:
 
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1083979790?h=2f56e8502a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Using the Debug Console to Filter Log Messages"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+> [!TIP]
+> 
+> You are welcome to browse the [complete source code for the **StudentsAndCourses** app.](https://github.com/lcs-rgordon/StudentsAndCourses/tree/93f2ffa293b61340865b564e3f3c35941bd1f8df)

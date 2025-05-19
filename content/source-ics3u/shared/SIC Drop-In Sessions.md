@@ -9,4 +9,4 @@ They are friendly, very knowledgeable, and staff drop-in sessions as well – si
 
 > [!NOTE]
 > 
-> For the remainder of the school year, due to approaching AP exams, there are no SIC Drop-In sessions scheduled.
+> For the remainder of the school year, due to approaching exams, there are no SIC Drop-In sessions scheduled.
