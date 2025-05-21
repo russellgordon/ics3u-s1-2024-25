@@ -86,6 +86,7 @@ Here are some suggestions about how to get rolling!
 > - [[Culminating Task#Debugging|Using log messages to more easily debug logical errors]] ✅
 > - [[Publisher-Subscriber Messaging Pattern|Ensuring all users of an app see up-to-date information]] ✅
 > - [[Creating Local Notifications|Creating local notifications on an iOS device]] ✅
+> - [[Array vs. Dictionary|Grouping an array to create a dictionary]] ✅
 > - Parsing more complex JSON from web endpoints
 > - Showing a map with annotations
 > - How to play background audio
