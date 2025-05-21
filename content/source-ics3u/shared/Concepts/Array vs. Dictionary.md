@@ -151,7 +151,7 @@ This transformation makes it much easier to work with students grouped by house 
 
 Let's see how we would iterate over each data structure using SwiftUI's `List` component:
 
-### Displaying an Array
+### Displaying an array
 
 ```swift
 // 1. Simple array-based view (flat listing of all students)
@@ -210,7 +210,7 @@ This creates a simple flat list of all students' arrival statuses, that looks li
 
 ![[RocketSim_Screenshot_iPhone_16_Pro_6.3_2025-05-21_16.37.24.png|300]]
 
-### Displaying a Dictionary
+### Displaying a dictionary
 
 ```swift
 //
