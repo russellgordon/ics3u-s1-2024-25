@@ -88,7 +88,8 @@ Here are some suggestions about how to get rolling!
 > - [[Creating Local Notifications|Creating local notifications on an iOS device]] ✅
 > - [[Array vs. Dictionary|Grouping an array to create a dictionary]] ✅
 > - Parsing more complex JSON from web endpoints
-> - Showing a map with annotations
+> - [Showing a map with annotations](https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-annotations-in-a-map-view) ✅ (by Paul Hudson)
+> - [Showing a map and the user's location](https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-a-map-view) ✅ (by Paul Hudson)
 > - How to play background audio
 > - Drag gestures (how to swipe left or right)
 > - [[Showing a slide-up sheet]] ✅
