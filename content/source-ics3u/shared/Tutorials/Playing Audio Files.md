@@ -134,7 +134,7 @@ How could loop an audio file?
 
 What would we do to change the background audio file that was playing?
 
-> [!COMING SOON]
+> [!NOTE]
 > 
 > Mr. Gordon has the code written for this, but needs a bit of time later today to do the writeup. If you really need to see how you might add background audio to your app, you are welcome to [browse his source code](https://github.com/lcs-rgordon/SoundExample/tree/2b0dfa63117231b9a0af3a17afb285912a2f8ccf) or [download a copy](https://github.com/lcs-rgordon/SoundExample/archive/2b0dfa63117231b9a0af3a17afb285912a2f8ccf.zip) of the completed app to try it out.
 
