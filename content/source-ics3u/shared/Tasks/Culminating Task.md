@@ -90,7 +90,7 @@ Here are some suggestions about how to get rolling!
 > - Parsing more complex JSON from web endpoints
 > - [Showing a map with annotations](https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-annotations-in-a-map-view) ✅ (by Paul Hudson)
 > - [Showing a map and the user's location](https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-a-map-view) ✅ (by Paul Hudson)
-> - How to play background audio
+> - [[Playing Audio Files|Playing audio files]] ✅
 > - Drag gestures (how to swipe left or right)
 > - [[Showing a slide-up sheet]] ✅
 > - [[Culminating Task#Dates and times|Working with dates and times]] ✅
