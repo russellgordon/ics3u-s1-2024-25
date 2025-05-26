@@ -332,7 +332,65 @@ Here is how the app works at this point in time:
 > 1. The format of the value for a "bio" or biography for an author changes. Sometimes it is sent as a simple string – sometimes as another JSON object. Mr. Gordon chose to simply comment out the parts of his code that show author biographies, for now.
 > 2. Links are not always provided for every author, so, Mr. Gordon made that property of his model optional.
 
-## Author works
+### Images
 
-Now that we are showing author works, 
+Mr. Gordon found the following note in the Open Library API documentation:
+
+![[Pasted image 20250525205840.png]]
+
+What he thinks this means is that, if you know the unique identifier for an author or a book, you can get an image of the author or book using a URL like this:
+
+`https://covers.openlibrary.org/a/olid/OL52922A-M.jpg`
+
+... and that seems to be true! For example:
+
+![[Pasted image 20250525210031.png]]
+
+However, in testing some code changes to retrieve those images, he found that some (perhaps most) authors don't have photos. 
+
+So... if he programmed the app to *always* attempt to show an author's image using a URL following the pattern described above, most of the time, he'd end up with a blank space where the image should appear.
+
+Mr. Gordon then remembered that the original response for a given author had a `photos` property:
+
+![[Pasted image 20250525212636.png]]
+
+Even better, for authors where there are no photos available, that property is not returned in the response:
+
+![[Pasted image 20250525212836.png]]
+
+So, Mr. Gordon made these changes to the `AuthorDetailResponse` structure:
+
+![[Pasted image 20250525213117.png]]
+
+Note that the `photos` property is defined as an optional value – so that if no photos information is provided by the remote endpoint – the property will contain a `nil` value.
+
+However, Mr. Gordon wasn't entirely sure *how* to use the integers listed in the array returned as the value for the `photos` property:
+
+![[Pasted image 20250525213247.png]]
+
+So, he [asked ChatGPT about this](https://chatgpt.com/share/6833c53e-4ac4-800b-90e5-d9ea384b8e8f), briefly.
+
+That conversation confirmed that Mr. Gordon only needed to make these changes to the view model – he added a function that, given a photo's `id`, provides the URL to that image:
+
+![[Pasted image 20250525213952.png]]
+
+Then he made these changes to the view:
+
+![[Pasted image 20250525214041.png]]
+
+That deserves some explanation, so let's review...
+
+> [!DISCUSSION]
+> 
+> 1. So long as the `photos` property of the response received providing details of an author is not nil, let's try to show the photo...
+> 2. Use the `AsyncImage` structure that is provided by the **SwiftUI** framework to go out across the Internet and fetch the image from the provided URL. Paul Hudson has a [nice summary](https://www.hackingwithswift.com/books/ios-swiftui/loading-an-image-from-a-remote-server) of the different ways to use `AsyncImage`.
+> 3. We call the `getImageURL` function we just defined a moment ago on the view model.
+> 4. We pass in the ID of the first photo in the array provided in the response from the remote endpoint.
+> 5. When a photo is loaded, several phases will occur. Once an image has finished being loaded, we'll display it using the code in this block.
+> 6. If any kind of error occurred while loading the image, we'll show an error message in the view.
+> 7. While `AsyncImage` is going out and getting the author's image, we'll display a progress view, or spinner.
+> 8. Finally, we ensure that every image will have the same width (the height may vary).
+
+
+
 
