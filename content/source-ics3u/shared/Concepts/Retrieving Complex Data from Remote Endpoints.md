@@ -226,3 +226,113 @@ Then, we define the helper view itself:
 Now, we can use that helper view in the main view that shows our list of fetched results:
 
 ![[Pasted image 20250525124628.png]]
+
+## Author details
+
+The next logical progression is that once a list of authors has been retrieved, our user could navigate into a detail view for that author to see more information about that author, and then perhaps see a list of their most famous works.
+
+According to the [Open Library API for authors](https://openlibrary.org/dev/docs/api/authors):
+
+![[Pasted image 20250525190727.png]]
+
+We can:
+
+> [!DISCUSSION]
+> 
+> 1. Get data on individual authors using, for example, [this endpoint for Margaret Atwood](https://openlibrary.org/authors/OL52922A.json).
+> 2. Get data on the works of a given [author using this endpoint](https://openlibrary.org/authors/OL52922A/works.json), again using Margaret Atwood as an example.
+> 
+> In the case of both endpoints, we need to know the Open Library unique identifier for that author. Fortunately, we just obtained that with the code written to return a list of authors.
+
+### Another model
+
+Let's begin with the endpoint that will simply provide some additional information about an author. 
+
+As before, we identify properties we want to decode when retrieving information from the endpoint, omitting properties we don't care about, and possibly adjusting the name of properties so they better match expected Swift programming language style conventions.
+
+Here is a video where Mr. Gordon reviews the information available for an author and decides what to include in his model:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1087588663?h=0430a27295&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Creating a Model for an Endpoint Response"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+Here is the model Mr. Gordon ended up writing:
+
+![[Pasted image 20250525193244.png]]
+
+### Another view model
+
+Here is the view model Mr. Gordon developed to retrieve a response from the endpoint.
+
+It is mostly the same, but not identical, to the previous view model that we authored.
+
+The new view model code is:
+
+![[Pasted image 20250525194243.png]]
+
+Let's review the interesting parts:
+
+> [!DISCUSSION]
+> 
+> 1. The initializer receives the unique identifier of the author we want to get details for (more on how the view model is created and provided with this information when we build out the view). When the initializer runs, `currentResponse` is initially set to be be `nil` because we haven't yet gone out over the Internet to get a response from the endpoint. We then (lines 27 to 29) invoke the function defined further down in this view model to go out and get the author details.
+> 2. We define a function named `fetchDetails` that does the work of speaking to the endpoint and getting details for a given author. It's marked as private, which means we can only call it from somewhere else inside this class – we can't call this function directly from the view.
+> 3. We construct the URL for the endpoint. Notice how the `id` passed in to this function is used to construct the endpoint URL. 👀
+> 4. Everything else about this view model is identical to the other one; the only remaining part that's different is we decode the response from the endpoint into a data type of `AuthorDetailResponse` (instead of `AuthorSearchResponse` like in the first view model).
+
+### Another view
+
+We need a view to show the information held by the view model.
+
+Here one possible way to write that view:
+
+![[Pasted image 20250525200520.png]]
+
+Reviewing key details...
+
+> [!DISCUSSION]
+> 
+> 1. This view does not create it's own view model. Instead, it receives its view model from the calling view. An explanation for why this is done will be provided momentarily.
+> 2. The view also receives the name of the author from the calling view. This is so that we can use the author's name as the navigation title. 
+> 3. Initially there will be no response to show from the `AuthorDetailViewModel`, as it takes a little while for the endpoint to provide one. When there is no response, the `currentResponse` property from the view model is `nil`. When this is true, we show a spinner to indicate that the app is in fact doing something for us as the user.
+> 4. Once a response has been received, we show details. This makes use of a helper view named `LabelAndValueView`, since the layout of showing each individual property is the same – a label that is **bolded** and then the actual information to be shown.
+
+Applying some abstraction, we have also created a helper view, which is shown here:
+
+![[Pasted image 20250525201209.png]]
+
+How this helper view works should be self-explanatory at this point.
+
+Finally, we need to make use of this detail view, calling it from `AuthorSearchView`, so, let's make that modification.
+
+Right now, `AuthorSearchView` just shows a scrollable list of authors that match the search term:
+
+![[Pasted image 20250525201539.png]]
+
+We change the code around line 28 to show a `NavigationLink` instead of just an instance of `AuthorDocumentationResponseItemView`.
+
+Now the *label* for the navigation link is `AuthorDocumentationResponseItemView` and the user navigates down to `AuthorDetailView`:
+
+![[Pasted image 20250525201855.png]]
+
+Reviewing important details:
+
+> [!DISCUSSION]
+> 
+> 1. When the app navigates down to the detail view, it passes an instance of `AuthorDetailViewModel` into the detail view. We know the details of a given author  within the scope of the `List` structure (lines 27 to 37) and we pass the unique identifier of the current author in to the initializer of the view model.
+> 2. The author's name is also passed to the detail view to be shown as the navigation title.
+
+Here is how the app works at this point in time:
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1087596227?h=2fb0b017de&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Showing Author Details"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+> [!TIP]
+> 
+> As you saw in the video, it's pretty common to encounter challenges when receiving information from a remote endpoint.
+> 
+> Mr. Gordon found that:
+> 
+> 1. The format of the value for a "bio" or biography for an author changes. Sometimes it is sent as a simple string – sometimes as another JSON object. Mr. Gordon chose to simply comment out the parts of his code that show author biographies, for now.
+> 2. Links are not always provided for every author, so, Mr. Gordon made that property of his model optional.
+
+## Author works
+
+Now that we are showing author works, 
+

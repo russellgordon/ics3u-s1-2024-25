@@ -87,7 +87,7 @@ Here are some suggestions about how to get rolling!
 > - [[Publisher-Subscriber Messaging Pattern|Ensuring all users of an app see up-to-date information]] ✅
 > - [[Creating Local Notifications|Creating local notifications on an iOS device]] ✅
 > - [[Array vs. Dictionary|Grouping an array to create a dictionary]] ✅
-> - [[Retrieving Complex Data from Remote Endpoints]] ✅
+> - [[Retrieving Complex Data from Remote Endpoints|Retrieving complex data from endpoints]] ✅
 > - [Showing a map with annotations](https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-annotations-in-a-map-view) ✅ (by Paul Hudson)
 > - [Showing a map and the user's location](https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-a-map-view) ✅ (by Paul Hudson)
 > - [[Playing Audio Files|Playing audio files]] ✅
