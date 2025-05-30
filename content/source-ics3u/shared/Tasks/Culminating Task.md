@@ -83,6 +83,7 @@ Here are some suggestions about how to get rolling!
 > 
 > Here is a list of currently planned mini-tutorials that will be added to what is already available below:
 > 
+> - [[Symbolic Mathematics in Apps|How to display symbolic mathematics in an app]] ✅
 > - [[Culminating Task#Debugging|Using log messages to more easily debug logical errors]] ✅
 > - [[Publisher-Subscriber Messaging Pattern|Ensuring all users of an app see up-to-date information]] ✅
 > - [[Creating Local Notifications|Creating local notifications on an iOS device]] ✅
