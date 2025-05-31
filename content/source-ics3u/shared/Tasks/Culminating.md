@@ -27,9 +27,17 @@ The first exemplar described above *meets* expectations. It was specifically des
 
 Knowing that many students are interested in exceeding expectations (and making more interesting and useful apps that require a database) Mr. Gordon has chosen to author a second exemplar for the culminating task.
 
-For this exemplar, Mr. Gordon is going to (mostly) adopt an "alter ego" – a student named *Walter* Gordon who is going to build out the *Bone Appétit* app that we used to learn how to make prototypes in Keynote earlier in the school year.
+For this exemplar, Mr. Gordon is going to (mostly) adopt an "alter ego" – a student 🫠 *Walter* Gordon who is going to build out the *Bone Appétit* app that we used to learn how to make prototypes in Keynote earlier in the school year.
 
 If you are interested in seeing, essentially, a live-streamed process of authoring a database-driven app from start to finish, you can review the [[Building Bone Appétit]] article.
+
+## Third exemplar
+
+In the process of considering how to explain user authentication – adding **Sign in with Google** or something similar to an app – Mr. Gordon ended up writing... yes... another exemplar. 🫠
+
+You can read about that here: [[Building Electric Ride]]
+
+The app is a used-car marketplace for electric vehicles.
 
 ## Obtain the template
 

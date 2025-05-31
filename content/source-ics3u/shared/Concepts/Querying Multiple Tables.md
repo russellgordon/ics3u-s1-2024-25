@@ -219,7 +219,7 @@ The database connection information was obtained from the **Data API** section o
 
 ![[Pasted image 20250508092936.png]]
 
-Next Mr. Gordon added the [[To-do List App, Pt. 6#Adding the Supabase framework|package dependency]] for [Supabase]([github.com/supabase-community/supabase-swift](https://github.com/supabase-community/supabase-swift)):
+Next Mr. Gordon added the [[To-do List App, Pt. 6#Adding the Supabase framework|package dependency]] for [Supabase](https://github.com/supabase-community/supabase-swift):
 
 ![[Screenshot 2025-05-08 at 9.35.08 AM (2).png]]
 
