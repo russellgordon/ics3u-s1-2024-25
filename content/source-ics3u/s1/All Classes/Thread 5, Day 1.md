@@ -10,7 +10,7 @@ created: 2025-06-02T07:00:00.000-0400
 ## Agenda
 1. Task: [[Culminating]]
 	- Continue using the already available [[Culminating#Recaps and resources|recaps and resources]] to make further progress on your culminating task.
-	- Mr. Gordon will chat briefly with each student, in person, to ensure you know what next steps to take.
+	- Mr. Gordon will chat briefly with each student, in person, to ensure you know what next steps to take to continue with your project.
 
 ## Things to do before our next class
 
