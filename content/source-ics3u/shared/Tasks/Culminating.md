@@ -37,6 +37,8 @@ In the process of considering how to explain user authentication – adding **Si
 
 You can read about that here: [[Building Electric Ride]]
 
+Here is how social-sign in with Google was added to this app: [[Adding Sign in with Google]]
+
 The app is a used-car marketplace for electric vehicles.
 
 ## Obtain the template
