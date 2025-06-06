@@ -256,4 +256,6 @@ Do your users need to select a date or time in your app? You should consult the 
 - [How to show relative dates, such as "3 minutes ago" or "5 days ago"](https://www.hackingwithswift.com/example-code/system/how-to-show-a-relative-date-and-time-using-relativedatetimeformatter)
 - [How to create dates at particular times of day, show only certain components of a date, or how to format dates for presentation to users](https://www.hackingwithswift.com/books/ios-swiftui/working-with-dates)
 
+### Source control
 
+You may find it necessary to go back to old versions of your code; [[Reverting to Old Versions of Code|this article describes a series of options if you find yourself in that situation]].
