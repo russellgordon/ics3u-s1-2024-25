@@ -126,3 +126,13 @@ This four-and-half-minute video shows you exactly how to do this:
 	</iframe>
 	</div>
 <script src="https://player.vimeo.com/api/player.js"></script>
+
+## Adding to old revisions
+
+Sometimes we know that we do not just want to switch to and *look* at code from an old commit, but to instead carry on from that point in time, adding new code and making further commits.
+
+In this scenario, we need to make a *branch*.
+
+This five minute video shows exactly what you need to do, and how to recover if you have accidentally gone back to an old version of code, and made commits from that old version of code, without being on a branch yet:
+
+<div style="padding:75% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1091186825?h=a28ae72019&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Reverting to Old Code and Making New Commits"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>

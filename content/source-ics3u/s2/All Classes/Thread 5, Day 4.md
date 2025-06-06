@@ -14,7 +14,7 @@ createdForSectionTwo: 2025-05-26T03:34:55.000-0400
 		- Make a copy of the [interview slide deck](https://docs.google.com/presentation/d/1qGeMSlXIBL_e8GcDOACFtqulZvRfnU_7A3R6yt9HjLg/copy).
 			- Then:
 				- change the file name (top left) to include your first name only
-				- change the first slide to include your first and last anme
+				- change the first slide to include your first and last name
 			- Then please [submit a link to the first page of your slide deck here](https://forms.gle/dn59pUABy24RoBvA6)
 			> [!TIP]
 			> 
